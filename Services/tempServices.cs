@@ -1,4 +1,4 @@
-﻿namespace ZealandZoo.Service
+﻿namespace ZealandZoo.Services
 {
     public class tempServices
     {
