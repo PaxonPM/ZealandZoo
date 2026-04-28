@@ -1,6 +1,13 @@
-﻿namespace ZealandZoo.MockData
+﻿// MockData/AdminMock.cs
+using ZealandZoo.Models;
+
+namespace ZealandZoo.MockData
 {
-    public class tempMock
+    public static class AdminMock
     {
+        public static List<Admin> Admins = new List<Admin>
+        {
+            new Admin { Id = 1, Username = "admin", Password = "1234" }
+        };
     }
 }
