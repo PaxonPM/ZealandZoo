@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "OngM3BLZ3WY=",
+  "dgSpecHash": "esUPznZ5h7A=",
   "success": true,
-  "projectFilePath": "D:\\workspace\\school\\ZealandZoo\\ZealandZoo.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Nikolai Rasmusson\\OneDrive\\Dokumenter\\GitHub\\ZealandZoo\\ZealandZoo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nikolai Rasmusson\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.14\\microsoft.windowsdesktop.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\Nikolai Rasmusson\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.14\\microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\Nikolai Rasmusson\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.14\\microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\Nikolai Rasmusson\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.14\\microsoft.netcore.app.host.win-x64.9.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

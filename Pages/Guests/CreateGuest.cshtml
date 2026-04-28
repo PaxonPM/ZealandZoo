@@ -1,0 +1,24 @@
+﻿@page
+@model ZealandZoo.Pages.Guests.CreateGuestModel
+
+<h1>Create Guest</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Guest.UserName"></label>
+        <input asp-for="Guest.UserName" />
+        <span asp-validation-for="Guest.UserName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Guest.Password"></label>
+        <input asp-for="Guest.Password" type="password" />
+        <span asp-validation-for="Guest.Password"></span>
+    </div>
+
+    <button type="submit">Create Guest</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
