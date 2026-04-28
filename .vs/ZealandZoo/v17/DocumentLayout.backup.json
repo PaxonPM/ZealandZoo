@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\workspace\\school\\ZealandZoo\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\zooapp.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\zooapp.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "database_generator.txt",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeDocumentMoniker": "ZooApp.Data\\database_generator.txt",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeToolTip": "ZooApp.Data\\database_generator.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-04-28T11:32:32.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ZooApp.Data",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
+              "RelativeDocumentMoniker": "ZooApp.Data\\ZooApp.Data.csproj",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
+              "RelativeToolTip": "ZooApp.Data\\ZooApp.Data.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-28T08:11:18.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Class1.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\Class1.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Class1.cs",
+              "RelativeToolTip": "ZooApp.Data\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-28T08:10:55.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\appsettings.json",
+              "RelativeDocumentMoniker": "ZooApp.Web\\appsettings.json",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\appsettings.json",
+              "RelativeToolTip": "ZooApp.Web\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-28T07:42:36.703Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

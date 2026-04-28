@@ -1,0 +1,34 @@
+/*
+    Database: dev_ZealandZoo_0_1
+    version: 0.1
+    Description:
+    This database supports the Zealand Zoo system.
+    Author: Paw
+
+    Open Server Manager and copy all of this text into an SQL query (.sql) and execute it.
+    It should create the entire database for you.
+
+    PS: Check that the connection string is the same for all of us, or adjust it individually if needed.
+*/
+
+-- Create database
+
+CREATE DATABASE dev_ZealandZoo_0_1;
+GO
+
+USE dev_ZealandZoo_0_1;
+GO
+
+CREATE TABLE Event(
+event_id INT IDENTITY(1,1) PRIMARY KEY,
+title NVARCHAR(50) NOT NULL,
+description NVARCHAR(255) NOT NULL,
+start_time DATETIME NOT NULL,
+end_time DATETIME NOT NULL,
+location NVARCHAR(100) NOT NULL,
+max_participants INT NOT NULL CHECK (max_participants > 0),
+created_at DATETIME NOT NULL DEFAULT GETDATE(),
+
+CONSTRAINT CHK_Event_Time 
+    CHECK (end_time > start_time)
+)
