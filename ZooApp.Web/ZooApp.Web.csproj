@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZooApp.Domain\ZooApp.Domain.csproj" />
+    <ProjectReference Include="..\ZooApp.Services\ZooApp.Services.csproj" />
+  </ItemGroup>
+
 </Project>
