@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "D:\\workspace\\school\\ZealandZoo\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\db\\dbconnectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\db\\dbconnectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA815AC-C2FB-417C-AE0E-641C4641DECC}|ZooApp.Domain\\ZooApp.Domain.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.domain\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA815AC-C2FB-417C-AE0E-641C4641DECC}|ZooApp.Domain\\ZooApp.Domain.csproj|solutionrelative:zooapp.domain\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\zooapp.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\zooapp.data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.data\\interfaces\\ibaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\interfaces\\ibaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,52 +38,87 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IEventRepository.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\interfaces\\IEventRepository.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\interfaces\\IEventRepository.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\interfaces\\IEventRepository.cs",
+              "RelativeToolTip": "ZooApp.Data\\interfaces\\IEventRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T09:13:11.678Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "database_generator.txt",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
-              "RelativeDocumentMoniker": "ZooApp.Data\\database_generator.txt",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
-              "RelativeToolTip": "ZooApp.Data\\database_generator.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-04-28T11:32:32.6Z",
+              "Title": "DbConnectionHelper.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "RelativeToolTip": "ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T09:11:51.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IBaseRepository.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\interfaces\\IBaseRepository.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\interfaces\\IBaseRepository.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\interfaces\\IBaseRepository.cs",
+              "RelativeToolTip": "ZooApp.Data\\interfaces\\IBaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T09:13:10.925Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ZooApp.Data.csproj",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
-              "RelativeDocumentMoniker": "ZooApp.Data\\ZooApp.Data.csproj",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
-              "RelativeToolTip": "ZooApp.Data\\ZooApp.Data.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-28T08:11:18.241Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Class1.cs",
-              "RelativeDocumentMoniker": "ZooApp.Data\\Class1.cs",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Class1.cs",
-              "RelativeToolTip": "ZooApp.Data\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "EventRepository.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Repositories\\EventRepository.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\Repositories\\EventRepository.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\Repositories\\EventRepository.cs",
+              "RelativeToolTip": "ZooApp.Data\\Repositories\\EventRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T08:10:55.193Z"
+              "WhenOpened": "2026-04-29T09:13:12.768Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\appsettings.json",
-              "RelativeDocumentMoniker": "ZooApp.Web\\appsettings.json",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\appsettings.json",
-              "RelativeToolTip": "ZooApp.Web\\appsettings.json",
+              "Title": "Event.cs",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Domain\\Models\\Event.cs",
+              "RelativeDocumentMoniker": "ZooApp.Domain\\Models\\Event.cs",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Domain\\Models\\Event.cs",
+              "RelativeToolTip": "ZooApp.Domain\\Models\\Event.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA1wBwAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T09:28:39.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "database_generator.txt",
+              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeDocumentMoniker": "ZooApp.Data\\database_generator.txt",
+              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeToolTip": "ZooApp.Data\\database_generator.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-28T07:42:36.703Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-04-29T11:07:30.281Z",
+              "EditorCaption": ""
             }
           ]
         }
