@@ -95,3 +95,9 @@ Generated\ Files/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
+/ZooApp.Web/obj
+/ZooApp.Web/obj
+/ZooApp.Web/obj/Debug
+/ZooApp.Web/obj
+/.vs
+/.vs
