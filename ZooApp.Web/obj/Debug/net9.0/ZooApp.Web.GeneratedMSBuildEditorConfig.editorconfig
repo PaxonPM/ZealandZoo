@@ -20,8 +20,16 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+[D:/workspace/school/ZealandZoo/ZooApp.Web/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/workspace/school/ZealandZoo/ZooApp.Web/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/workspace/school/ZealandZoo/ZooApp.Web/Pages/Event/CreateEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXZlbnRcQ3JlYXRlRXZlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/workspace/school/ZealandZoo/ZooApp.Web/Pages/Index.cshtml]

@@ -21,10 +21,10 @@ namespace ZooApp.Domain.Models
         public DateTime CreatedAt { get; set; }
 
 
-        public Event(int id, string title, string description, DateTime startDateTime, 
+        public Event(string title, string description, DateTime startDateTime, 
             DateTime endDateTime, string location, int maxParticipants)
         {
-            Id = id;
+            
             Title = title;
             Description = description;
             StartDateTime = startDateTime;

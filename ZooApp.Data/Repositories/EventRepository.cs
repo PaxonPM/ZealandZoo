@@ -19,22 +19,29 @@ namespace ZooApp.Data.Repositories
         /// </summary>
         /// <param name="entity">The event entity to be created.</param>
         /// <returns>A string representation of the created event.</returns>
-        public string Create(Event entity)
+        public Event Create(Event entity)
         {
-            string queryStr = $"INSERT INTO Event (Title, Description, StartDateTime, EndDateTime, Location, MaxParticipants) " +
-                $"VALUES (@Title, @description, @start_time, @end_time, @location, @max_participants)";
+            string queryStr = $"INSERT INTO Event (title, description, start_time, end_time, location, max_participants) " +
+                $"OUTPUT INSERTED.event_id, INSERTED.created_at " +
+                $"VALUES (@title, @description, @start_time, @end_time, @location, @max_participants)";
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
-            cmd.Parameters.AddWithValue("@Title", entity.Title);
-            cmd.Parameters.AddWithValue("@Description", entity.Description);
-            cmd.Parameters.AddWithValue("@StartDateTime", entity.StartDateTime);
-            cmd.Parameters.AddWithValue("@EndDateTime", entity.EndDateTime);
-            cmd.Parameters.AddWithValue("@Location", entity.Location);
-            cmd.Parameters.AddWithValue("@MaxParticipants", entity.MaxParticipants);
+            cmd.Parameters.AddWithValue("@title", entity.Title);
+            cmd.Parameters.AddWithValue("@description", entity.Description);
+            cmd.Parameters.AddWithValue("@start_time", entity.StartDateTime);
+            cmd.Parameters.AddWithValue("@end_time", entity.EndDateTime);
+            cmd.Parameters.AddWithValue("@location", entity.Location);
+            cmd.Parameters.AddWithValue("@max_participants", entity.MaxParticipants);
             connection.Open();
-            cmd.ExecuteNonQuery();
 
-            return entity.ToString();
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                entity.Id = reader.GetInt32(0);
+                entity.CreatedAt = reader.GetDateTime(1);
+            }
+
+            return entity;
         }
         public Event GetById(int id)
         {
@@ -46,11 +53,11 @@ namespace ZooApp.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public string Update(Event entity)
+        public Event Update(Event entity)
         {
             throw new NotImplementedException();
         }
-        public string Delete(int id)
+        public Event Delete(int id)
         {
             throw new NotImplementedException();
         }

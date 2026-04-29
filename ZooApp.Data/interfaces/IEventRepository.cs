@@ -10,10 +10,11 @@ namespace ZooApp.Data.interfaces
     public interface IEventRepository : IBaseRepository<Event>
     {
 
-        public string Create(Event entity);
+        public Event Create(Event entity);
         public Event GetById(int id);
         public IEnumerable<Event> GetAll();
-        public string Update(Event entity);
-        public string Delete(int id);
+        public Event Update(Event entity);
+        public Event Delete(int id);
     }
 }
+
