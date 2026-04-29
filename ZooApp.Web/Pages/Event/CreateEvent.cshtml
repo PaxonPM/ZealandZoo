@@ -1,0 +1,70 @@
+﻿@page
+@model ZooApp.Web.Pages.Event.CreateEventModel
+@{
+	ViewData["Title"] = "Create Event";
+}
+
+
+<h1>Create new Item</h1>
+
+<form method="post">
+	<div class="form-group">
+		<label asp-for="@Model.Event.Title" class="control-label"></label>
+		<input asp-for="@Model.Event.Title" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.Event.Description" class="control-label"></label>
+		<input asp-for="@Model.Event.Description" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.Event.StartDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.StartDateTime" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.Event.EndDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.EndDateTime" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.Event.Location" class="control-label"></label>
+		<input asp-for="@Model.Event.Location" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="@Model.Event.MaxParticipants" class="control-label"></label>
+		<input asp-for="@Model.Event.MaxParticipants" class="form-control" />
+	</div>
+
+	<p>
+		<div class="form-group">
+			<input type="submit" value="Create" class="btn btn-primary" />
+		</div>
+	</p>
+</form>
+
+@if (Model.CreatedEvent != null)
+{
+	<!-- Modal -->
+	<div class="modal fade show" id="successModal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Event Created Successfully!</h5>
+					<button type="button" class="btn-close" onclick="window.location.href='/Index'"></button>
+				</div>
+				<div class="modal-body">
+					<p><strong>ID:</strong> @Model.CreatedEvent.Id</p>
+					<p><strong>Title:</strong> @Model.CreatedEvent.Title</p>
+					<p><strong>Description:</strong> @Model.CreatedEvent.Description</p>
+					<p><strong>Location:</strong> @Model.CreatedEvent.Location</p>
+					<p><strong>Start:</strong> @Model.CreatedEvent.StartDateTime.ToString("g")</p>
+					<p><strong>End:</strong> @Model.CreatedEvent.EndDateTime.ToString("g")</p>
+					<p><strong>Max Participants:</strong> @Model.CreatedEvent.MaxParticipants</p>
+					<p><strong>Created At:</strong> @Model.CreatedEvent.CreatedAt.ToString("g")</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/Index" class="btn btn-primary">Go to HomePage</a>
+					<a href="/Event/CreateEvent" class="btn btn-primary">Create Another</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
