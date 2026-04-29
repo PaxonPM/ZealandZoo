@@ -1,6 +1,6 @@
 ﻿namespace ZealandZoo.DTO
 {
-    public class temp
+    public class Temp
     {
     }
 }
