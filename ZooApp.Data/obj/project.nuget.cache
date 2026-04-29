@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/ZqABV1TDko=",
+  "dgSpecHash": "5wk9kBHGq/s=",
   "success": true,
-  "projectFilePath": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
+  "projectFilePath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pawmo\\.nuget\\packages\\microsoft.bcl.cryptography\\9.0.13\\microsoft.bcl.cryptography.9.0.13.nupkg.sha512",
     "C:\\Users\\pawmo\\.nuget\\packages\\microsoft.data.sqlclient\\7.0.1\\microsoft.data.sqlclient.7.0.1.nupkg.sha512",

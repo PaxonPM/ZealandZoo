@@ -1,22 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\workspace\\school\\ZealandZoo\\",
+  "WorkspaceRootPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|c:\\users\\pawmo\\documents\\aworkspace\\programmering\\zealandzoo\\zooapp.data\\db\\dbconnectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\db\\dbconnectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\pages\\event\\createevent.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\pages\\event\\createevent.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|d:\\workspace\\school\\zealandzoo\\zooapp.web\\pages\\event\\createevent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|c:\\users\\pawmo\\documents\\aworkspace\\programmering\\zealandzoo\\zooapp.web\\pages\\event\\createevent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A62C4355-E2DD-66ED-F986-89B5B7984C1B}|ZooApp.Web\\ZooApp.Web.csproj|solutionrelative:zooapp.web\\pages\\event\\createevent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|c:\\users\\pawmo\\documents\\aworkspace\\programmering\\zealandzoo\\zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{007877D5-1499-488D-A048-EDC4EB576C4D}|ZooApp.Data\\ZooApp.Data.csproj|solutionrelative:zooapp.data\\database_generator.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateEvent.cshtml",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
-              "RelativeDocumentMoniker": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
-              "RelativeToolTip": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-29T14:56:21.147Z",
+              "DocumentIndex": 0,
+              "Title": "DbConnectionHelper.cs",
+              "DocumentMoniker": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "RelativeDocumentMoniker": "ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "ToolTip": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "RelativeToolTip": "ZooApp.Data\\Db\\DbConnectionHelper.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T15:27:08.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CreateEvent.cshtml.cs",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml.cs",
-              "RelativeDocumentMoniker": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml.cs",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml.cs",
-              "RelativeToolTip": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T14:56:22.553Z",
+              "Title": "database_generator.txt",
+              "DocumentMoniker": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeDocumentMoniker": "ZooApp.Data\\database_generator.txt",
+              "ToolTip": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\database_generator.txt",
+              "RelativeToolTip": "ZooApp.Data\\database_generator.txt",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-04-29T15:18:04.881Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": ".gitignore",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\.gitignore",
-              "RelativeDocumentMoniker": "ZooApp.Web\\.gitignore",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\.gitignore",
-              "RelativeToolTip": "ZooApp.Web\\.gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-04-29T14:59:53.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Index.cshtml",
-              "RelativeDocumentMoniker": "ZooApp.Web\\Index.cshtml",
-              "ToolTip": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Web\\Index.cshtml",
-              "RelativeToolTip": "ZooApp.Web\\Index.cshtml",
+              "Title": "CreateEvent.cshtml",
+              "DocumentMoniker": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
+              "RelativeDocumentMoniker": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
+              "ToolTip": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
+              "RelativeToolTip": "ZooApp.Web\\Pages\\Event\\CreateEvent.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-29T15:00:24.954Z",
+              "WhenOpened": "2026-04-29T14:56:21.147Z",
               "EditorCaption": ""
             }
           ]

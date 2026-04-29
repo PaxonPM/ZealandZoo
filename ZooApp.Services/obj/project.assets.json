@@ -1219,11 +1219,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Services\\ZooApp.Services.csproj",
+      "projectUniqueName": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Services\\ZooApp.Services.csproj",
       "projectName": "ZooApp.Services",
-      "projectPath": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Services\\ZooApp.Services.csproj",
+      "projectPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Services\\ZooApp.Services.csproj",
       "packagesPath": "C:\\Users\\pawmo\\.nuget\\packages\\",
-      "outputPath": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Services\\obj\\",
+      "outputPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1244,11 +1244,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj": {
-              "projectPath": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj"
+            "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj": {
+              "projectPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Data\\ZooApp.Data.csproj"
             },
-            "D:\\workspace\\school\\ZealandZoo\\ZooApp.Domain\\ZooApp.Domain.csproj": {
-              "projectPath": "D:\\workspace\\school\\ZealandZoo\\ZooApp.Domain\\ZooApp.Domain.csproj"
+            "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Domain\\ZooApp.Domain.csproj": {
+              "projectPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZooApp.Domain\\ZooApp.Domain.csproj"
             }
           }
         }
