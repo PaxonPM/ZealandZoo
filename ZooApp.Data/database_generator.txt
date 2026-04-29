@@ -32,3 +32,15 @@ created_at DATETIME NOT NULL DEFAULT GETDATE(),
 CONSTRAINT CHK_Event_Time 
     CHECK (end_time > start_time)
 )
+
+INSERT INTO Event (Title, Description, StartDateTime, EndDateTime, Location, MaxParticipants) VALUES
+(N'Beer Pong Tournament', N'Weekly beer pong tournament with prizes.', '2026-05-08 20:00:00', '2026-05-08 23:00:00', N'Main Bar Area', 40),
+(N'DJ Night', N'Live DJ playing hits all night.', '2026-05-08 21:00:00', '2026-05-09 02:00:00', N'Dance Floor', 100),
+(N'Karaoke Night', N'Sing your favorite songs with friends.', '2026-05-15 19:00:00', '2026-05-15 22:00:00', N'Stage Area', 30),
+(N'Flip Cup Tournament', N'Fast-paced team game competition.', '2026-05-22 20:00:00', '2026-05-22 22:00:00', N'Game Area', 32),
+(N'90s Throwback Party', N'Dance to the best hits from the 90s.', '2026-05-22 21:00:00', '2026-05-23 01:00:00', N'Dance Floor', 120),
+(N'Open Mic Night', N'Comedy, music, and performances.', '2026-05-29 19:00:00', '2026-05-29 21:30:00', N'Stage Area', 25),
+(N'Board Game Night', N'Relax and play games with friends.', '2026-05-29 18:00:00', '2026-05-29 21:00:00', N'Lounge Area', 20),
+(N'Quiz Night', N'Test your knowledge and win prizes.', '2026-06-05 19:30:00', '2026-06-05 21:30:00', N'Main Bar Area', 50),
+(N'Techno Night', N'Deep beats and late-night vibes.', '2026-06-05 22:00:00', '2026-06-06 03:00:00', N'Dance Floor', 150),
+(N'Cocktail Workshop', N'Learn to mix cocktails with a bartender.', '2026-06-12 18:00:00', '2026-06-12 19:30:00', N'Bar Counter', 15);
