@@ -1,0 +1,17 @@
+﻿@page
+@model ZealandZoo.Pages.Events.IndexModel
+
+<h1>Events</h1>
+
+@foreach (var zooEvent in Model.Events)
+{
+    <div>
+        <h3>@zooEvent.EventName</h3>
+        <p>Guests joined: @zooEvent.GuestCount</p>
+
+        <form method="post" asp-page-handler="JoinEvent">
+            <input type="hidden" name="eventId" value="@zooEvent.EventId" />
+            <button type="submit">Join Event</button>
+        </form>
+    </div>
+}
