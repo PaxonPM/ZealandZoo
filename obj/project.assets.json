@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\lucas\\.nuget\\packages\\": {},
+    "C:\\Users\\pawmo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\Documents\\GitHub\\ZealandZoo\\ZealandZoo.csproj",
+      "projectUniqueName": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZealandZoo.csproj",
       "projectName": "ZealandZoo",
-      "projectPath": "C:\\Users\\lucas\\Documents\\GitHub\\ZealandZoo\\ZealandZoo.csproj",
-      "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucas\\Documents\\GitHub\\ZealandZoo\\obj\\",
+      "projectPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\ZealandZoo.csproj",
+      "packagesPath": "C:\\Users\\pawmo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pawmo\\Documents\\Aworkspace\\Programmering\\ZealandZoo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pawmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -75,7 +75,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
