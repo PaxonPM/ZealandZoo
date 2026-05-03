@@ -4,12 +4,13 @@ using Microsoft.Extensions.Logging;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using ZealandZoo.Models;
+using ZealandZoo.Services;
 
 namespace ZealandZoo.Pages
 {
     public class KalenderModel : PageModel
     {
-        public List<Models.OpenHours> ÅbningsTider { get; set; } = new List<Models.OpenHours>();
+        //public List<Models.OpenHours> ÅbningsTider { get; set; } = new List<Models.OpenHours>();
 
         //public List<Models.Event> Events { get; set; } = new List<Models.Event>();
 
@@ -19,76 +20,39 @@ namespace ZealandZoo.Pages
         //    .OrderBy(e => e.StartDateTime)
         //  .ToList();
         //}
+
+       
         
-        public void OnGet()
-        {
-            ÅbningsTider = new List<OpenHours>
+            private IEventService _eventService;
+
+            public KalenderModel(IEventService eventService)
             {
-                new Models.OpenHours
+                _eventService = eventService;
+            }
+
+            [BindProperty]
+            public Models.Event Event { get; set; }
+
+            public IActionResult OnGet()
+            {
+                return Page();
+            }
+
+            public IActionResult OnPost()
+            {
+                if (!ModelState.IsValid)
                 {
-                    DayOfWeek = DayOfWeek.Monday,
-                    OpenTime = new TimeOnly(14,30),
-                    CloseTime = new TimeOnly(18,00),
-                    IsClosed = false,
-                    Note = null
-                },
-
-                 new Models.OpenHours
-                {
-                    DayOfWeek = DayOfWeek.Tuesday,
-                    OpenTime = new TimeOnly(14,30),
-                    CloseTime = new TimeOnly(18,00),
-                    IsClosed = false,
-                    Note = null
-                },
-                  new Models.OpenHours
-                  {
-                      DayOfWeek = DayOfWeek.Wednesday,
-                      OpenTime = new TimeOnly(14, 30),
-                      CloseTime = new TimeOnly(18, 00),
-                      IsClosed = false,
-                      Note = null
-                  },
-                   new Models.OpenHours
-                   {
-                       DayOfWeek = DayOfWeek.Thursday,
-                       OpenTime = new TimeOnly(14, 30),
-                       CloseTime = new TimeOnly(20, 00),
-                       IsClosed = false,
-                       Note = null
-                   },
-                    new Models.OpenHours
-                    {
-                        DayOfWeek = DayOfWeek.Friday,
-                        OpenTime = new TimeOnly(14, 00),
-                        CloseTime = new TimeOnly(22, 00),
-                        IsClosed = false,
-                        Note = null
-                    },
-                     new Models.OpenHours
-                     {
-                         DayOfWeek = DayOfWeek.Saturday,
-                         OpenTime = new TimeOnly(),
-                         CloseTime = new TimeOnly(),
-                         IsClosed = true,
-                         Note = "Weekend"
-                     },
-                      new Models.OpenHours
-                      {
-                          DayOfWeek = DayOfWeek.Sunday,
-                          OpenTime = new TimeOnly(),
-                          CloseTime = new TimeOnly(),
-                          IsClosed = true,
-                          Note = "Weekend"
-                      }
-
-
-            };
-
-        
-            
+                    return Page();
+                }
+                _eventService.AddEvent(Event);
+                return RedirectToPage("GetAllEvent");
+            }
         }
-        
+
+
+
     }
+
     
-}
+    
+
