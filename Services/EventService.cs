@@ -3,16 +3,74 @@ using ZealandZoo.Models;
 
 namespace ZealandZoo.Services
 {
+    /// <summary>
+    /// Service responsible for handling logic related to events.
+    /// </summary>
     public class EventService
     {
-        public List<Event> GetEvents()
+        /// <summary>
+        /// Dictionary that stores which users are signed up for which events.
+        /// Key = eventId, Value = list of userIds.
+        /// Used as a temporary solution instead of a database.
+        /// </summary>
+        private static Dictionary<int, List<int>> eventSignUps = new();
+
+        /// <summary>
+        /// Returns all available events.
+        /// </summary>
+        /// <returns>List of events</returns>
+        public List<Event> GetAllEvents()
         {
             return MockEvents.GetMockEvents();
         }
 
-        public void AddGuestToEvent(int eventId, Guest guest)
+        /// <summary>
+        /// Finds and returns a specific event by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the event</param>
+        /// <returns>The event if found, otherwise null</returns>
+        public Event? GetEventById(int id)
         {
-            MockEvents.AddGuestToEvent(eventId, guest);
+            return MockEvents.GetMockEvents().FirstOrDefault(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Signs a user up for an event.
+        /// Validates that the event exists, is not full,
+        /// and that the user is not already signed up.
+        /// </summary>
+        /// <param name="eventId">The ID of the event</param>
+        /// <param name="userId">The ID of the user</param>
+        public void SignUpForEvent(int eventId, int userId)
+        {
+            Event? selectedEvent = GetEventById(eventId);
+
+            if (selectedEvent == null)
+            {
+                throw new Exception("Eventet blev ikke fundet.");
+            }
+
+            // Ensure the event has a list of signed-up users
+            if (!eventSignUps.ContainsKey(eventId))
+            {
+                eventSignUps[eventId] = new List<int>();
+            }
+
+            // Prevent duplicate sign-up
+            if (eventSignUps[eventId].Contains(userId))
+            {
+                throw new Exception("Du er allerede tilmeldt dette event.");
+            }
+
+            // Check if event is full
+            if (selectedEvent.CurrentParticipants >= selectedEvent.MaxParticipants)
+            {
+                throw new Exception("Eventet er fuldt booket.");
+            }
+
+            // Add user to event
+            eventSignUps[eventId].Add(userId);
+            selectedEvent.CurrentParticipants++;
         }
     }
 }
