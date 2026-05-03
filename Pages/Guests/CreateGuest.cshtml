@@ -1,7 +1,21 @@
 ﻿@page
-@model ZealandZoo.Pages.Guests.CreateGuestModel
+@model ZealandZoo.Pages.CreateGuestModel
 
-<h1>Create Guest</h1>
+<h1>Create User</h1>
+
+@if (Model.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @Model.SuccessMessage
+    </div>
+}
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
 
 <form method="post">
     <div>
@@ -16,9 +30,5 @@
         <span asp-validation-for="Guest.Password"></span>
     </div>
 
-    <button type="submit">Create Guest</button>
+    <button type="submit">Create User</button>
 </form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
