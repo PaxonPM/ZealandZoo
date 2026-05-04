@@ -1,6 +1,6 @@
 /*
-    Database: dev_ZealandZoo_0_3
-    version: 0.3
+    Database: dev_ZealandZoo_0_4
+    version: 0.4
     Description:
     This database supports the Zealand Zoo system.
     Author: Paw
@@ -13,10 +13,10 @@
 
 -- Create database
 
-CREATE DATABASE dev_ZealandZoo_0_3;
+CREATE DATABASE dev_ZealandZoo_0_4;
 GO
 
-USE dev_ZealandZoo_0_3;
+USE dev_ZealandZoo_0_4;
 GO
 
 CREATE TABLE Event(
@@ -26,6 +26,7 @@ description NVARCHAR(255) NOT NULL,
 start_time DATETIME NOT NULL,
 end_time DATETIME NOT NULL,
 location NVARCHAR(100) NOT NULL,
+current_participants INT NOT NULL DEFAULT 0 CHECK (current_participants >= 0),
 max_participants INT NOT NULL CHECK (max_participants > 0),
 created_at DATETIME NOT NULL DEFAULT GETDATE(),
 
@@ -33,14 +34,19 @@ CONSTRAINT CHK_Event_Time
     CHECK (end_time > start_time)
 )
 
-INSERT INTO Event (title, description, start_time, end_time, location, max_participants) VALUES
-(N'Beer Pong Tournament', N'Weekly beer pong tournament with prizes.', '2026-05-08 20:00:00', '2026-05-08 23:00:00', N'Main Bar Area', 40),
-(N'DJ Night', N'Live DJ playing hits all night.', '2026-05-08 21:00:00', '2026-05-09 02:00:00', N'Dance Floor', 100),
-(N'Karaoke Night', N'Sing your favorite songs with friends.', '2026-05-15 19:00:00', '2026-05-15 22:00:00', N'Stage Area', 30),
-(N'Flip Cup Tournament', N'Fast-paced team game competition.', '2026-05-22 20:00:00', '2026-05-22 22:00:00', N'Game Area', 32),
-(N'90s Throwback Party', N'Dance to the best hits from the 90s.', '2026-05-22 21:00:00', '2026-05-23 01:00:00', N'Dance Floor', 120),
-(N'Open Mic Night', N'Comedy, music, and performances.', '2026-05-29 19:00:00', '2026-05-29 21:30:00', N'Stage Area', 25),
-(N'Board Game Night', N'Relax and play games with friends.', '2026-05-29 18:00:00', '2026-05-29 21:00:00', N'Lounge Area', 20),
-(N'Quiz Night', N'Test your knowledge and win prizes.', '2026-06-05 19:30:00', '2026-06-05 21:30:00', N'Main Bar Area', 50),
-(N'Techno Night', N'Deep beats and late-night vibes.', '2026-06-05 22:00:00', '2026-06-06 03:00:00', N'Dance Floor', 150),
-(N'Cocktail Workshop', N'Learn to mix cocktails with a bartender.', '2026-06-12 18:00:00', '2026-06-12 19:30:00', N'Bar Counter', 15);
+
+
+
+
+
+INSERT INTO Event (title, description, start_time, end_time, location, current_participants, max_participants) VALUES
+(N'Beer Pong Tournament', N'Weekly beer pong tournament with prizes.', '2026-05-08 20:00:00', '2026-05-08 23:00:00', N'Main Bar Area', 0, 40),
+(N'DJ Night', N'Live DJ playing hits all night.', '2026-05-08 21:00:00', '2026-05-09 02:00:00', N'Dance Floor', 0, 100),
+(N'Karaoke Night', N'Sing your favorite songs with friends.', '2026-05-15 19:00:00', '2026-05-15 22:00:00', N'Stage Area', 0, 30),
+(N'Flip Cup Tournament', N'Fast-paced team game competition.', '2026-05-22 20:00:00', '2026-05-22 22:00:00', N'Game Area', 0, 32),
+(N'90s Throwback Party', N'Dance to the best hits from the 90s.', '2026-05-22 21:00:00', '2026-05-23 01:00:00', N'Dance Floor', 0, 120),
+(N'Open Mic Night', N'Comedy, music, and performances.', '2026-05-29 19:00:00', '2026-05-29 21:30:00', N'Stage Area', 0, 25),
+(N'Board Game Night', N'Relax and play games with friends.', '2026-05-29 18:00:00', '2026-05-29 21:00:00', N'Lounge Area', 0, 20),
+(N'Quiz Night', N'Test your knowledge and win prizes.', '2026-06-05 19:30:00', '2026-06-05 21:30:00', N'Main Bar Area', 0, 50),
+(N'Techno Night', N'Deep beats and late-night vibes.', '2026-06-05 22:00:00', '2026-06-06 03:00:00', N'Dance Floor', 0, 150),
+(N'Cocktail Workshop', N'Learn to mix cocktails with a bartender.', '2026-06-12 18:00:00', '2026-06-12 19:30:00', N'Bar Counter', 0, 15);
