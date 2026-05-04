@@ -18,7 +18,7 @@ namespace ZooApp.Services
         /// Used as a temporary solution instead of a database.
         /// </summary>
         private static Dictionary<int, List<int>> eventSignUps = new();
-
+        
         //private List<Event> _events;
         private readonly IEventRepository _eventRepository;
 
@@ -64,31 +64,51 @@ namespace ZooApp.Services
             Event? selectedEvent = GetEventById(eventId);
 
             if (selectedEvent == null)
-            {
                 throw new Exception("Eventet blev ikke fundet.");
-            }
 
             // Ensure the event has a list of signed-up users
             if (!eventSignUps.ContainsKey(eventId))
-            {
                 eventSignUps[eventId] = new List<int>();
-            }
 
             // Prevent duplicate sign-up
             if (eventSignUps[eventId].Contains(userId))
-            {
                 throw new Exception("Du er allerede tilmeldt dette event.");
-            }
 
             // Check if event is full
             if (selectedEvent.CurrentParticipants >= selectedEvent.MaxParticipants)
-            {
                 throw new Exception("Eventet er fuldt booket.");
-            }
 
             // Add user to event
             eventSignUps[eventId].Add(userId);
             selectedEvent.CurrentParticipants++;
+        }
+
+        public void CancelSignUp(int eventId, int userId)
+        {
+            Event? selectedEvent = GetEventById(eventId);
+
+            if (selectedEvent == null)
+                throw new Exception("Eventet blev ikke fundet.");
+
+            if (!eventSignUps.ContainsKey(eventId) || !eventSignUps[eventId].Contains(userId))
+                throw new Exception("Du er ikke tilmeldt dette event.");
+
+            eventSignUps[eventId].Remove(userId);
+
+            if (selectedEvent.CurrentParticipants > 0)
+                selectedEvent.CurrentParticipants--;
+        }
+
+        /// <summary>
+        /// Checks if a user is already signed up for an event.
+        /// </summary>
+        /// <param name="eventId">The ID of the event</param>
+        /// <param name="userId">The ID of the user</param>
+        /// <returns>True if the user is signed up, otherwise false</returns>
+        public bool IsUserSignedUp(int eventId, int userId)
+        {
+            return eventSignUps.ContainsKey(eventId)
+                   && eventSignUps[eventId].Contains(userId);
         }
     }
 }
