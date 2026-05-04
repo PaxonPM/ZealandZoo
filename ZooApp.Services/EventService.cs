@@ -8,7 +8,7 @@ using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
 
-namespace ZooApp.Services.Services
+namespace ZooApp.Services
 {
     public class EventService : IEventService
     {

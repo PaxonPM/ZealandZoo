@@ -3,7 +3,7 @@ using System.Text;
 using ZooApp.Data.MockData;
 using ZooApp.Domain.Models;
 
-namespace ZooApp.Services.Services
+namespace ZooApp.Services
 {
     /// <summary>
     /// Service responsible for handling guest-related business logic.

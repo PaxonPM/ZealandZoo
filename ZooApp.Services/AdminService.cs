@@ -1,7 +1,7 @@
 using ZooApp.Data.Repositories;
 using ZooApp.Domain.Models;
 
-namespace ZooApp.Services.Services
+namespace ZooApp.Services
 {
     public class AdminService
     {

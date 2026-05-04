@@ -1,8 +1,8 @@
 using ZooApp.Data.Db;
 using ZooApp.Data.interfaces;
 using ZooApp.Data.Repositories;
+using ZooApp.Services;
 using ZooApp.Services.Interfaces;
-using ZooApp.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

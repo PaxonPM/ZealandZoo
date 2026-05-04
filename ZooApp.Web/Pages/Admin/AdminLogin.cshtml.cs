@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZooApp.Services.Services;
+using ZooApp.Services;
 
 namespace ZooApp.Web.Pages.Admin
 {
