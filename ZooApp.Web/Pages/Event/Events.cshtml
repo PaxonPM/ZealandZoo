@@ -1,0 +1,68 @@
+﻿@page
+@model ZooApp.Web.Pages.Event.EventsModel
+
+<h1>Events</h1>
+
+@if (Model.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @Model.SuccessMessage
+    </div>
+}
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
+
+@if (Model.Events.Count == 0)
+{
+    <p>Der findes ingen events.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Start</th>
+                <th>Slut</th>
+                <th>Lokation</th>
+                <th>Deltagere</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model.Events)
+            {
+                <tr>
+                    <td>@ev.Title</td>
+                    <td>@ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.Location</td>
+                    <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
+                    <td>
+                        <form method="post" asp-page-handler="SignUp">
+                            <input type="hidden" name="eventId" value="@ev.Id" />
+
+                            @if (ev.CurrentParticipants >= ev.MaxParticipants)
+                            {
+                                <button class="btn btn-secondary" disabled>
+                                    Fuldt booket
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary">
+                                    Tilmeld
+                                </button>
+                            }
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
