@@ -28,6 +28,8 @@ namespace ZealandZoo.Models
         [Required]
         public string Password { get; set; }
 
+        public List<Event> Events { get; set; } = new List<Event>();
+
         /// <summary>
         /// Constructor used when creating a new guest with username and password.
         /// </summary>
