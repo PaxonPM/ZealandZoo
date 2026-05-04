@@ -17,8 +17,18 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 // Service
 builder.Services.AddScoped<IEventService, EventService>();
 
+// Admin
+builder.Services.AddScoped<AdminRepository>();
+builder.Services.AddScoped<AdminService>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 
 var app = builder.Build();
+app.UseSession();
 
 
 // Configure the HTTP request pipeline.
