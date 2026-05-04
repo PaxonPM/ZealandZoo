@@ -1,5 +1,5 @@
 ﻿@page
-@model ZealandZoo.Pages.EventsModel
+@model ZooApp.Web.Pages.Event.EventsModel
 
 <h1>Events</h1>
 
@@ -39,8 +39,8 @@ else
             {
                 <tr>
                     <td>@ev.Title</td>
-                    <td>@ev.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                    <td>@ev.EndTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</td>
                     <td>@ev.Location</td>
                     <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
                     <td>

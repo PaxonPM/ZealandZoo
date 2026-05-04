@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using ZealandZoo.MockData;
-using ZealandZoo.Models;
+using ZooApp.Data.MockData;
+using ZooApp.Domain.Models;
 
-namespace ZealandZoo.Services
+namespace ZooApp.Services.Services
 {
     /// <summary>
     /// Service responsible for handling guest-related business logic.

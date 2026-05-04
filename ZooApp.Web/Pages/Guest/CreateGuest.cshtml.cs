@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 using System.Text;
-using ZealandZoo.Models;
-using ZealandZoo.MockData;
+using ZooApp.Data.MockData;
 
-namespace ZealandZoo.Pages
+namespace ZooApp.Web.Pages.Guest
 {
     /// <summary>
     /// PageModel for creating a new guest user.
@@ -17,7 +16,7 @@ namespace ZealandZoo.Pages
         /// Guest object bound to the form input.
         /// </summary>
         [BindProperty]
-        public Guest Guest { get; set; } = new Guest();
+        public Domain.Models.Guest Guest { get; set; } = new Domain.Models.Guest();
 
         /// <summary>
         /// Confirmation message shown after successful creation.
@@ -55,7 +54,7 @@ namespace ZealandZoo.Pages
 
                 SuccessMessage = "User created successfully!";
                 ModelState.Clear();
-                Guest = new Guest();
+                Guest = new Domain.Models.Guest();
             }
             catch (Exception ex)
             {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ZealandZoo.Models
+namespace ZooApp.Domain.Models
 {
     /// <summary>
     /// Represents a guest (user) in the system.

@@ -1,6 +1,6 @@
-﻿using ZealandZoo.Models;
+﻿using ZooApp.Domain.Models;
 
-namespace ZealandZoo.MockData
+namespace ZooApp.Data.MockData
 {
     /// <summary>
     /// MockEvents acts as a temporary data source instead of a database.
@@ -18,8 +18,8 @@ namespace ZealandZoo.MockData
                 Id = 1,
                 Title = "Dødsdruk",
                 Description = "A social evening at Zealand Zoo.",
-                StartTime = new DateTime(2026, 5, 10, 18, 00, 00),
-                EndTime = new DateTime(2026, 5, 10, 22, 00, 00),
+                StartDateTime = new DateTime(2026, 5, 10, 18, 00, 00),
+                EndDateTime = new DateTime(2026, 5, 10, 22, 00, 00),
                 Location = "Zealand Zoo Café",
                 MaxParticipants = 30,
                 CurrentParticipants = 30, // Event is fully booked
@@ -31,8 +31,8 @@ namespace ZealandZoo.MockData
                 Id = 2,
                 Title = "Hyggefredag",
                 Description = "Cozy Friday with snacks and good vibes.",
-                StartTime = new DateTime(2026, 5, 17, 15, 00, 00),
-                EndTime = new DateTime(2026, 5, 17, 20, 00, 00),
+                StartDateTime = new DateTime(2026, 5, 17, 15, 00, 00),
+                EndDateTime = new DateTime(2026, 5, 17, 20, 00, 00),
                 Location = "Zealand Zoo Café",
                 MaxParticipants = 40,
                 CurrentParticipants = 0,
@@ -44,8 +44,8 @@ namespace ZealandZoo.MockData
                 Id = 3,
                 Title = "Wests frække aften",
                 Description = "Evening event with activities and social interaction.",
-                StartTime = new DateTime(2026, 5, 24, 19, 00, 00),
-                EndTime = new DateTime(2026, 5, 24, 23, 00, 00),
+                StartDateTime = new DateTime(2026, 5, 24, 19, 00, 00),
+                EndDateTime = new DateTime(2026, 5, 24, 23, 00, 00),
                 Location = "Zealand Zoo Café",
                 MaxParticipants = 25,
                 CurrentParticipants = 0,

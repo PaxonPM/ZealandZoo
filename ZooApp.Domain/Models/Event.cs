@@ -23,7 +23,7 @@ namespace ZooApp.Domain.Models
         /// Gets or sets the title of the event.
         /// Maximum length is 50 characters.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Title is required")]
         [StringLength(50)]
         public string Title { get; set; }
 
@@ -38,13 +38,13 @@ namespace ZooApp.Domain.Models
         /// <summary>
         /// Gets or sets the start date and time of the event.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Start time is required")]
         public DateTime StartDateTime { get; set; }
 
         /// <summary>
         /// Gets or sets the end date and time of the event.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Endtime is required")]
         public DateTime EndDateTime { get; set; }
 
         /// <summary>
@@ -54,6 +54,11 @@ namespace ZooApp.Domain.Models
         [Required]
         [StringLength(100)]
         public string Location { get; set; }
+
+        /// <summary>
+        /// Current number of participants signed up for the event.
+        /// </summary>
+        public int CurrentParticipants { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of participants allowed for the event.
@@ -75,15 +80,17 @@ namespace ZooApp.Domain.Models
         /// <param name="startDateTime">The start date and time of the event.</param>
         /// <param name="endDateTime">The end date and time of the event.</param>
         /// <param name="location">The location where the event will take place.</param>
+        /// <param name="currentParticipants">The current number of participants signed up for the event.</param>
         /// <param name="maxParticipants">The maximum number of participants allowed.</param>
         public Event(string title, string description, DateTime startDateTime, 
-            DateTime endDateTime, string location, int maxParticipants)
+            DateTime endDateTime, string location, int currentParticipants, int maxParticipants)
         {
             Title = title;
             Description = description;
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
             Location = location;
+            CurrentParticipants = currentParticipants;
             MaxParticipants = maxParticipants;
         }
 

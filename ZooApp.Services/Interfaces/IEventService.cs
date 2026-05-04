@@ -21,5 +21,7 @@ namespace ZooApp.Services.Interfaces
         /// <exception cref="ArgumentNullException">Thrown when newEvent is null.</exception>
         /// <exception cref="ValidationException">Thrown when the event data is invalid.</exception>
         Event CreateEvent(Event newEvent);
+        List<Event> GetAllEvents();
+        void SignUpForEvent(int eventId, int userId);
     }
 }

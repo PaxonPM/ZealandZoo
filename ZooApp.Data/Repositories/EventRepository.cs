@@ -28,9 +28,9 @@ namespace ZooApp.Data.Repositories
         /// <returns>The created event with populated Id and CreatedAt properties.</returns>
         public Event Create(Event entity)
         {
-            string queryStr = $"INSERT INTO Event (title, description, start_time, end_time, location, max_participants) " +
+            string queryStr = $"INSERT INTO Event (title, description, start_time, end_time, location, current_participants, max_participants) " +
                 $"OUTPUT INSERTED.event_id, INSERTED.created_at " +
-                $"VALUES (@title, @description, @start_time, @end_time, @location, @max_participants)";
+                $"VALUES (@title, @description, @start_time, @end_time, @location, @current_participants, @max_participants)";
             
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
@@ -39,6 +39,7 @@ namespace ZooApp.Data.Repositories
             cmd.Parameters.AddWithValue("@start_time", entity.StartDateTime);
             cmd.Parameters.AddWithValue("@end_time", entity.EndDateTime);
             cmd.Parameters.AddWithValue("@location", entity.Location);
+            cmd.Parameters.AddWithValue("@current_participants", 0); // New event starts with 0 participants
             cmd.Parameters.AddWithValue("@max_participants", entity.MaxParticipants);
             
             connection.Open();
@@ -67,7 +68,7 @@ namespace ZooApp.Data.Repositories
                 throw new ArgumentException("Event ID must be greater than 0.", nameof(id));
             }
 
-            string queryStr = @"SELECT event_id, title, description, start_time, end_time, location, max_participants, created_at 
+            string queryStr = @"SELECT event_id, title, description, start_time, end_time, location, current_participants, max_participants, created_at 
                                FROM Event 
                                WHERE event_id = @id";
 
@@ -152,6 +153,7 @@ namespace ZooApp.Data.Repositories
                 StartDateTime = reader.GetDateTime(reader.GetOrdinal("start_time")),
                 EndDateTime = reader.GetDateTime(reader.GetOrdinal("end_time")),
                 Location = reader.GetString(reader.GetOrdinal("location")),
+                CurrentParticipants = reader.GetInt32(reader.GetOrdinal("current_participants")),
                 MaxParticipants = reader.GetInt32(reader.GetOrdinal("max_participants")),
                 CreatedAt = reader.GetDateTime(reader.GetOrdinal("created_at"))
             };

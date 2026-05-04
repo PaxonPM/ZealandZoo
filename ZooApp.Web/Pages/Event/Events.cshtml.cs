@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZealandZoo.Models;
-using ZealandZoo.Services;
+using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
+using ZooApp.Services.Services;
 
-namespace ZealandZoo.Pages
+namespace ZooApp.Web.Pages.Event
 {
     /// <summary>
     /// PageModel for the Events page.
@@ -13,13 +14,13 @@ namespace ZealandZoo.Pages
         /// <summary>
         /// Service used for event logic and data.
         /// </summary>
-        private readonly EventService _eventService;
+        private readonly IEventService _eventService;
 
         /// <summary>
         /// Constructor with dependency injection of EventService.
         /// </summary>
         /// <param name="eventService">Service for handling events</param>
-        public EventsModel(EventService eventService)
+        public EventsModel(IEventService eventService)
         {
             _eventService = eventService;
         }
@@ -27,7 +28,7 @@ namespace ZealandZoo.Pages
         /// <summary>
         /// List of events displayed on the page.
         /// </summary>
-        public List<Event> Events { get; set; } = new List<Event>();
+        public List<ZooApp.Domain.Models.Event> Events { get; set; } = new();
 
         /// <summary>
         /// Success message shown after a successful action.

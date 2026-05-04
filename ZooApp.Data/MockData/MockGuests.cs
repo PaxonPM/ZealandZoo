@@ -1,6 +1,6 @@
-﻿using ZealandZoo.Models;
+﻿using ZooApp.Domain.Models;
 
-namespace ZealandZoo.MockData
+namespace ZooApp.Data.MockData
 {
     /// <summary>
     /// MockGuests acts as a temporary in-memory data source for guest users.
