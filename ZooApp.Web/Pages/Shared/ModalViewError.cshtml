@@ -1,0 +1,52 @@
+﻿@model ZooApp.Web.Pages.Shared.ModalViewErrorModel
+@{
+    @* This partial view displays error messages in a Bootstrap modal dialog *@
+}
+
+@* Only display the modal if there is an error message to show *@
+@if (!string.IsNullOrEmpty(Model?.Message))
+{
+    <div class="modal fade show" tabindex="-1" style="display:block; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+
+                <div class="modal-header bg-danger text-white">
+                    @* Display "Error" for error codes, otherwise use the custom title *@
+                    <h5 class="modal-body">
+                        @Model.Title
+                    </h5>
+                    @* Close button reloads the page to clear the error state *@
+                    <a href="/Event/CreateEvent" class="btn-close btn-close-white"></a>
+                    <!-- <button type="button" class="" onclick="/Event/CreateEvent"></button> -->
+                </div>
+
+                <div class="modal-body">
+                    @* Display the error message to the user *@
+                    <p class="text-danger fw-bold">@Model.Message</p>
+
+                    @* Display the error stacktrace if not null *@
+                    @if (Model.StackTrace != null)
+                    {
+                        <button class="btn btn-sm btn-outline-secondary mb-2"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#stackTrace">
+                            Show Stack Trace
+                        </button>
+
+                        <div id="stackTrace" class="collapse">
+                            <pre class="bg-light p-2 small border rounded" style="max-height: 300px; overflow:auto;">
+                                @Model.StackTrace
+                            </pre>
+                        </div>
+                    }
+                </div>
+
+                <div class="modal-footer">
+                    @* OK button to dismiss the modal and reload the page *@
+                    <a href="/Event/CreateEvent" class="btn btn-danger">OK</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,105 @@
+﻿@page
+@model ZooApp.Web.Pages.Event.CreateEventModel
+@{
+	ViewData["Title"] = "Create Event";
+}
+
+@* Main heading for the event creation page *@
+<h1>Create new Event</h1>
+
+@* Event creation form with validation *@
+<form method="post">
+	@* Display model-level validation errors (e.g., business rule violations) *@
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	
+	@* Event Title input field with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.Title" class="control-label"></label>
+		<input asp-for="@Model.Event.Title" class="form-control" />
+		<span asp-validation-for="@Model.Event.Title" class="text-danger"></span>
+	</div>
+	
+	@* Event Description textarea with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.Description" class="control-label"></label>
+		<textarea asp-for="@Model.Event.Description" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="@Model.Event.Description" class="text-danger"></span>
+	</div>
+	
+	@* Start DateTime picker with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.StartDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.StartDateTime" class="form-control" type="datetime-local" />
+		<span asp-validation-for="@Model.Event.StartDateTime" class="text-danger"></span>
+	</div>
+	
+	@* End DateTime picker with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.EndDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.EndDateTime" class="form-control" type="datetime-local" />
+		<span asp-validation-for="@Model.Event.EndDateTime" class="text-danger"></span>
+	</div>
+	
+	@* Location input field with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.Location" class="control-label"></label>
+		<input asp-for="@Model.Event.Location" class="form-control" />
+		<span asp-validation-for="@Model.Event.Location" class="text-danger"></span>
+	</div>
+	
+	@* Max Participants number input with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.Event.MaxParticipants" class="control-label"></label>
+		<input asp-for="@Model.Event.MaxParticipants" class="form-control" type="number" min="1" />
+		<span asp-validation-for="@Model.Event.MaxParticipants" class="text-danger"></span>
+	</div>
+
+	@* Form submission button *@
+	<p>
+		<div class="form-group">
+			<input type="submit" value="Create" class="btn btn-primary" />
+		</div>
+	</p>
+</form>
+
+@* Include client-side validation scripts for immediate feedback *@
+@* JQuery validation, watches form inputs, applies rules, show errors, prevents submission *@
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+@* Success modal displayed when event is created successfully *@
+@if (Model.CreatedEvent != null)
+{
+	<div class="modal fade show" id="successModal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Event Created Successfully!</h5>
+					<button type="button" class="btn-close" onclick="window.location.href='/Index'"></button>
+				</div>
+				<div class="modal-body">
+					@* Display all created event details for confirmation *@
+					<p><strong>ID:</strong> @Model.CreatedEvent.Id</p>
+					<p><strong>Title:</strong> @Model.CreatedEvent.Title</p>
+					<p><strong>Description:</strong> @Model.CreatedEvent.Description</p>
+					<p><strong>Location:</strong> @Model.CreatedEvent.Location</p>
+					<p><strong>Start:</strong> @Model.CreatedEvent.StartDateTime.ToString("g")</p>
+					<p><strong>End:</strong> @Model.CreatedEvent.EndDateTime.ToString("g")</p>
+					<p><strong>Max Participants:</strong> @Model.CreatedEvent.MaxParticipants</p>
+					<p><strong>Created At:</strong> @Model.CreatedEvent.CreatedAt.ToString("g")</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/Index" class="btn btn-primary">Go to HomePage</a>
+					<a href="/Event/CreateEvent" class="btn btn-primary">Create Another</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@* Error modal displayed when event creation fails. *@
+@if (Model.Modal != null)
+{
+	<partial name="Shared/ModalViewError" model="Model.Modal" />
+}
