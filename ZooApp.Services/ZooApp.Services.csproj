@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZooApp.Data\ZooApp.Data.csproj" />
+    <ProjectReference Include="..\ZooApp.Domain\ZooApp.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
