@@ -6,10 +6,10 @@ namespace ZealandZoo.Repositories
 {
     public class AdminRepository
     {
-        public Admin? GetByCredentials(string username, string password)
+        public Admin? GetByUsername(string username)
         {
             return AdminMock.Admins
-                .FirstOrDefault(a => a.Username == username && a.Password == password);
+                .FirstOrDefault(a => a.Username == username);
         }
     }
 }

@@ -1,16 +1,17 @@
+// Pages/AdminLogin.cshtml.cs
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZealandZoo.Repositories;
+using ZealandZoo.Services;
 
 namespace ZealandZoo.Pages
 {
     public class AdminLoginModel : PageModel
     {
-        private readonly AdminRepository _adminRepo;
+        private readonly AdminService _adminService;
 
-        public AdminLoginModel(AdminRepository adminRepo)
+        public AdminLoginModel(AdminService adminService)
         {
-            _adminRepo = adminRepo;
+            _adminService = adminService;
         }
 
         [BindProperty]
@@ -25,9 +26,9 @@ namespace ZealandZoo.Pages
 
         public IActionResult OnPost()
         {
-            var admin = _adminRepo.GetByCredentials(Username, Password);
+            bool isValid = _adminService.ValidateLogin(Username, Password);
 
-            if (admin == null)
+            if (!isValid)
             {
                 ErrorMessage = "Forkerte loginoplysninger";
                 return Page();

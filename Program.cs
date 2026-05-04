@@ -1,17 +1,18 @@
 using ZealandZoo.Repositories;
+using ZealandZoo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddScoped<AdminRepository>();
+builder.Services.AddScoped<AdminService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
-builder.Services.AddScoped<AdminRepository>();
 
 var app = builder.Build();
 app.UseSession();
