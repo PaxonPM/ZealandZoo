@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ZealandZoo.Pages
+namespace ZooApp.Web.Pages.Admin
 {
     public class AdminDashboardModel : PageModel
     {
@@ -10,7 +10,7 @@ namespace ZealandZoo.Pages
             // Kun admins må komme ind
             if (HttpContext.Session.GetString("IsAdmin") != "true")
             {
-                return RedirectToPage("/AdminLogin");
+                return RedirectToPage("/Admin/AdminLogin");
             }
             return Page();
         }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Domain.Models;
 
-namespace ZooApp.Web.Pages
+namespace ZooApp.Web.Pages.EventsView
 {
     public class ÅbningstiderModel : PageModel
     {

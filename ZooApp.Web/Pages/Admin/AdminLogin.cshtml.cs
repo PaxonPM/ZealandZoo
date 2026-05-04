@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Services.Services;
 
-namespace ZealandZoo.Pages
+namespace ZooApp.Web.Pages.Admin
 {
     public class AdminLoginModel : PageModel
     {
@@ -34,7 +34,7 @@ namespace ZealandZoo.Pages
             }
 
             HttpContext.Session.SetString("IsAdmin", "true");
-            return RedirectToPage("/AdminDashboard");
+            return RedirectToPage("/Admin/AdminDashboard");
         }
     }
 }

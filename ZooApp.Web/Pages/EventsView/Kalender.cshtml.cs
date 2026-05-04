@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Services.Interfaces;
 
-namespace ZooApp.Web.Pages
+namespace ZooApp.Web.Pages.EventsView
 {
     public class KalenderModel : PageModel
     {
