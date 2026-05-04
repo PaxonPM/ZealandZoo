@@ -18,6 +18,9 @@ build/
 bld/
 Bin/
 Obj/
+obj/
+bin/
+
 
 # Visual Studio cache
 .vs/
