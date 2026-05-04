@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages
@@ -15,7 +14,7 @@ namespace ZooApp.Web.Pages
         }
 
         [BindProperty]
-        public Event Event { get; set; }
+        public Domain.Models.Event Event { get; set; }
 
         public IActionResult OnGet()
         {
