@@ -14,16 +14,16 @@ namespace ZooApp.Data.MockData
         /// </summary>
         private static List<Guest> guests = new List<Guest>()
         {
-            new Guest("Lukas", "pmWkWSBCL51Bqz3z1ZC7fFZ9lP2M1vUqGkzR6d4W5bA=") { UserId = 1 },
-            new Guest("Frederik", "pmWkWSBCL51Bqz3z1ZC7fFZ9lP2M1vUqGkzR6d4W5bA=") { UserId = 2 },
-            new Guest("Paw", "pmWkWSBCL51Bqz3z1ZC7fFZ9lP2M1vUqGkzR6d4W5bA=") { UserId = 3 },
-            new Guest("Nikolai", "pmWkWSBCL51Bqz3z1ZC7fFZ9lP2M1vUqGkzR6d4W5bA=") { UserId = 4 }
+new Guest("Lukas", "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=") { UserId = 1 },
+new Guest("Frederik", "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=") { UserId = 2 },
+new Guest("Paw", "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=") { UserId = 3 },
+new Guest("Nikolai", "pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=") { UserId = 4 }
         };
 
         /// <summary>
         /// Returns all guest users from the mock list.
         /// </summary>
-        /// <returns>A list of guests</returns>
+        /// <returns>A list of guests</returns>https://vocalremover.org/
         public static List<Guest> GetMockGuests()
         {
             return guests;

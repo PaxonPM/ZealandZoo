@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<GuestService>();
+builder.Services.AddScoped<GuestService>();
 
 // Database connection helper
 builder.Services.AddScoped<DbConnectionHelper>();
