@@ -16,7 +16,9 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7073;http://localhost:5042",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "EmailSettings__Username": "test",
+        "EmailSettings__Password": "testtest"
       }
     }
   }
