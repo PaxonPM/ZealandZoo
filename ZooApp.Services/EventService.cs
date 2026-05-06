@@ -21,15 +21,22 @@ namespace ZooApp.Services
 
         //private List<Event> _events;
         private readonly IEventRepository _eventRepository;
+        private readonly IEmailService _emailService;
+        private readonly IPersonService _personService;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IEmailService emailService, IPersonService personService)
         {
             _eventRepository = eventRepository;
+            _emailService = emailService;
+            _personService = personService;
         }
 
         public Event CreateEvent(Event newEvent)
         {
-            return _eventRepository.Create(newEvent);
+            Event created = _eventRepository.Create(newEvent);
+            List<Person> newsletterMembers = _personService.GetNewsletterMembers();
+            _emailService.SendEventNotification(created, newsletterMembers);
+            return created;
         }
 
         
