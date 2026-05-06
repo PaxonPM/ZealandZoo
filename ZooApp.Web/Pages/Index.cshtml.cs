@@ -5,6 +5,9 @@ using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Pages
 {
+    // TODO: Refactor the "tilmeld event" button to only show for signed in users.
+    // HIGH_TODO: Implement role-based access control to restrict event creation to admin users only.
+    
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
