@@ -46,7 +46,9 @@ namespace ZooApp.Services
         /// <returns>List of events</returns>
         public List<Event> GetAllEvents()
         {
-            return MockEvents.GetMockEvents();
+            return _eventRepository.GetAll().ToList();
+
+
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace ZooApp.Services
         /// <returns>The event if found, otherwise null</returns>
         public Event? GetEventById(int id)
         {
-            return MockEvents.GetMockEvents().FirstOrDefault(e => e.Id == id);
+            return _eventRepository.GetById(id);
         }
 
         /// <summary>

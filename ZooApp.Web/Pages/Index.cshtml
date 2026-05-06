@@ -2,16 +2,143 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    bool isCalendar = Model.View == "calendar";
+    var today = DateTime.Today;
+    int year = today.Year;
+    int month = today.Month;
+    int daysInMonth = DateTime.DaysInMonth(year, month);
+    int firstDayOfWeek = ((int)new DateTime(year, month, 1).DayOfWeek + 6) % 7; // Monday = 0
 }
 
-   <form method="get" asp-page="/EventsView/Åbningstider"><button type="submit" class="btn btn primary">Åbningstider</button></form>
-    <form method="get" asp-page="/EventsView/Kalender"><button type="submit" class="btn btn primary">Kalender</button></form>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2>Åbningstider</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Dag</th>
+            <th>Åbningstid</th>
+            <th>Lukketid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var å in Model.ÅbningsTider)
+        {
+            <tr>
+                <td>@å.DayOfWeek</td>
+                <td>@å.OpenTime</td>
+                <td>@å.CloseTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Events</h2>
+<div class="mb-3 d-flex justify-content-between align-items-center">
+    <a class="btn btn-primary" asp-page="/Event/CreateEvent">Opret nyt Event</a>
+    <div>
+        <a class="btn btn-outline-secondary @(!isCalendar ? "active" : "")" asp-page="/Index" asp-route-view="list">Liste</a>
+        <a class="btn btn-outline-secondary @(isCalendar ? "active" : "")" asp-page="/Index" asp-route-view="calendar">Kalender</a>
+    </div>
 </div>
-<div>
-    <p>
-        <a class="btn btn-primary" asp-page="/Event/CreateEvent">Create a new Item</a>
-    </p>
-</div>
+
+@if (!isCalendar)
+{
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @Model.SuccessMessage
+        </div>
+    }
+
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    @if (Model.Events.Count == 0)
+    {
+        <p>Der findes ingen events.</p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Starttid</th>
+                <th>Sluttid</th>
+                <th>Lokation</th>
+                <th>Deltagere</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model.Events)
+            {
+                <tr>
+                    <td>@ev.Title</td>
+                    <td>@ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@ev.Location</td>
+                    <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
+                    <td>
+                        <form method="post" asp-page-handler="SignUp">
+                            <input type="hidden" name="eventId" value="@ev.Id" />
+                            @if (ev.CurrentParticipants >= ev.MaxParticipants)
+                            {
+                                <button class="btn btn-secondary btn-sm" disabled>Fuldt booket</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary btn-sm">Tilmeld</button>
+                            }
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5 class="mb-3">@((new DateTime(year, month, 1)).ToString("MMMM yyyy"))</h5>
+    <table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
+        <thead>
+            <tr>
+                <th>Man</th><th>Tir</th><th>Ons</th><th>Tor</th><th>Fre</th><th>Lør</th><th>Søn</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cell = 0;
+                int totalCells = firstDayOfWeek + daysInMonth;
+                int rows = (int)Math.Ceiling(totalCells / 7.0);
+            }
+            @for (int row = 0; row < rows; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < 7; col++)
+                    {
+                        int dayNumber = row * 7 + col - firstDayOfWeek + 1;
+                        if (dayNumber < 1 || dayNumber > daysInMonth)
+                        {
+                            <td style="height: 100px;"></td>
+                        }
+                        else
+                        {
+                            var dayEvents = Model.Events.Where(e => e.StartDateTime.Date == new DateTime(year, month, dayNumber)).ToList();
+                            <td class="@(dayNumber == today.Day ? "table-warning" : "")" style="height: 100px; vertical-align: top; padding: 6px; word-wrap: break-word; overflow: hidden;">
+                                <strong>@dayNumber</strong>
+                                @foreach (var ev in dayEvents)
+                                {
+                                    <div><small class="badge bg-primary text-wrap">@ev.StartDateTime.ToString("HH:mm") @ev.Title</small></div>
+                                }
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
