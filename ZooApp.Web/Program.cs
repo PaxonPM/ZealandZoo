@@ -1,3 +1,5 @@
+using ZealandZoo.Repositories;
+using ZealandZoo.Services;
 using ZooApp.Data.Db;
 using ZooApp.Data.interfaces;
 using ZooApp.Data.Repositories;
@@ -16,6 +18,8 @@ builder.Services.AddScoped<DbConnectionHelper>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 // Service
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<InventoryRepository>();
+builder.Services.AddScoped<InventoryService>();
 
 // Admin
 builder.Services.AddScoped<AdminRepository>();
