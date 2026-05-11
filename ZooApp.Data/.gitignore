@@ -18,7 +18,8 @@ build/
 bld/
 Bin/
 Obj/
-
+ZooApp.Web\Properties\launchSettings.json
+ZooApp.Web/Properties/launchSettings.json
 # Visual Studio cache
 .vs/
 

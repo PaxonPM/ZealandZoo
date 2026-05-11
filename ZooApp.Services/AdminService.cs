@@ -1,13 +1,15 @@
+using ZooApp.Data.interfaces;
 using ZooApp.Data.Repositories;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Services
 {
-    public class AdminService
+    public class AdminService: IAdminService
     {
-        private readonly AdminRepository _adminRepository;
+        private readonly IAdminRepository _adminRepository;
 
-        public AdminService(AdminRepository adminRepository)
+        public AdminService(IAdminRepository adminRepository)
         {
             _adminRepository = adminRepository;
         }

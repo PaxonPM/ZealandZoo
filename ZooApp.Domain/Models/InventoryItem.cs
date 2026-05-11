@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZealandZoo.Models
+namespace ZooApp.Domain.Models
 {
     public class InventoryItem
     {
@@ -12,5 +12,17 @@ namespace ZealandZoo.Models
         public int CategoryId { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
+    }
+}
+        public InventoryItem(int id, int category,string name, int quantity)
+        {
+            Id = id;
+            CategoryId = category;
+            Name = name;
+            Quantity = quantity;
+        }
+
+
+      
     }
 }
