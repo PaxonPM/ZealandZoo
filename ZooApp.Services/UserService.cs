@@ -10,7 +10,7 @@ using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Services
 {
-    internal class UserService 
+    public class UserService : IUserService
     {
         private readonly UserRepository _userService;
 
@@ -61,9 +61,14 @@ namespace ZooApp.Services
 
             return user;
         }
+
+        public List<Event> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
         //private static string HashPassword(string pwHash)
         //{
-           
+
         //}
     }
 }

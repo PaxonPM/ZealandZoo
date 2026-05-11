@@ -9,13 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<GuestService>();
+builder.Services.AddSingleton<UserService>();
 
 // Database connection helper
 builder.Services.AddScoped<DbConnectionHelper>();
 // Repository
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 // Service
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Admin
 builder.Services.AddScoped<AdminRepository>();
