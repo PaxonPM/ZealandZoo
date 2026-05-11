@@ -13,21 +13,25 @@ builder.Services.AddSingleton<UserService>();
 
 // Database connection helper
 builder.Services.AddScoped<DbConnectionHelper>();
-// Repository
+
+// Repositories
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 // Service
-builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
-// Admin
-builder.Services.AddScoped<AdminRepository>();
-builder.Services.AddScoped<AdminService>();
+// Services
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    //options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
 var app = builder.Build();

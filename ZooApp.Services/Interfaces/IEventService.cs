@@ -20,7 +20,7 @@ namespace ZooApp.Services.Interfaces
         /// <returns>The created event with system-generated properties (Id, CreatedAt) populated.</returns>
         /// <exception cref="ArgumentNullException">Thrown when newEvent is null.</exception>
         /// <exception cref="ValidationException">Thrown when the event data is invalid.</exception>
-        Event CreateEvent(Event newEvent);
+        Task<Event> CreateEventAsync(Event newEvent);
         List<Event> GetAllEvents();
         void SignUpForEvent(int eventId, int userId);
     }
