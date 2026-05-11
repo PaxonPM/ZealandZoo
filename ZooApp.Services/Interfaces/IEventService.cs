@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ZooApp.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace ZooApp.Services.Interfaces
 {
     /// <summary>
@@ -22,6 +23,11 @@ namespace ZooApp.Services.Interfaces
         /// <exception cref="ValidationException">Thrown when the event data is invalid.</exception>
         Task<Event> CreateEventAsync(Event newEvent);
         List<Event> GetAllEvents();
+        Event? GetEventById(int id);
+
         void SignUpForEvent(int eventId, int userId);
+        void CancelSignUp(int eventId, int userId);
+
+        bool IsUserSignedUp(int eventId, int userId);
     }
 }

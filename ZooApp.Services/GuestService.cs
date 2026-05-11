@@ -66,5 +66,31 @@ namespace ZooApp.Services
                 return Convert.ToBase64String(hash);
             }
         }
+        /// <summary>
+        /// Validates guest login by comparing username and hashed password.
+        /// </summary>
+        /// <param name="username">Guest username</param>
+        /// <param name="password">Plain text password</param>
+        /// <returns>The guest if login is valid, otherwise null</returns>
+        public Guest? ValidateLogin(string username, string password)
+        {
+            Guest? guest = MockGuests.GetMockGuests()
+                .FirstOrDefault(g => g.UserName == username);
+
+            if (guest == null)
+            {
+                return null;
+            }
+
+            string hashedInput = HashPassword(password);
+
+            if (guest.Password != hashedInput)
+            {
+                return null;
+            }
+
+            return guest;
+        }
+
     }
 }

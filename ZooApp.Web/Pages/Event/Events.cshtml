@@ -5,16 +5,12 @@
 
 @if (Model.SuccessMessage != null)
 {
-    <div class="alert alert-success">
-        @Model.SuccessMessage
-    </div>
+    <div class="alert alert-success">@Model.SuccessMessage</div>
 }
 
 @if (Model.ErrorMessage != null)
 {
-    <div class="alert alert-danger">
-        @Model.ErrorMessage
-    </div>
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
 }
 
 @if (Model.Events.Count == 0)
@@ -31,12 +27,14 @@ else
                 <th>Slut</th>
                 <th>Lokation</th>
                 <th>Deltagere</th>
-                <th></th>
+                <th>Tilmelding</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var ev in Model.Events)
             {
+                bool isSignedUp = Model.UserSignUps.ContainsKey(ev.Id) && Model.UserSignUps[ev.Id];
+
                 <tr>
                     <td>@ev.Title</td>
                     <td>@ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</td>
@@ -44,22 +42,28 @@ else
                     <td>@ev.Location</td>
                     <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
                     <td>
-                        <form method="post" asp-page-handler="SignUp">
-                            <input type="hidden" name="eventId" value="@ev.Id" />
+                        @if (isSignedUp)
+                        {
+                            <form method="post" asp-page-handler="CancelSignUp">
+                                <input type="hidden" name="eventId" value="@ev.Id" />
+                                <button class="btn btn-danger">Afmeld</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="SignUp">
+                                <input type="hidden" name="eventId" value="@ev.Id" />
 
-                            @if (ev.CurrentParticipants >= ev.MaxParticipants)
-                            {
-                                <button class="btn btn-secondary" disabled>
-                                    Fuldt booket
-                                </button>
-                            }
-                            else
-                            {
-                                <button type="submit" class="btn btn-primary">
-                                    Tilmeld
-                                </button>
-                            }
-                        </form>
+                                @if (ev.CurrentParticipants >= ev.MaxParticipants)
+                                {
+                                    <button class="btn btn-secondary" disabled>Fuldt booket</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-primary">Tilmeld</button>
+                                }
+                            </form>
+                        }
                     </td>
                 </tr>
             }
