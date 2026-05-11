@@ -1,6 +1,6 @@
 /*
-    Database: dev_ZealandZoo_0_3
-    version: 0.3
+    Database: dev_ZealandZoo_0_4
+    version: 0.4
     Description:
     This database supports the Zealand Zoo system.
     Author: Paw
@@ -13,7 +13,7 @@
 
 -- Create database
 
-CREATE DATABASE dev_ZealandZoo_0_3;
+CREATE DATABASE dev_ZealandZoo_0_4;
 GO
 
 USE dev_ZealandZoo_0_3;

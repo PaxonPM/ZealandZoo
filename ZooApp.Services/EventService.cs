@@ -31,11 +31,20 @@ namespace ZooApp.Services
             _personService = personService;
         }
 
-        public Event CreateEvent(Event newEvent)
+        public async Task<Event> CreateEventAsync(Event newEvent)
         {
             Event created = _eventRepository.Create(newEvent);
-            List<Person> newsletterMembers = _personService.GetNewsletterMembers();
-            _emailService.SendEventNotification(created, newsletterMembers);
+
+            try
+            {
+                List<Person> newsletterMembers = _personService.GetNewsletterMembers();
+                await _emailService.SendEventNotificationAsync(created, newsletterMembers);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (for demonstration, we just write to console)
+                Console.WriteLine($"Failed to send event notification emails: {ex.Message}");
+            }
             return created;
         }
 
