@@ -10,7 +10,7 @@ using ZooApp.Domain.Models;
 
 namespace ZooApp.Data.Repositories
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DbConnectionHelper _connection;
 
@@ -19,7 +19,7 @@ namespace ZooApp.Data.Repositories
             _connection = connection;
         }
 
-        public User Create(User entity)
+        public User CreateUser(User entity)
         {
             string queryStr = $"INSERT INTO Users (id, name, telefon , email, role_id, is_newsletter_member) " +
                 $"OUTPUT INSERTED.id, INSERTED.name " +
@@ -122,6 +122,11 @@ namespace ZooApp.Data.Repositories
 
 
 
+        }
+
+        public User Create(User entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
