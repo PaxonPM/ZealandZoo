@@ -9,15 +9,15 @@ namespace ZooApp.Domain.Models
     public class InventoryItem
     {
         public int Id { get; set; }
-        public int Category { get; set; }
-        public string? Name { get; set; }
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
         public int Quantity { get; set; }
-
-        
+    }
+}
         public InventoryItem(int id, int category,string name, int quantity)
         {
             Id = id;
-            Category = category;
+            CategoryId = category;
             Name = name;
             Quantity = quantity;
         }
