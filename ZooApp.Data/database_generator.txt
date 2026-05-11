@@ -16,7 +16,7 @@
 CREATE DATABASE dev_ZealandZoo_0_4;
 GO
 
-USE dev_ZealandZoo_0_3;
+USE dev_ZealandZoo_0_4;
 GO
 
 CREATE TABLE Event(
