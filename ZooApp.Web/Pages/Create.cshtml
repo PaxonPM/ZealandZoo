@@ -1,0 +1,31 @@
+﻿@page
+@model ZealandZoo.Pages.Inventory.CreateModel
+
+<h2>Opret ny vare</h2>
+
+<form method="post">
+    <div>
+        <label>Navn</label>
+        <input asp-for="NewItem.Name" />
+        <span asp-validation-for="NewItem.Name"></span>
+    </div>
+
+    <div>
+        <label>Kategori</label>
+        <select asp-for="NewItem.CategoryId" asp-items="Model.Categories">
+            <option value="">-- Vælg kategori --</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Antal på lager</label>
+        <input asp-for="NewItem.Quantity" type="number" />
+    </div>
+
+    <button type="submit">Opret vare</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color:red">@Model.ErrorMessage</p>
+}

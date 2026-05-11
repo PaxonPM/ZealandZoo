@@ -21,13 +21,13 @@ namespace ZooApp.Web.Pages.EventsView
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _eventService.CreateEvent(Event);
+            await _eventService.CreateEventAsync(Event);
             return RedirectToPage("Index");
         }
     }

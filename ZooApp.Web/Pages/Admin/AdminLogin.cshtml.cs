@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Services;
+using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Admin
 {
     public class AdminLoginModel : PageModel
     {
-        private readonly AdminService _adminService;
+        private readonly IAdminService _adminService;
 
-        public AdminLoginModel(AdminService adminService)
+        public AdminLoginModel(IAdminService adminService)
         {
             _adminService = adminService;
         }

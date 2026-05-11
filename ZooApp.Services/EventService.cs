@@ -21,15 +21,31 @@ namespace ZooApp.Services
         
         //private List<Event> _events;
         private readonly IEventRepository _eventRepository;
+        private readonly IEmailService _emailService;
+        private readonly IPersonService _personService;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IEmailService emailService, IPersonService personService)
         {
             _eventRepository = eventRepository;
+            _emailService = emailService;
+            _personService = personService;
         }
 
-        public Event CreateEvent(Event newEvent)
+        public async Task<Event> CreateEventAsync(Event newEvent)
         {
-            return _eventRepository.Create(newEvent);
+            Event created = _eventRepository.Create(newEvent);
+
+            try
+            {
+                List<Person> newsletterMembers = _personService.GetNewsletterMembers();
+                await _emailService.SendEventNotificationAsync(created, newsletterMembers);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (for demonstration, we just write to console)
+                Console.WriteLine($"Failed to send event notification emails: {ex.Message}");
+            }
+            return created;
         }
 
         
@@ -39,7 +55,9 @@ namespace ZooApp.Services
         /// <returns>List of events</returns>
         public List<Event> GetAllEvents()
         {
-            return MockEvents.GetMockEvents();
+            return _eventRepository.GetAll().ToList();
+
+
         }
 
         /// <summary>
@@ -49,7 +67,7 @@ namespace ZooApp.Services
         /// <returns>The event if found, otherwise null</returns>
         public Event? GetEventById(int id)
         {
-            return MockEvents.GetMockEvents().FirstOrDefault(e => e.Id == id);
+            return _eventRepository.GetById(id);
         }
 
         /// <summary>

@@ -1,0 +1,101 @@
+﻿@page
+@model ZooApp.Web.Pages.CreateUser.CreateUserModel
+@{
+	ViewData["Id"] = "Create User";
+}
+
+@* Main heading for the event creation page *@
+<h1>Create new User</h1>
+
+@* Event creation form with validation *@
+<form method="post">
+	@* Display model-level validation errors (e.g., business rule violations) *@
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	@* Event Title input field with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.Id" class="control-label"></label>
+		<input asp-for="@Model.User.Id" class="form-control" />
+		<span asp-validation-for="@Model.User.Id" class="text-danger"></span>
+	</div>
+
+	@* Event Description textarea with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.Name" class="control-label"></label>
+		<input asp-for="@Model.User.Name" class="form-control" type="text"/>
+		<span asp-validation-for="@Model.User.Name" class="text-danger"></span>
+	</div>
+
+	@* Start DateTime picker with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.Email" class="control-label"></label>
+		<input asp-for="@Model.User.Email" class="form-control" type="email" />
+		<span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+	</div>
+
+	@* End DateTime picker with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.PwHash" class="control-label"></label>
+		<input asp-for="@Model.User.PwHash" class="form-control" type="password" />
+		<span asp-validation-for="@Model.User.PwHash" class="text-danger"></span>
+	</div>
+
+	@* Location input field with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.Telefon" class="control-label"></label>
+		<input asp-for="@Model.User.Telefon" class="form-control" type="number" min="8" />
+		<span asp-validation-for="@Model.User.Telefon" class="text-danger"></span>
+	</div>
+
+	@* Max Participants number input with validation *@
+	<div class="form-group">
+		<label asp-for="@Model.User.Role" class="control-label"></label>
+		<input asp-for="@Model.User.Role" class="form-control" type="number" min="1" />
+		<span asp-validation-for="@Model.User.Role" class="text-danger"></span>
+	</div>
+
+	@* Form submission button *@
+	<p>
+		<div class="form-group">
+			<input type="submit" value="Create" class="btn btn-primary" />
+		</div>
+	</p>
+</form>
+
+
+
+@* Success modal displayed when event is created successfully *@
+@if (Model.User != null)
+{
+	<div class="modal fade show" id="successModal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">User Created Successfully!</h5>
+					<button type="button" class="btn-close" onclick="window.location.href='/Index'"></button>
+				</div>
+				<div class="modal-body">
+					@* Display all created event details for confirmation *@
+					<p><strong>ID:</strong> @Model.CreatedUser.Id</p>
+					<p><strong>Name:</strong> @Model.CreatedUser.Name</p>
+					<p><strong>Email:</strong> @Model.CreatedUser.Email</p>
+					<p><strong>Password:</strong> @Model.CreatedUser.PwHash</p>
+					<p><strong>Telefon:</strong> @Model.CreatedUser.Telefon</p>
+					<p><strong>Role:</strong> @Model.CreatedUser.Role</p>
+					
+				</div>
+				<div class="modal-footer">
+					<a href="/Index" class="btn btn-primary">Go to HomePage</a>
+					<a href="/User/CreateUser" class="btn btn-primary">Create Another</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@* Error modal displayed when event creation fails. *@
+@if (Model.Modal != null)
+{
+	<partial name="Shared/ModalViewError" model="Model.Modal" />
+}
+
