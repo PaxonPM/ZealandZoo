@@ -62,18 +62,19 @@ namespace ZooApp.Web.Pages.Event
         /// A page result displaying validation errors if the model is invalid,
         /// or the same page with either a success modal or error modal based on the operation result.
         /// </returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             // Return to the form with validation errors if model state is invalid
             if (!ModelState.IsValid)
             {
+                Modal = new ModalViewErrorModel();
                 return Page();
             }
 
             try
             {
                 // Attempt to create the event through the service layer
-                CreatedEvent = _eventService.CreateEvent(Event);
+                CreatedEvent = await _eventService.CreateEventAsync(Event);
             }
             catch (Exception ex)
             {

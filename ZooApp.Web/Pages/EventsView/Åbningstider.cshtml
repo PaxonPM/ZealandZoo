@@ -1,9 +1,9 @@
-﻿@page
+﻿@* @page
 @model ZooApp.Web.Pages.EventsView.ÅbningstiderModel
 @{
 }
 <h1>Åbningstider</h1>
-@if (@* Model.Events != null && Model.Events.Any() || *@ Model.ÅbningsTider != null && Model.ÅbningsTider.Any())
+if (Model.Events != null && Model.Events.Any() || Model.ÅbningsTider != null && Model.ÅbningsTider.Any())
 {
     <head>
         <form method="get" asp-page="/EventsView/Kalender"><button type="submit" class="btn btn primary">Kalender</button></form>
@@ -16,11 +16,11 @@
                 <th>Lukketider</th>
                 <th>Lukket</th>
                 <th>Note</th>
-                
+
             </tr>
         </thead>
         <tbody>
-           @*  @foreach (var e in Model.Events)
+            @*  @foreach (var e in Model.Events)
             {
                 <tr>
                     <td>@e.Id</td>
@@ -31,20 +31,18 @@
                     <td>@e.EndDateTime</td>
                     <td>@e.Location</td>
                     <td>@e.MaxParticipants</td>
-                </tr> *@
-                @foreach(var å in Model.ÅbningsTider)
-                {
-                    <tr>
-                        <td>@å.DayOfWeek</td>
-                        <td>@å.OpenTime</td>
-                        <td>@å.CloseTime</td>
-                        <td>@å.IsClosed</td>
-                        <td>@å.Note</td>
-                      
+                </tr> 
+            @foreach (var å in Model.ÅbningsTider)
+            {
+                <tr>
+                    <td>@å.DayOfWeek</td>
+                    <td>@å.OpenTime</td>
+                    <td>@å.CloseTime</td>
+
                 </tr>
-                
-               
-                }
+
+
+            }
 
 
             }
@@ -56,4 +54,4 @@ else
 {
     <p><em>Ingen events fundet.</em></p>
 }
-
+ *@

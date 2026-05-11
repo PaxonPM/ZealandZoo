@@ -1,9 +1,10 @@
+using ZooApp.Data.interfaces;
 using ZooApp.Data.MockData;
 using ZooApp.Domain.Models;
 
 namespace ZooApp.Data.Repositories
 {
-    public class AdminRepository
+    public class AdminRepository: IAdminRepository
     {
         public Admin? GetByUsername(string username)
         {

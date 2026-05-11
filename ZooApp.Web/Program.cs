@@ -9,22 +9,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<GuestService>();
-
 // Database connection helper
 builder.Services.AddScoped<DbConnectionHelper>();
-// Repository
-builder.Services.AddScoped<IEventRepository, EventRepository>();
-// Service
-builder.Services.AddScoped<IEventService, EventService>();
 
-// Admin
-builder.Services.AddScoped<AdminRepository>();
-builder.Services.AddScoped<AdminService>();
+// Repositories
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+// Services
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    //options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
 var app = builder.Build();

@@ -85,3 +85,4 @@ Generated\ Files/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
+Properties\launchSettings.json
