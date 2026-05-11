@@ -1,26 +1,31 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
 using ZealandZoo.Models;
-using Microsoft.Extensions.Configuration;
+using ZooApp.Data.Db;
+using ZooApp.Data.interfaces;
+using ZooApp.Domain.Models;
 namespace ZealandZoo.Repositories
 
 {
-    public class InventoryRepository
+    public class InventoryRepository : IInventoryRepository
     {
-        private readonly string _connectionString;
+        //private readonly string _connectionString;
+        private readonly DbConnectionHelper _connection;
 
-        public InventoryRepository(IConfiguration configuration)
+        public InventoryRepository(DbConnectionHelper connection) //IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("ZealandZoo");
+            _connection = connection; //_connectionString = configuration.GetConnectionString("ZealandZoo");
         }
 
         public bool ExistsByName(string name)
         {
-            using SqlConnection connection = new SqlConnection(_connectionString);
+            //using SqlConnection connection = new SqlConnection(_connectionString);
+            using var connection = _connection.CreateConnection();
             connection.Open();
 
             string sql = "SELECT COUNT(*) FROM InventoryItems WHERE Name = @Name";
@@ -32,7 +37,8 @@ namespace ZealandZoo.Repositories
 
         public void CreateItem(InventoryItem item)
         {
-            using SqlConnection connection = new SqlConnection(_connectionString);
+            //using SqlConnection connection = new SqlConnection(_connectionString);
+            using var connection = _connection.CreateConnection();
             connection.Open();
 
             string sql = "INSERT INTO InventoryItems (category_id, Name, quantity) " +
@@ -50,7 +56,8 @@ namespace ZealandZoo.Repositories
         {
             List<ItemCategory> categories = new List<ItemCategory>();
 
-            using SqlConnection connection = new SqlConnection(_connectionString);
+            //using SqlConnection connection = new SqlConnection(_connectionString);
+            using var connection = _connection.CreateConnection();
             connection.Open();
 
             string sql = "SELECT id, Name FROM ItemCategories";

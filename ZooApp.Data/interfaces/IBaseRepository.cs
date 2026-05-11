@@ -14,5 +14,6 @@ namespace ZooApp.Data.interfaces
         public IEnumerable<T> GetAll();
         public T Update(T entity);
         public T Delete(int id);
+
     }
 }

@@ -5,14 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using ZealandZoo.Models;
 using ZealandZoo.Repositories;
+using ZooApp.Data.interfaces;
+using ZooApp.Domain.Models;
 
 namespace ZealandZoo.Services
 {
     public class InventoryService
     {
-        private readonly InventoryRepository _inventoryRepository;
+        private readonly IInventoryRepository _inventoryRepository;
 
-        public InventoryService(InventoryRepository inventoryRepository)
+        public InventoryService(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }

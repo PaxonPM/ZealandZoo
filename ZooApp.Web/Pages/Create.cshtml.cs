@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ZealandZoo.Models;
 using ZealandZoo.Services;
+using ZooApp.Domain.Models;
 
 namespace ZealandZoo.Pages.Inventory
 {
