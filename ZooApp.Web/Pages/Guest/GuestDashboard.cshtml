@@ -1,0 +1,10 @@
+﻿@page
+@model ZooApp.Web.Pages.Guest.GuestDashboardModel
+
+<h2>Guest Dashboard</h2>
+
+<p>Velkommen, @HttpContext.Session.GetString("GuestUsername")!</p>
+
+<p>Her kan du se og tilmelde dig events.</p>
+
+<a class="btn btn-primary" asp-page="/Event/Events">Se events</a>

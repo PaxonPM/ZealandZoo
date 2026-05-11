@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 using System.Text;
-using ZooApp.Data.MockData;
+using ZooApp.Domain.Models;
 
 namespace ZooApp.Web.Pages.Guest
 {
@@ -13,10 +13,10 @@ namespace ZooApp.Web.Pages.Guest
     public class CreateGuestModel : PageModel
     {
         /// <summary>
-        /// Guest object bound to the form input.
+        /// Person object bound to the form input.
         /// </summary>
         [BindProperty]
-        public Domain.Models.Guest Guest { get; set; } = new Domain.Models.Guest();
+        public Person Person { get; set; } = new Person();
 
         /// <summary>
         /// Confirmation message shown after successful creation.
@@ -40,21 +40,15 @@ namespace ZooApp.Web.Pages.Guest
                     throw new Exception("Invalid input. Please check your data.");
                 }
 
-                // Check if username already exists
-                if (MockGuests.GetMockGuests().Any(g => g.UserName == Guest.UserName))
-                {
-                    throw new Exception("Username already exists.");
-                }
-
                 // Hash password before saving
-                Guest.Password = HashPassword(Guest.Password);
-
-                // Save guest (mock)
-                MockGuests.AddGuest(Guest);
-
+                Person.PwHash = HashPassword(Person.PwHash);
+                
+                // TODO Person RoleId 3 = guest (Check DEFAULT OR NOT IN DATABASE else set to guest)
+                // HIGH_TODO save user to database, use database error handling.
+               
                 SuccessMessage = "User created successfully!";
                 ModelState.Clear();
-                Guest = new Domain.Models.Guest();
+                
             }
             catch (Exception ex)
             {

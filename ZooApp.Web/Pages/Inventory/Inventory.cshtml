@@ -1,0 +1,27 @@
+﻿@page
+@using ZooApp.Domain.Models
+@model ZooApp.Web.Pages.Inventory.InventoryModel
+@{
+}
+<h1>Lageroversigt</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Quantity</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.CategoryId</td>
+            <td>@item.Name</td>
+            <td>@item.Quantity</td>
+        </tr>
+        }
+    </tbody>
