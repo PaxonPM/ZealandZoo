@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<GuestService>();
-builder.Services.AddSingleton<UserService>();
+//builder.Services.AddSingleton<UserService>();
 
 // Database connection helper
 builder.Services.AddScoped<DbConnectionHelper>();
@@ -17,11 +17,10 @@ builder.Services.AddScoped<DbConnectionHelper>();
 // Repositories
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-// Service
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
-// Services
+// Service
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPersonService, PersonService>();

@@ -7,14 +7,15 @@ using ZooApp.Data.MockData;
 using ZooApp.Data.Repositories;
 using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
+using ZooApp.Data.interfaces;
 
 namespace ZooApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserRepository _userService;
+        private readonly IUserRepository _userService;
 
-        public UserService(UserRepository userRepository)
+        public UserService(IUserRepository userRepository)
         {
             _userService = userRepository;
         }

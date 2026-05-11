@@ -22,28 +22,28 @@
 	@* Event Description textarea with validation *@
 	<div class="form-group">
 		<label asp-for="@Model.User.Name" class="control-label"></label>
-		<textarea asp-for="@Model.User.Name" class="form-control" rows="3"></textarea>
+		<input asp-for="@Model.User.Name" class="form-control" type="text"/>
 		<span asp-validation-for="@Model.User.Name" class="text-danger"></span>
 	</div>
 
 	@* Start DateTime picker with validation *@
 	<div class="form-group">
 		<label asp-for="@Model.User.Email" class="control-label"></label>
-		<input asp-for="@Model.User.Email" class="form-control" type="datetime-local" />
+		<input asp-for="@Model.User.Email" class="form-control" type="email" />
 		<span asp-validation-for="@Model.User.Email" class="text-danger"></span>
 	</div>
 
 	@* End DateTime picker with validation *@
 	<div class="form-group">
 		<label asp-for="@Model.User.PwHash" class="control-label"></label>
-		<input asp-for="@Model.User.PwHash" class="form-control" type="datetime-local" />
+		<input asp-for="@Model.User.PwHash" class="form-control" type="password" />
 		<span asp-validation-for="@Model.User.PwHash" class="text-danger"></span>
 	</div>
 
 	@* Location input field with validation *@
 	<div class="form-group">
 		<label asp-for="@Model.User.Telefon" class="control-label"></label>
-		<input asp-for="@Model.User.Telefon" class="form-control" />
+		<input asp-for="@Model.User.Telefon" class="form-control" type="number" min="8" />
 		<span asp-validation-for="@Model.User.Telefon" class="text-danger"></span>
 	</div>
 
