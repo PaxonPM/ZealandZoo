@@ -82,7 +82,7 @@
                     <td>@ev.Location</td>
                     <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
                     <td>
-                        <form method="post" asp-page-handler="SignUp">
+                        <form method="post" asp-page-handler="SignUp" style="display:inline;">
                             <input type="hidden" name="eventId" value="@ev.Id" />
                             @if (ev.CurrentParticipants >= ev.MaxParticipants)
                             {
@@ -93,6 +93,17 @@
                                 <button type="submit" class="btn btn-primary btn-sm">Tilmeld</button>
                             }
                         </form>
+                        <a class="btn btn-warning btn-sm"
+                           asp-page="/Event/UpdateEvent"
+                           asp-route-id="@ev.Id">
+                            Update
+                        </a>
+
+                        <a class="btn btn-danger btn-sm"
+                           asp-page="/Event/DeleteEvent"
+                           asp-route-id="@ev.Id">
+                            Delete
+                        </a>
                     </td>
                 </tr>
             }

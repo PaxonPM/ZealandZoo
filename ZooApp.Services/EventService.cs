@@ -128,5 +128,27 @@ namespace ZooApp.Services
             return eventSignUps.ContainsKey(eventId)
                    && eventSignUps[eventId].Contains(userId);
         }
+        /// <summary>
+        /// Updates an existing event.
+        /// </summary>
+        /// <param name="updatedEvent">The updated event object.</param>
+        /// <returns>The updated event.</returns>
+        public async Task<Event> UpdateEventAsync(Event updatedEvent)
+        {
+            return await Task.Run(() => _eventRepository.Update(updatedEvent));
+        }
+        /// <summary>
+        /// Gets an event asynchronously by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event.</param>
+        /// <returns>The event if found; otherwise null.</returns>
+        public async Task<Event?> GetEventByIdAsync(int id)
+        {
+            return await Task.Run(() => _eventRepository.GetById(id));
+        }
+        public Event? DeleteEvent(int id)
+        {
+            return _eventRepository.Delete(id);
+        }
     }
 }
