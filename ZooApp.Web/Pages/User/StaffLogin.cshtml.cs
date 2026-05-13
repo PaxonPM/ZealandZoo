@@ -26,16 +26,16 @@ namespace ZooApp.Web.Pages.User
 
         public IActionResult OnPost()
         {
-            ZooApp.Domain.Models.User? user = _userService.ValidateLogin(Username, Password);
+            ZooApp.Domain.Models.User? User = _userService.ValidateLogin(Username, Password);
 
-            if (user == null)
+            if (User == null)
             {
                 ErrorMessage = "Forkerte loginoplysninger";
                 return Page();
             }
 
             HttpContext.Session.SetString("IsStaff", "true");
-            HttpContext.Session.SetString("Name", user.Name);
+            HttpContext.Session.SetString("Name", User.Name);
            
 
             return RedirectToPage("/Index");
