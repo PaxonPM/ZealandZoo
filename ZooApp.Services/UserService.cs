@@ -71,6 +71,18 @@ namespace ZooApp.Services
         //{
 
         //}
+        public User? ValidateLogin(string name, string pwHash)
+        {
+            User? user = MockUser.GetMockUsers()
+                .FirstOrDefault(u => u.Name == name && u.PwHash == pwHash);
+
+            return user;
+
+            if (user == null)
+            {
+                return null;
+            }
+        }
     }
 }
 

@@ -23,7 +23,7 @@ namespace ZooApp.Web.Pages.CreateUser
             /// Gets or sets the event being created. This property is bound to the form inputs.
             /// </summary>
             [BindProperty]
-            public Domain.Models.User User{ get; set; }
+            public Domain.Models.User user{ get; set; }
 
             /// <summary>
             /// Gets or sets the successfully created event to display in the success modal.
@@ -70,7 +70,7 @@ namespace ZooApp.Web.Pages.CreateUser
                 try
                 {
                     // Attempt to create the event through the service layer
-                    CreatedUser = _userService.CreateUser(User);
+                    CreatedUser = _userService.CreateUser(user);
                 }
                 catch (Exception ex)
                 {
