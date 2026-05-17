@@ -32,5 +32,15 @@ namespace ZealandZoo.Services
         {
             return _inventoryRepository.GetAllCategories();
         }
+
+        public List<InventoryItem> GetAllItems()
+        {
+            return _inventoryRepository.GetAllItems();
+        }
+
+        public void UpdateItem(InventoryItem item)
+        {
+            _inventoryRepository.UpdateItem(item);
+        }
     }
 }

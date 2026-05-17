@@ -13,5 +13,7 @@ namespace ZooApp.Data.interfaces
         bool ExistsByName(string name);
         void CreateItem(InventoryItem item);
         List<ItemCategory> GetAllCategories();
+        List<InventoryItem> GetAllItems();
+        void UpdateItem(InventoryItem item);
     }
 }
