@@ -57,7 +57,7 @@ namespace ZooApp.Services
 
             //user.PwHash = HashPassword(user.PwHash);
 
-            // Save to mock Repository
+            //Save to mock Repository
             _userService.Create(user);
 
             return user;
@@ -71,6 +71,27 @@ namespace ZooApp.Services
         //{
 
         //}
+        public User GetByNameAndPassword(string name, string password)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Name cannot be empty.", nameof(name));
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Password cannot be empty.", nameof(password));
+            }
+
+            User user = _userService.GetByName(name);
+
+            if (user == null || user.PwHash != password)
+            {
+                return null;
+            }
+
+            return user;
+        }
     }
 }
 

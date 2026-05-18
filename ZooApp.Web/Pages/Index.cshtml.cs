@@ -5,9 +5,6 @@ using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Pages
 {
-    // TODO: Refactor the "tilmeld event" button to only show for signed in users.
-    // HIGH_TODO: Implement role-based access control to restrict event creation to admin users only.
-    
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -31,6 +28,9 @@ namespace ZealandZoo.Pages
         [TempData]
         public string? ErrorMessage { get; set; }
 
+        // Add this property to your IndexModel class
+        public Dictionary<int, bool> UserSignUps { get; set; } = new Dictionary<int, bool>();
+
         public IndexModel(ILogger<IndexModel> logger, IEventService eventService)
         {
             _logger = logger;
@@ -39,7 +39,15 @@ namespace ZealandZoo.Pages
 
         public void OnGet()
         {
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
+
             Events = _eventService.GetAllEvents();
+
+            UserSignUps = Events.ToDictionary(
+                ev => ev.Id,
+                ev => guestId.HasValue && _eventService.IsUserSignedUp(ev.Id, guestId.Value)
+            );
+            
 
             ÅbningsTider = new List<OpenHours>
             {
@@ -47,8 +55,8 @@ namespace ZealandZoo.Pages
                 new OpenHours
                 {
                     DayOfWeek = DayOfWeek.Friday,
-                    OpenTime = new TimeOnly(15,00),
-                    CloseTime = new TimeOnly(23,59),
+                    OpenTime = new TimeOnly(15, 00),
+                    CloseTime = new TimeOnly(23, 59),
                 },
 
             };
@@ -57,14 +65,30 @@ namespace ZealandZoo.Pages
         }
         public IActionResult OnPostSignUp(int eventId)
         {
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
+            if (guestId == null) return RedirectToPage("/Guest/GuestLogin");
+
             try
             {
-                // Temporary mock user ID
-                int userId = 1;
-
-                _eventService.SignUpForEvent(eventId, userId);
-
+                _eventService.SignUpForEvent(eventId, guestId.Value);
                 SuccessMessage = "Du er nu tilmeldt eventet.";
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+
+            return RedirectToPage();
+        }
+        public IActionResult OnPostCancelSignUp(int eventId)
+        {
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
+            if (guestId == null) return RedirectToPage("/Guest/GuestLogin");
+
+            try
+            {
+                _eventService.CancelSignUp(eventId, guestId.Value);
+                SuccessMessage = "Du er nu afmeldt eventet.";
             }
             catch (Exception ex)
             {

@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Cryptography;
-using System.Text;
 using ZooApp.Domain.Models;
+using ZooApp.Services;
 
 namespace ZooApp.Web.Pages.Guest
 {
@@ -12,6 +11,13 @@ namespace ZooApp.Web.Pages.Guest
     /// </summary>
     public class CreateGuestModel : PageModel
     {
+        private readonly GuestService _guestService;
+
+        public CreateGuestModel(GuestService guestService)
+        {
+            _guestService = guestService;
+        }
+
         /// <summary>
         /// Person object bound to the form input.
         /// </summary>
@@ -36,19 +42,22 @@ namespace ZooApp.Web.Pages.Guest
             try
             {
                 if (!ModelState.IsValid)
-                {
-                    throw new Exception("Invalid input. Please check your data.");
-                }
+                    throw new Exception("Ugyldigt input. Kontroller dine oplysninger.");
 
-                // Hash password before saving
-                Person.PwHash = HashPassword(Person.PwHash);
-                
-                // TODO Person RoleId 3 = guest (Check DEFAULT OR NOT IN DATABASE else set to guest)
-                // HIGH_TODO save user to database, use database error handling.
-               
-                SuccessMessage = "User created successfully!";
+                GuestModel guest = new GuestModel
+                {
+                    UserName = Person.Name,
+                    Email = Person.Email,
+                    PhoneNumber = Person.PhoneNumber,
+                    Password = Person.PwHash,  // GuestService hashes this
+                    IsNewsletterMember = Person.IsNewsLetterMember
+                };
+
+                _guestService.CreateGuest(guest);
+
+                SuccessMessage = "Bruger oprettet!";
                 ModelState.Clear();
-                
+                Person = new Person();
             }
             catch (Exception ex)
             {
@@ -56,22 +65,6 @@ namespace ZooApp.Web.Pages.Guest
             }
 
             return Page();
-        }
-
-        /// <summary>
-        /// Hashes a password using SHA256.
-        /// </summary>
-        /// <param name="password">Plain text password</param>
-        /// <returns>Hashed password</returns>
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-
-                return Convert.ToBase64String(hash);
-            }
         }
     }
 }
