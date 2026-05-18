@@ -45,6 +45,33 @@ namespace ZooApp.Data.Repositories
 
             return entity;
         }
+
+        public User GetByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Name cannot be empty.", nameof(name));
+            }
+
+            string queryStr = @"SELECT id, name, email, telefon, pw_hash, role_id, is_newsletter_member
+                       FROM Users
+                       WHERE name = @name";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+            cmd.Parameters.AddWithValue("@name", name);
+
+            connection.Open();
+
+            using var reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return MapReaderToUser(reader);
+            }
+
+            return null;
+        }
         public User GetById(int id)
         {
             // Validate input parameter
