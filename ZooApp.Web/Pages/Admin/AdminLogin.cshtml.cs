@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZooApp.Services;
 using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Admin
@@ -15,27 +14,27 @@ namespace ZooApp.Web.Pages.Admin
         }
 
         [BindProperty]
-        public string Username { get; set; }
+        public string Username { get; set; } = "";
 
         [BindProperty]
-        public string Password { get; set; }
+        public string Password { get; set; } = "";
 
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = "";
 
         public void OnGet() { }
 
         public IActionResult OnPost()
         {
-            bool isValid = _adminService.ValidateLogin(Username, Password);
-
-            if (!isValid)
+            if (!_adminService.ValidateLogin(Username, Password))
             {
                 ErrorMessage = "Forkerte loginoplysninger";
                 return Page();
             }
 
             HttpContext.Session.SetString("IsAdmin", "true");
-            return RedirectToPage("/Admin/AdminDashboard");
+            HttpContext.Session.SetString("AdminUsername", Username);
+
+            return RedirectToPage("/index");
         }
     }
 }
