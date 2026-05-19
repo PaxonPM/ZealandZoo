@@ -1,23 +1,24 @@
 ﻿@page
 @model ZooApp.Web.Pages.Guest.GuestLoginModel
 
-<h2>Guest Login</h2>
-
-<form method="post">
-    <div>
-        <label>Brugernavn</label>
-        <input asp-for="Username" />
+<div class="container mt-4" style="max-width: 480px;">
+    <h4>Gæst Login</h4>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" asp-for="Email" type="email" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Adgangskode</label>
+            <input class="form-control" asp-for="Password" type="password" />
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="text-danger">@Model.ErrorMessage</p>
+        }
+        <button type="submit" class="btn btn-primary">Log ind</button>
+    </form>
+    <div class="mt-2">
+        <small><a asp-page="/User/StaffLogin">Medarbejder login</a></small>
     </div>
-
-    <div>
-        <label>Adgangskode</label>
-        <input asp-for="Password" type="password" />
-    </div>
-
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <p style="color:red">@Model.ErrorMessage</p>
-    }
-
-    <button type="submit">Log ind</button>
-</form>
+</div>

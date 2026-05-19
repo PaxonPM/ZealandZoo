@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZooApp.Domain.Models;
+using ZooApp.Data.MockData;
 
 namespace ZooApp.Data.MockData
 {
@@ -28,7 +29,12 @@ namespace ZooApp.Data.MockData
             {
                 PwHash = "hashedpassword4"
             }
+      
 
-        };
+    };
+        public static List<User> GetMockUsers()
+        {
+            return users;
+        }
     }
 }

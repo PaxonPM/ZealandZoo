@@ -75,5 +75,44 @@ namespace ZealandZoo.Repositories
 
             return categories;
         }
+
+        public List<InventoryItem> GetAllItems()
+        {
+            var items = new List<InventoryItem>();
+
+            using var connection = _connection.CreateConnection();
+            connection.Open();
+
+            string sql = "SELECT id, category_id, Name, quantity FROM InventoryItems";
+            using SqlCommand command = new SqlCommand(sql, connection);
+            using SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                items.Add(new InventoryItem(
+                    (int)reader["id"],
+                    (int)reader["category_id"],
+                    (string)reader["Name"],
+                    (int)reader["quantity"]
+                ));
+            }
+
+            return items;
+        }
+
+        public void UpdateItem(InventoryItem item)
+        {
+            using var connection = _connection.CreateConnection();
+            connection.Open();
+
+            string sql = "UPDATE InventoryItems SET category_id = @CategoryId, Name = @Name, quantity = @Quantity WHERE id = @Id";
+            using SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@CategoryId", item.CategoryId);
+            command.Parameters.AddWithValue("@Name", item.Name);
+            command.Parameters.AddWithValue("@Quantity", item.Quantity);
+            command.Parameters.AddWithValue("@Id", item.Id);
+
+            command.ExecuteNonQuery();
+        }
     }
 }

@@ -1,27 +1,41 @@
 ﻿@page
 @using ZooApp.Domain.Models
 @model ZooApp.Web.Pages.Inventory.InventoryModel
-@{
-}
-<h1>Lageroversigt</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Quantity</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.CategoryId</td>
-            <td>@item.Name</td>
-            <td>@item.Quantity</td>
-        </tr>
-        }
-    </tbody>
+@{
+    string GetCategoryName(int id) => id switch
+    {
+        1 => "Softdrinks",
+        2 => "Beers",
+        3 => "Snacks",
+        _ => $"Kategori {id}"
+    };
+}
+
+<h1>Lageroversigt</h1>
+
+@foreach (var group in Model.Items.GroupBy(i => i.CategoryId))
+{
+    <h4 class="mt-4">@GetCategoryName(group.Key)</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Navn</th>
+                <th>Antal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in group)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td><a asp-page="/Inventory/EditItem" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Rediger</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

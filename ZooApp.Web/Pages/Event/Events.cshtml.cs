@@ -14,7 +14,6 @@ namespace ZooApp.Web.Pages.Event
         }
 
         public List<ZooApp.Domain.Models.Event> Events { get; set; } = new();
-
         public Dictionary<int, bool> UserSignUps { get; set; } = new();
 
         [TempData]
@@ -25,22 +24,24 @@ namespace ZooApp.Web.Pages.Event
 
         public void OnGet()
         {
-            int userId = 1;
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
 
             Events = _eventService.GetAllEvents();
 
             UserSignUps = Events.ToDictionary(
                 ev => ev.Id,
-                ev => _eventService.IsUserSignedUp(ev.Id, userId)
+                ev => guestId.HasValue && _eventService.IsUserSignedUp(ev.Id, guestId.Value)
             );
         }
 
         public IActionResult OnPostSignUp(int eventId)
         {
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
+            if (guestId == null) return RedirectToPage("/Guest/GuestLogin");
+
             try
             {
-                int userId = 1;
-                _eventService.SignUpForEvent(eventId, userId);
+                _eventService.SignUpForEvent(eventId, guestId.Value);
                 SuccessMessage = "Du er nu tilmeldt eventet.";
             }
             catch (Exception ex)
@@ -53,10 +54,12 @@ namespace ZooApp.Web.Pages.Event
 
         public IActionResult OnPostCancelSignUp(int eventId)
         {
+            int? guestId = HttpContext.Session.GetInt32("GuestId");
+            if (guestId == null) return RedirectToPage("/Guest/GuestLogin");
+
             try
             {
-                int userId = 1;
-                _eventService.CancelSignUp(eventId, userId);
+                _eventService.CancelSignUp(eventId, guestId.Value);
                 SuccessMessage = "Du er nu afmeldt eventet.";
             }
             catch (Exception ex)
