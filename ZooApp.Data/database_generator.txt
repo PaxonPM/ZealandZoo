@@ -118,6 +118,18 @@ INSERT INTO ItemCategories (Name) VALUES ('Softdrinks');
 INSERT INTO ItemCategories (Name) VALUES ('Beers');
 INSERT INTO ItemCategories (Name) VALUES ('Snacks');
 
+INSERT INTO InventoryItems (category_id, Name, quantity)
+VALUES
+(1, 'Coca Cola', 50),
+(1, 'Pepsi', 45),
+(1, 'Fanta Orange', 30),
+(2, 'Carlsberg', 25),
+(2, 'Tuborg Classic', 20),
+(2, 'Heineken', 18),
+(3, 'Potato Chips', 40),
+(3, 'Salted Peanuts', 35),
+(3, 'Chocolate Bar', 60),
+(3, 'Popcorn', 22);
 
 -- insert into role and users
 INSERT INTO Role (role_id, role_name) 
