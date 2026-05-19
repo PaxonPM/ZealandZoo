@@ -45,7 +45,33 @@ namespace ZooApp.Data.Repositories
 
             return entity;
         }
+        public User GetByEmail(string email)
+        {
+            string queryStr = @"SELECT id, name, email, pw_hash 
+                                FROM Users 
+                                WHERE email = @email AND role_id = 2";
 
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+            cmd.Parameters.AddWithValue("@email", email);
+
+            connection.Open();
+
+            using var reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return new User
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("id")),
+                    Name = reader.GetString(reader.GetOrdinal("name")),
+                    Email = reader.GetString(reader.GetOrdinal("email")),
+                    PwHash = reader.GetString(reader.GetOrdinal("pw_hash"))
+                };
+            }
+
+            return null;
+        }
         public User GetByName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
