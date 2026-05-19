@@ -27,14 +27,9 @@ namespace ZooApp.Services
                 throw new Exception("User cannot be null.");
             }
 
-            if (int.IsNegative(user.Id))
-            {
-                throw new Exception("Id is required.");
-            }
-
             if (string.IsNullOrWhiteSpace(user.Name))
             {
-                throw new Exception("Password is required.");
+                throw new Exception("Name is required.");
             }
 
             if (string.IsNullOrWhiteSpace(user.Email))
@@ -51,17 +46,11 @@ namespace ZooApp.Services
                 throw new Exception("Phone number is required.");
             }
 
-            if (string.IsNullOrWhiteSpace(user.Role))
-            {
-                throw new Exception("Role is required.");
-            }
 
-            //user.PwHash = HashPassword(user.PwHash);
+            user.PwHash = HashPassword(user.PwHash);
 
             //Save to mock Repository
-            _userRepository.Create(user);
-
-            return user;
+            return _userRepository.CreateUser(user);
         }
 
         public List<Event> GetAllUsers()
@@ -110,6 +99,7 @@ namespace ZooApp.Services
             byte[] hash = sha256.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
         }
+        
     }
 }
 

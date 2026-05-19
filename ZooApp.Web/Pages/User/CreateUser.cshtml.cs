@@ -46,9 +46,14 @@ namespace ZooApp.Web.Pages.CreateUser
             /// <returns>A page result displaying the event creation form.</returns>
             public IActionResult OnGet()
             {
+                if (HttpContext.Session.GetString("IsAdmin") != "true")
+                {
+                    TempData["ErrorMessage"] = "Du skal være logget ind som admin for at kunne oprette medarbejdere.";
+                    return RedirectToPage("/Admin/AdminLogin");
+                }
                 // Initialize Modal to prevent null reference when no errors occur
                 Modal = new ModalViewErrorModel();
-                return Page();
+                    return Page();
             }
 
             /// <summary>
@@ -62,10 +67,11 @@ namespace ZooApp.Web.Pages.CreateUser
             public IActionResult OnPost()
             {
                 // Return to the form with validation errors if model state is invalid
-                if (!ModelState.IsValid)
-                {
-                    return Page();
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    Modal = new ModalViewErrorModel();
+                //    return Page();
+                //}
 
                 try
                 {

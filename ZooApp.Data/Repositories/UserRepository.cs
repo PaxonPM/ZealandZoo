@@ -21,18 +21,16 @@ namespace ZooApp.Data.Repositories
 
         public User CreateUser(User entity)
         {
-            string queryStr = $"INSERT INTO Users (id, name, telefon , email, role_id, is_newsletter_member) " +
+            string queryStr = $"INSERT INTO Users (name, telefon , email, pw_hash, role_id, is_newsletter_member) " +
                 $"OUTPUT INSERTED.id, INSERTED.name " +
-                $"VALUES (@id, @name, @telefon, @email, @role_id, @is_newsletter_member)";
+                $"VALUES (@name, @telefon, @email, @pw_hash, 2, 0)";
 
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
-            cmd.Parameters.AddWithValue("@id", entity.Id);
             cmd.Parameters.AddWithValue("@name", entity.Name);
             cmd.Parameters.AddWithValue("@telefon", entity.Telefon);
             cmd.Parameters.AddWithValue("@email", entity.Email);
-            cmd.Parameters.AddWithValue("role_id", entity.Role);
-            cmd.Parameters.AddWithValue("@is_newsletter_member", entity.IsNotificationActive);
+            cmd.Parameters.AddWithValue("@pw_hash", entity.PwHash);
 
             connection.Open();
 
@@ -168,8 +166,8 @@ namespace ZooApp.Data.Repositories
                 Email = reader.GetString(reader.GetOrdinal("email")),
                 Telefon = reader.GetString(reader.GetOrdinal("telefon")),
                 PwHash = reader.GetString(reader.GetOrdinal("pw_hash")),
-                Role = reader.GetString(reader.GetOrdinal("role_id")),
-                IsNotificationActive = reader.GetBoolean(reader.GetOrdinal("is_newsletter_active")),
+                Role = reader.GetInt32(reader.GetOrdinal("role_id")).ToString(),
+                IsNotificationActive = reader.GetBoolean(reader.GetOrdinal("is_newsletter_member")),
 
             };
 
