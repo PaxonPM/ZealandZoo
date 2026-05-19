@@ -120,20 +120,19 @@
                             {
                                 <button class="btn btn-outline-secondary w-100" disabled>Log ind for at tilmelde</button>
                             }
-                        </form>
-                        <a class="btn btn-warning btn-sm"
-                           asp-page="/Event/UpdateEvent"
-                           asp-route-id="@ev.Id">
-                            Update
-                        </a>
-
-                        <a class="btn btn-danger btn-sm"
-                           asp-page="/Event/DeleteEvent"
-                           asp-route-id="@ev.Id">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
+                            @if (isAdmin)
+                            {
+                                <a class="btn btn-warning btn-sm mt-2"
+                                   asp-page="/Event/UpdateEvent"
+                                   asp-route-id="@ev.Id">
+                                    Update
+                                </a>
+                                <a class="btn btn-danger btn-sm mt-2"
+                                   asp-page="/Event/DeleteEvent"
+                                   asp-route-id="@ev.Id">
+                                    Delete
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
