@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZealandZoo.Services;
 using ZooApp.Domain.Models;
@@ -14,9 +15,16 @@ namespace ZooApp.Web.Pages.Inventory
             _inventoryService = inventoryService;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            {
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at se lageret.";
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
             Items = _inventoryService.GetAllItems();
+            return Page();
         }
     }
 }

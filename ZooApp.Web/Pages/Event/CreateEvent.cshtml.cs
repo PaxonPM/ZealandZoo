@@ -44,11 +44,17 @@ namespace ZooApp.Web.Pages.Event
 
         /// <summary>
         /// Handles GET requests to display the create event form.
-        /// Initializes the Modal property to prevent null reference errors.
+        /// Redirects to admin login if the user is not logged in as admin.
         /// </summary>
-        /// <returns>A page result displaying the event creation form.</returns>
+        /// <returns>A page result displaying the event creation form, or a redirect to admin login.</returns>
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            {
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at oprette events.";
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
             // Initialize Modal to prevent null reference when no errors occur
             Modal = new ModalViewErrorModel();
             return Page();
@@ -64,6 +70,12 @@ namespace ZooApp.Web.Pages.Event
         /// </returns>
         public async Task<IActionResult> OnPostAsync()
         {
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            {
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at oprette events.";
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
             // Return to the form with validation errors if model state is invalid
             if (!ModelState.IsValid)
             {
@@ -78,7 +90,6 @@ namespace ZooApp.Web.Pages.Event
             }
             catch (Exception ex)
             {
-                // Populate the error modal with exception details for user feedback
                 Modal = new ModalViewErrorModel
                 {
                     Title = ex.Source != null ? ex.Source : "Error",
@@ -87,7 +98,7 @@ namespace ZooApp.Web.Pages.Event
                     Code = "error"
                 };
             }
-            
+
             return Page();
         }
     }

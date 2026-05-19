@@ -21,7 +21,13 @@ namespace ZooApp.Web.Pages.Admin
 
         public string ErrorMessage { get; set; } = "";
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+            if (TempData["ErrorMessage"] is string message)
+            {
+                ErrorMessage = message;
+            }
+        }
 
         public IActionResult OnPost()
         {
