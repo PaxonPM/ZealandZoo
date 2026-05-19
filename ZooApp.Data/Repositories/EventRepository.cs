@@ -28,10 +28,10 @@ namespace ZooApp.Data.Repositories
         /// <returns>The created event with populated Id and CreatedAt properties.</returns>
         public Event Create(Event entity)
         {
-            string queryStr = $"INSERT INTO Event (title, description, start_time, end_time, location, current_participants, max_participants) " +
-                $"OUTPUT INSERTED.event_id, INSERTED.created_at " +
-                $"VALUES (@title, @description, @start_time, @end_time, @location, @current_participants, @max_participants)";
-            
+            string queryStr = "INSERT INTO Event (title, description, start_time, end_time, location, max_participants) " +
+                              "OUTPUT INSERTED.event_id, INSERTED.created_at " +
+                              "VALUES (@title, @description, @start_time, @end_time, @location, @max_participants)";
+
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
             cmd.Parameters.AddWithValue("@title", entity.Title);
@@ -39,9 +39,8 @@ namespace ZooApp.Data.Repositories
             cmd.Parameters.AddWithValue("@start_time", entity.StartDateTime);
             cmd.Parameters.AddWithValue("@end_time", entity.EndDateTime);
             cmd.Parameters.AddWithValue("@location", entity.Location);
-            cmd.Parameters.AddWithValue("@current_participants", 0); // New event starts with 0 participants
             cmd.Parameters.AddWithValue("@max_participants", entity.MaxParticipants);
-            
+
             connection.Open();
 
             using var reader = cmd.ExecuteReader();
@@ -62,15 +61,17 @@ namespace ZooApp.Data.Repositories
         /// <exception cref="ArgumentException">Thrown when id is less than or equal to 0.</exception>
         public Event GetById(int id)
         {
-            // Validate input parameter
             if (id <= 0)
             {
                 throw new ArgumentException("Event ID must be greater than 0.", nameof(id));
             }
 
-            string queryStr = @"SELECT event_id, title, description, start_time, end_time, location, current_participants, max_participants, created_at 
-                               FROM Event 
-                               WHERE event_id = @id";
+            string queryStr = @"SELECT 
+                            event_id, title, description, start_time, end_time, location, max_participants,
+                            (SELECT COUNT(*) FROM EventParticipants WHERE EventParticipants.event_id = Event.event_id) AS current_participants,
+                            created_at
+                        FROM Event
+                        WHERE event_id = @id";
 
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
@@ -79,14 +80,12 @@ namespace ZooApp.Data.Repositories
             connection.Open();
 
             using var reader = cmd.ExecuteReader();
-            
-            // If event is found, map the data to an Event object
+
             if (reader.Read())
             {
                 return MapReaderToEvent(reader);
             }
 
-            // Return null if no event found with the given ID
             return null;
         }
 
@@ -160,6 +159,61 @@ namespace ZooApp.Data.Repositories
                 MaxParticipants = reader.GetInt32(reader.GetOrdinal("max_participants")),
                 CreatedAt = reader.GetDateTime(reader.GetOrdinal("created_at"))
             };
+        }
+
+        /// <summary>
+        /// Adds a participant to an event.
+        /// </summary>
+        /// <param name="eventId">The ID of the event.</param>
+        /// <param name="userId">The ID of the user to be added as a participant.</param>
+        public void AddParticipant(int eventId, int userId)
+        {
+            string queryStr = "INSERT INTO EventParticipants (event_id, user_id) VALUES (@eventId, @userId)";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+            cmd.Parameters.AddWithValue("@eventId", eventId);
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            connection.Open();
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Removes a participant from an event.
+        /// </summary>
+        /// <param name="eventId">The ID of the event.</param>
+        /// <param name="userId">The ID of the user to be removed from participants.</param>
+        public void RemoveParticipant(int eventId, int userId)
+        {
+            string queryStr = "DELETE FROM EventParticipants WHERE event_id = @eventId AND user_id = @userId";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+            cmd.Parameters.AddWithValue("@eventId", eventId);
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            connection.Open();
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Checks if a user is a participant in an event.
+        /// </summary>
+        /// <param name="eventId">The ID of the event.</param>
+        /// <param name="userId">The ID of the user.</param>
+        /// <returns>True if the user is a participant in the event; otherwise, false.</returns>
+        public bool IsParticipant(int eventId, int userId)
+        {
+            string queryStr = "SELECT COUNT(*) FROM EventParticipants WHERE event_id = @eventId AND user_id = @userId";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+            cmd.Parameters.AddWithValue("@eventId", eventId);
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            connection.Open();
+            return (int)cmd.ExecuteScalar() > 0;
         }
     }
 }
