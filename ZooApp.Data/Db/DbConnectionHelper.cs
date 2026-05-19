@@ -18,8 +18,8 @@ namespace ZooApp.Data.Db
         { 
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"DESKTOP-4VNI41I\SQLEXPRESS01",
-                InitialCatalog = "dev_ZealandZoo_0_4",
+                DataSource = @"SHARK1-PC\SQLEXPRESS",//@"PAX-LAPTOP\SQLEXPRESS",
+                InitialCatalog = "dev_ZealandZoo_0_8",
                 TrustServerCertificate = true,
                 IntegratedSecurity = true // For Windows Auth
             };

@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using ZooApp.Data.MockData;
+using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
 
 namespace ZooApp.Services
@@ -10,47 +10,51 @@ namespace ZooApp.Services
     /// </summary>
     public class GuestService
     {
-        /// <summary>
-        /// Returns all guests from mock data.
-        /// </summary>
-        public List<Guest> GetAllGuests()
+        private readonly IGuestRepository _guestRepository;
+
+        public GuestService(IGuestRepository guestRepository)
         {
-            return MockGuests.GetMockGuests();
+            _guestRepository = guestRepository;
         }
 
         /// <summary>
-        /// Creates a new guest.
-        /// hashes the password before saving.
+        /// Creates a new guest. Hashes the password before saving to the database.
         /// </summary>
-        /// <param name="guest">Guest to create</param>
-        public void CreateGuest(Guest guest)
+        public void CreateGuest(GuestModel guest)
         {
             if (guest == null)
-            {
                 throw new Exception("Guest cannot be null.");
-            }
 
-            if (string.IsNullOrWhiteSpace(guest.UserName))
-            {
-                throw new Exception("Username is required.");
-            }
+            if (string.IsNullOrWhiteSpace(guest.Email))
+                throw new Exception("Email is required.");
 
             if (string.IsNullOrWhiteSpace(guest.Password))
-            {
                 throw new Exception("Password is required.");
-            }
 
-            // Check for duplicate username
-            if (MockGuests.GetMockGuests().Any(g => g.UserName == guest.UserName))
-            {
-                throw new Exception("Username already exists.");
-            }
+            if (_guestRepository.GetByEmail(guest.Email) != null)
+                throw new Exception("An account with that email already exists.");
 
-            // Hash password
             guest.Password = HashPassword(guest.Password);
 
-            // Save to mock database
-            MockGuests.AddGuest(guest);
+            _guestRepository.Create(guest);
+        }
+
+        /// <summary>
+        /// Validates guest login by comparing email and hashed password against the database.
+        /// </summary>
+        public GuestModel? ValidateLogin(string email, string password)
+        {
+            GuestModel? guest = _guestRepository.GetByEmail(email);
+
+            if (guest == null)
+                return null;
+
+            string hashedInput = HashPassword(password);
+
+            if (guest.Password != hashedInput)
+                return null;
+
+            return guest;
         }
 
         /// <summary>
@@ -58,39 +62,10 @@ namespace ZooApp.Services
         /// </summary>
         private string HashPassword(string password)
         {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-
-                return Convert.ToBase64String(hash);
-            }
+            using SHA256 sha256 = SHA256.Create();
+            byte[] bytes = Encoding.UTF8.GetBytes(password);
+            byte[] hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
-        /// <summary>
-        /// Validates guest login by comparing username and hashed password.
-        /// </summary>
-        /// <param name="username">Guest username</param>
-        /// <param name="password">Plain text password</param>
-        /// <returns>The guest if login is valid, otherwise null</returns>
-        public Guest? ValidateLogin(string username, string password)
-        {
-            Guest? guest = MockGuests.GetMockGuests()
-                .FirstOrDefault(g => g.UserName == username);
-
-            if (guest == null)
-            {
-                return null;
-            }
-
-            string hashedInput = HashPassword(password);
-
-            if (guest.Password != hashedInput)
-            {
-                return null;
-            }
-
-            return guest;
-        }
-
     }
 }

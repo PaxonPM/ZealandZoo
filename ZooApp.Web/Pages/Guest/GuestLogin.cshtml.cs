@@ -6,7 +6,7 @@ namespace ZooApp.Web.Pages.Guest
 {
     /// <summary>
     /// PageModel for guest login.
-    /// Handles guest login and stores guest information in session.
+    /// Handles guest login by email and stores guest information in session.
     /// </summary>
     public class GuestLoginModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace ZooApp.Web.Pages.Guest
         }
 
         [BindProperty]
-        public string Username { get; set; } = "";
+        public string Email { get; set; } = "";
 
         [BindProperty]
         public string Password { get; set; } = "";
@@ -29,7 +29,7 @@ namespace ZooApp.Web.Pages.Guest
 
         public IActionResult OnPost()
         {
-            ZooApp.Domain.Models.Guest? guest = _guestService.ValidateLogin(Username, Password);
+            ZooApp.Domain.Models.GuestModel? guest = _guestService.ValidateLogin(Email, Password);
 
             if (guest == null)
             {

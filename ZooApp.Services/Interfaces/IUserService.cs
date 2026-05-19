@@ -11,5 +11,7 @@ namespace ZooApp.Services.Interfaces
     {
         User CreateUser(User newUser);
         List<Event> GetAllUsers();
+        public User ValidateLogin(string email, string password);
+        //User GetByNameAndPassword(string name, string password);
     }
 }

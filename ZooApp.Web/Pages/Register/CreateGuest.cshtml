@@ -1,51 +1,49 @@
 ﻿@page
 @model ZooApp.Web.Pages.Guest.CreateGuestModel
 
-<h1>Create User</h1>
+<div class="container mt-4" style="max-width: 480px;">
+    <h4>Opret Bruger</h4>
 
-@if (Model.SuccessMessage != null)
-{
-    <div class="alert alert-success">
-        @Model.SuccessMessage
-    </div>
-}
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success">@Model.SuccessMessage</div>
+    }
 
-@if (Model.ErrorMessage != null)
-{
-    <div class="alert alert-danger">
-        @Model.ErrorMessage
-    </div>
-}
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
 
-<form method="post">
-    <div>
-        <label asp-for="Person.Name"></label>
-        <input asp-for="Person.Name" />
-        <span asp-validation-for="Person.Name"></span>
-    </div>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" asp-for="Person.Name"></label>
+            <input class="form-control" asp-for="Person.Name" />
+            <span class="text-danger" asp-validation-for="Person.Name"></span>
+        </div>
 
-    <div>
-        <label asp-for="Person.Email"></label>
-        <input asp-for="Person.Email" type="email" />
-        <span asp-validation-for="Person.Email"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Person.Email"></label>
+            <input class="form-control" asp-for="Person.Email" type="email" />
+            <span class="text-danger" asp-validation-for="Person.Email"></span>
+        </div>
 
-    <div>
-        <label asp-for="Person.PhoneNumber"></label>
-        <input asp-for="Person.PhoneNumber" />
-        <span asp-validation-for="Person.PhoneNumber"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Person.PhoneNumber"></label>
+            <input class="form-control" asp-for="Person.PhoneNumber" />
+            <span class="text-danger" asp-validation-for="Person.PhoneNumber"></span>
+        </div>
 
-    <div>
-        <label asp-for="Person.PwHash">Password</label>
-        <input asp-for="Person.PwHash" type="password" />
-        <span asp-validation-for="Person.PwHash"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Person.PwHash">Adgangskode</label>
+            <input class="form-control" asp-for="Person.PwHash" type="password" />
+            <span class="text-danger" asp-validation-for="Person.PwHash"></span>
+        </div>
 
-    <div>
-        <label asp-for="Person.IsNewsletterMember">Tilmeld nyhedsbrev</label>
-        <input asp-for="Person.IsNewsletterMember" type="checkbox" />
-    </div>
+        <div class="mb-3 form-check">
+            <input class="form-check-input" asp-for="Person.IsNewsletterMember" type="checkbox" />
+            <label class="form-check-label" asp-for="Person.IsNewsletterMember">Tilmeld nyhedsbrev</label>
+        </div>
 
-    <button type="submit">Create User</button>
-</form>
+        <button type="submit" class="btn btn-primary">Opret Bruger</button>
+    </form>
+</div>

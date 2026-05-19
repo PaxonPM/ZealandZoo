@@ -96,9 +96,12 @@ namespace ZooApp.Data.Repositories
         /// <returns>An enumerable collection of all events in the database.</returns>
         public IEnumerable<Event> GetAll()
         {
-            string queryStr = @"SELECT event_id, title, description, start_time, end_time, location, max_participants, current_participants, created_at 
-                               FROM Event 
-                               ORDER BY start_time ASC";
+            string queryStr = @"SELECT 
+                            event_id, title, description, start_time, end_time, location, max_participants,
+                            (SELECT COUNT(*) FROM EventParticipants WHERE EventParticipants.event_id = Event.event_id) AS current_participants,
+                            created_at
+                        FROM Event
+                        ORDER BY start_time ASC";
 
             var events = new List<Event>();
 
@@ -107,7 +110,7 @@ namespace ZooApp.Data.Repositories
 
             connection.Open();
 
-            using var reader = cmd.ExecuteReader();
+                using var reader = cmd.ExecuteReader();
             
             // Read all events and add them to the list
             while (reader.Read())

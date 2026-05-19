@@ -6,7 +6,7 @@ namespace ZooApp.Domain.Models
     /// Represents a guest (user) in the system.
     /// A guest can create an account and sign up for events.
     /// </summary>
-    public class Guest
+    public class GuestModel
     {
         /// <summary>
         /// Unique ID for the guest.
@@ -16,11 +16,21 @@ namespace ZooApp.Domain.Models
 
         /// <summary>
         /// Username chosen by the guest.
-        /// Must be between 1 and 20 characters.
         /// </summary>
         [Required]
         [StringLength(20)]
         public string UserName { get; set; }
+
+        /// <summary>
+        /// Email address used for login.
+        /// </summary>
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Password for the guest account.
@@ -28,25 +38,27 @@ namespace ZooApp.Domain.Models
         [Required]
         public string Password { get; set; }
 
+        public bool IsNewsletterMember { get; set; }
+
         public List<Event> Events { get; set; } = new List<Event>();
 
         /// <summary>
-        /// Constructor used when creating a new guest with username and password.
+        /// Constructor used when creating a new guest.
         /// </summary>
-        /// <param name="userName">The username of the guest</param>
-        /// <param name="password">The password of the guest</param>
-        public Guest(string userName, string password)
+        public GuestModel(string userName, string email, string password)
         {
             UserName = userName;
+            Email = email;
             Password = password;
         }
 
         /// <summary>
         /// Default constructor required for model binding and serialization.
         /// </summary>
-        public Guest()
+        public GuestModel()
         {
             UserName = "";
+            Email = "";
             Password = "";
         }
     }
