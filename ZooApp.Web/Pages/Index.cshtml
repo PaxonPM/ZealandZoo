@@ -10,6 +10,8 @@
     int firstDayOfWeek = ((int)new DateTime(year, month, 1).DayOfWeek + 6) % 7; // Monday = 0
     bool isGuest = Model.HttpContext.Session.GetString("IsGuest") == "true";
     bool isAdmin = Model.HttpContext.Session.GetString("IsAdmin") == "true";
+    bool isStaff = Model.HttpContext.Session.GetString("IsStaff") == "true";
+
 }
 
 <h2>Åbningstider</h2>
@@ -116,7 +118,7 @@
                             {
                                 <button class="btn btn-secondary w-100" disabled>Fuldt booket</button>
                             }
-                            else
+                            else if (!isAdmin && !isStaff)
                             {
                                 <button class="btn btn-outline-secondary w-100" disabled>Log ind for at tilmelde</button>
                             }
