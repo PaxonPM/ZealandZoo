@@ -1,0 +1,92 @@
+﻿@page "{id:int}"
+@model ZooApp.Web.Pages.Event.UpdateEventModel
+@{
+	ViewData["Title"] = "Update Event";
+}
+
+<h1>Update Event</h1>
+
+<form method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<input type="hidden" asp-for="@Model.Event.Id" />
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.Title" class="control-label"></label>
+		<input asp-for="@Model.Event.Title" class="form-control" />
+		<span asp-validation-for="@Model.Event.Title" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.Description" class="control-label"></label>
+		<textarea asp-for="@Model.Event.Description" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="@Model.Event.Description" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.StartDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.StartDateTime" class="form-control" type="datetime-local" />
+		<span asp-validation-for="@Model.Event.StartDateTime" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.EndDateTime" class="control-label"></label>
+		<input asp-for="@Model.Event.EndDateTime" class="form-control" type="datetime-local" />
+		<span asp-validation-for="@Model.Event.EndDateTime" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.Location" class="control-label"></label>
+		<input asp-for="@Model.Event.Location" class="form-control" />
+		<span asp-validation-for="@Model.Event.Location" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="@Model.Event.MaxParticipants" class="control-label"></label>
+		<input asp-for="@Model.Event.MaxParticipants" class="form-control" type="number" min="1" />
+		<span asp-validation-for="@Model.Event.MaxParticipants" class="text-danger"></span>
+	</div>
+
+	<p>
+		<div class="form-group">
+			<input type="submit" value="Update" class="btn btn-primary" />
+			<a href="/Index" class="btn btn-secondary">Cancel</a>
+		</div>
+	</p>
+</form>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+@if (Model.UpdatedEvent != null)
+{
+	<div class="modal fade show" id="successModal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Event Updated Successfully!</h5>
+					<button type="button" class="btn-close" onclick="window.location.href='/Index'"></button>
+				</div>
+				<div class="modal-body">
+					<p><strong>ID:</strong> @Model.UpdatedEvent.Id</p>
+					<p><strong>Title:</strong> @Model.UpdatedEvent.Title</p>
+					<p><strong>Description:</strong> @Model.UpdatedEvent.Description</p>
+					<p><strong>Location:</strong> @Model.UpdatedEvent.Location</p>
+					<p><strong>Start:</strong> @Model.UpdatedEvent.StartDateTime.ToString("g")</p>
+					<p><strong>End:</strong> @Model.UpdatedEvent.EndDateTime.ToString("g")</p>
+					<p><strong>Max Participants:</strong> @Model.UpdatedEvent.MaxParticipants</p>
+					<p><strong>Created At:</strong> @Model.UpdatedEvent.CreatedAt.ToString("g")</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/Index" class="btn btn-primary">Go to HomePage</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@if (Model.Modal != null)
+{
+	<partial name="Shared/ModalViewError" model="Model.Modal" />
+}

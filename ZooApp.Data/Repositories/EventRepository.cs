@@ -127,8 +127,50 @@ namespace ZooApp.Data.Repositories
         /// <returns>The updated event.</returns>
         public Event Update(Event entity)
         {
-            throw new NotImplementedException();
+            // Validate input
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "Event cannot be null.");
+            }
+
+            if (entity.Id <= 0)
+            {
+                throw new ArgumentException("Event ID must be greater than 0.");
+            }
+
+            string queryStr = @"UPDATE Event
+                       SET title = @title,
+                           description = @description,
+                           start_time = @start_time,
+                           end_time = @end_time,
+                           location = @location,
+                           max_participants = @max_participants
+                       WHERE event_id = @id";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+
+            cmd.Parameters.AddWithValue("@id", entity.Id);
+            cmd.Parameters.AddWithValue("@title", entity.Title);
+            cmd.Parameters.AddWithValue("@description", entity.Description);
+            cmd.Parameters.AddWithValue("@start_time", entity.StartDateTime);
+            cmd.Parameters.AddWithValue("@end_time", entity.EndDateTime);
+            cmd.Parameters.AddWithValue("@location", entity.Location);
+            cmd.Parameters.AddWithValue("@max_participants", entity.MaxParticipants);
+
+            connection.Open();
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            // If no rows were updated, event does not exist
+            if (rowsAffected == 0)
+            {
+                return null;
+            }
+
+            return entity;
         }
+
 
         /// <summary>
         /// Deletes an event from the database by its unique identifier.
@@ -137,7 +179,34 @@ namespace ZooApp.Data.Repositories
         /// <returns>The deleted event.</returns>
         public Event Delete(int id)
         {
-            throw new NotImplementedException();
+            // Validate input parameter
+            if (id <= 0)
+            {
+                throw new ArgumentException("Event ID must be greater than 0.", nameof(id));
+            }
+
+            // First retrieve the event so we can return it after deletion
+            Event eventToDelete = GetById(id);
+
+            // Return null if event does not exist
+            if (eventToDelete == null)
+            {
+                return null;
+            }
+
+            string queryStr = @"DELETE FROM Event
+                       WHERE event_id = @id";
+
+            using var connection = _connection.CreateConnection();
+            SqlCommand cmd = new SqlCommand(queryStr, connection);
+
+            cmd.Parameters.AddWithValue("@id", id);
+
+            connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            return eventToDelete;
         }
 
         /// <summary>

@@ -120,6 +120,20 @@
                             {
                                 <button class="btn btn-outline-secondary w-100" disabled>Log ind for at tilmelde</button>
                             }
+                        </form>
+                        <a class="btn btn-warning btn-sm"
+                           asp-page="/Event/UpdateEvent"
+                           asp-route-id="@ev.Id">
+                            Update
+                        </a>
+
+                        <a class="btn btn-danger btn-sm"
+                           asp-page="/Event/DeleteEvent"
+                           asp-route-id="@ev.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
                         </div>
                     </div>
                 </div>
