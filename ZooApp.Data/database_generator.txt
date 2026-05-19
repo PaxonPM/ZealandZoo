@@ -1,6 +1,6 @@
 /*
-    Database: dev_ZealandZoo_0_4
-    version: 0.4
+    Database: dev_ZealandZoo_0_8
+    version: 0.8
     Description:
     This database supports the Zealand Zoo system.
     Author: Paw
@@ -13,28 +13,67 @@
 
 -- Create database
 
-CREATE DATABASE dev_ZealandZoo_0_4;
+CREATE DATABASE dev_ZealandZoo_0_8;
 GO
 
-USE dev_ZealandZoo_0_4;
+USE dev_ZealandZoo_0_8;
 GO
 
 
 -- Create table Event
 CREATE TABLE Event(
-event_id INT IDENTITY(1,1) PRIMARY KEY,
-title NVARCHAR(50) NOT NULL,
-description NVARCHAR(255) NOT NULL,
-start_time DATETIME NOT NULL,
-end_time DATETIME NOT NULL,
-location NVARCHAR(100) NOT NULL,
-current_participants INT NOT NULL DEFAULT 0 CHECK (current_participants >= 0),
-max_participants INT NOT NULL CHECK (max_participants > 0),
-created_at DATETIME NOT NULL DEFAULT GETDATE(),
+    event_id INT IDENTITY(1,1) PRIMARY KEY,
+    title NVARCHAR(50) NOT NULL,
+    description NVARCHAR(255) NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    location NVARCHAR(100) NOT NULL,
+    max_participants INT NOT NULL CHECK (max_participants > 0),
+    created_at DATETIME NOT NULL DEFAULT GETDATE(),
 
-CONSTRAINT CHK_Event_Time 
-    CHECK (end_time > start_time)
-)
+    CONSTRAINT CHK_Event_Time 
+        CHECK (end_time > start_time)
+);
+
+-- Create table for Roles and Users
+CREATE TABLE Role(
+    role_id INT NOT NULL PRIMARY KEY,
+    role_name NVARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE Users(
+    id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    name NVARCHAR(50) NULL,
+    telefon NVARCHAR(8) NULL,
+    email NVARCHAR(50) NULL,
+    role_id INT NOT NULL,
+    is_newsletter_member BIT NULL,
+    pw_hash NVARCHAR(44) NULL,
+
+    CONSTRAINT FK_Users_Role
+        FOREIGN KEY (role_id)
+        REFERENCES Role(role_id)
+);
+
+
+-- Create table for Event Participants
+CREATE TABLE EventParticipants (
+    event_id INT NOT NULL,
+    user_id INT NOT NULL,
+    joined_at DATETIME NOT NULL DEFAULT GETDATE(),
+
+    PRIMARY KEY (event_id, user_id),
+
+    CONSTRAINT FK_EventParticipants_Event
+        FOREIGN KEY (event_id)
+        REFERENCES Event(event_id),
+
+    CONSTRAINT FK_EventParticipants_User
+        FOREIGN KEY (user_id)
+        REFERENCES Users(id)
+);
+GO
 
 -- Create table for Item Categories
 CREATE TABLE ItemCategories (
@@ -54,19 +93,53 @@ CREATE TABLE InventoryItems (
 );
 
 
-INSERT INTO Event (title, description, start_time, end_time, location, current_participants, max_participants) VALUES
-(N'Beer Pong Tournament', N'Weekly beer pong tournament with prizes.', '2026-05-08 20:00:00', '2026-05-08 23:00:00', N'Main Bar Area', 0, 40),
-(N'DJ Night', N'Live DJ playing hits all night.', '2026-05-09 21:00:00', '2026-05-09 23:59:00', N'Dance Floor', 0, 100),
-(N'Karaoke Night', N'Sing your favorite songs with friends.', '2026-05-15 19:00:00', '2026-05-15 22:00:00', N'Stage Area', 0, 30),
-(N'Flip Cup Tournament', N'Fast-paced team game competition.', '2026-05-22 20:00:00', '2026-05-22 22:00:00', N'Game Area', 0, 32),
-(N'90s Throwback Party', N'Dance to the best hits from the 90s.', '2026-05-23 21:00:00', '2026-05-23 23:59:00', N'Dance Floor', 0, 120),
-(N'Open Mic Night', N'Comedy, music, and performances.', '2026-05-29 19:00:00', '2026-05-29 21:30:00', N'Stage Area', 0, 25),
-(N'Board Game Night', N'Relax and play games with friends.', '2026-05-30 18:00:00', '2026-05-30 21:00:00', N'Lounge Area', 0, 20),
-(N'Quiz Night', N'Test your knowledge and win prizes.', '2026-06-05 19:30:00', '2026-06-05 21:30:00', N'Main Bar Area', 0, 50),
-(N'Techno Night', N'Deep beats and late-night vibes.', '2026-06-06 22:00:00', '2026-06-06 23:59:00', N'Dance Floor', 0, 150),
-(N'Cocktail Workshop', N'Learn to mix cocktails with a bartender.', '2026-06-12 18:00:00', '2026-06-12 19:30:00', N'Bar Counter', 0, 15);
+
+INSERT INTO Event (
+    title,
+    description,
+    start_time,
+    end_time,
+    location,
+    max_participants
+)
+VALUES
+(N'Beer Pong Tournament', N'Weekly beer pong tournament with prizes.', '2026-05-08 20:00:00', '2026-05-08 23:00:00', N'Main Bar Area', 40),
+(N'DJ Night', N'Live DJ playing hits all night.', '2026-05-09 21:00:00', '2026-05-09 23:59:00', N'Dance Floor', 100),
+(N'Karaoke Night', N'Sing your favorite songs with friends.', '2026-05-15 19:00:00', '2026-05-15 22:00:00', N'Stage Area', 30),
+(N'Flip Cup Tournament', N'Fast-paced team game competition.', '2026-05-22 20:00:00', '2026-05-22 22:00:00', N'Game Area', 32),
+(N'90s Throwback Party', N'Dance to the best hits from the 90s.', '2026-05-23 21:00:00', '2026-05-23 23:59:00', N'Dance Floor', 120),
+(N'Open Mic Night', N'Comedy, music, and performances.', '2026-05-29 19:00:00', '2026-05-29 21:30:00', N'Stage Area', 25),
+(N'Board Game Night', N'Relax and play games with friends.', '2026-05-30 18:00:00', '2026-05-30 21:00:00', N'Lounge Area', 20),
+(N'Quiz Night', N'Test your knowledge and win prizes.', '2026-06-05 19:30:00', '2026-06-05 21:30:00', N'Main Bar Area', 50),
+(N'Techno Night', N'Deep beats and late-night vibes.', '2026-06-06 22:00:00', '2026-06-06 23:59:00', N'Dance Floor', 150),
+(N'Cocktail Workshop', N'Learn to mix cocktails with a bartender.', '2026-06-12 18:00:00', '2026-06-12 19:30:00', N'Bar Counter', 15);
 
 INSERT INTO ItemCategories (Name) VALUES ('Softdrinks');
 INSERT INTO ItemCategories (Name) VALUES ('Beers');
 INSERT INTO ItemCategories (Name) VALUES ('Snacks');
 
+
+-- insert into role and users
+INSERT INTO Role (role_id, role_name) 
+VALUES
+(1, 'Admin'),
+(2, 'Staff'),
+(3, 'Student');
+
+INSERT INTO USERS (name, telefon, email, role_id, is_newsletter_member, pw_hash) 
+VALUES
+('admin', '88888888', 'admin@gmail.com', 1, 0, 'Zz0ZC3WJZ2IdokPwbDUM5ovkJ2F03IhlYCOf6pI9Slo='), -- hash123
+('Jane Smith', '23456789', 'jane@example.com',     2, 0, 'wN9kA2w2326r1pUfNEKnSjjlzoVW9NV5uD7aU1SV8cw='), -- hash456
+('Peter Hansen', '34567890', 'peter@example.com',    3, 1, 'Yv8QeqLYrcmBdeq/hqjP8kOHHBHhohQGN2LAIM8YbQU='), -- hash789
+('Maria Jensen', '45678901', 'maria@example.com',    3, 1, 'eHzltZ6QevMOwNHMVwm78miUSWVvdzqV2UQp6whIVd4='), -- hash321
+('Lucas Nielsen','56789012', 'lucas@example.com',    3, 1, '8NO0g7xrFrdJvCVx9SXXxtjkGYEDBLba5qmyQZ6Ru6A='); -- hash654
+
+-- insert into junction table for event participants
+INSERT INTO EventParticipants (event_id, user_id)
+VALUES
+(1, 3),
+(1, 4),
+(2, 5),
+(3, 3),
+(3, 5);
+GO

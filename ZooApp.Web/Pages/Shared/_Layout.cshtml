@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="~/ZealandZoo.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @{
+        bool isGuest = Context.Session.GetString("IsGuest") == "true";
+        bool isAdmin = Context.Session.GetString("IsAdmin") == "true";
+    }
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -27,17 +31,37 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Register/CreateGuest">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Guest/GuestLogin">Guest Login</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Event/Events">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Inventory/Inventory">Lager</a>
-                        </li>
+
+                        @if (!isGuest && !isAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Register/CreateGuest">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Guest/GuestLogin">Login</a>
+                            </li>
+                        }
+
+                        @if (isAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Event/CreateEvent">Opret Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Inventory/Inventory">Lager</a>
+                            </li>
+                        }
+
+                        @if (isGuest || isAdmin)
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-page="/Logout">
+                                    <button type="submit" class="btn btn-link nav-link text-dark px-0">Log ud</button>
+                                </form>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
