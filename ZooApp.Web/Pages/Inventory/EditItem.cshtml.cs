@@ -21,7 +21,7 @@ namespace ZooApp.Web.Pages.Inventory
 
         public IActionResult OnGet(int id)
         {
-            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            if (HttpContext.Session.GetString("IsAdmin") != "true" && HttpContext.Session.GetString("IsStaff") != "true")
                 return RedirectToPage("/Admin/AdminLogin");
 
             Item = _inventoryService.GetAllItems().FirstOrDefault(i => i.Id == id);
@@ -33,7 +33,7 @@ namespace ZooApp.Web.Pages.Inventory
 
         public IActionResult OnPost()
         {
-            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            if (HttpContext.Session.GetString("IsAdmin") != "true" && HttpContext.Session.GetString("IsStaff") != "true")
                 return RedirectToPage("/Admin/AdminLogin");
 
             if (!ModelState.IsValid)

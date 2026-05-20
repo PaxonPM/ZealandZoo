@@ -64,7 +64,7 @@ namespace ZooApp.Web.Pages.Guest
                 ErrorMessage = ex.Message;
             }
 
-            return Page();
+            return RedirectToPage("/index"); ;
         }
     }
 }

@@ -17,9 +17,9 @@ namespace ZooApp.Web.Pages.Inventory
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            if ((HttpContext.Session.GetString("IsAdmin") != "true") && (HttpContext.Session.GetString("IsStaff") != "true"))
             {
-                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at se lageret.";
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin/medarbejder for at se lageret.";
                 return RedirectToPage("/Admin/AdminLogin");
             }
 

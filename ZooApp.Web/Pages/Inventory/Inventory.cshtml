@@ -10,10 +10,14 @@
         3 => "Snacks",
         _ => $"Kategori {id}"
     };
+    bool isAdmin = Model.HttpContext.Session.GetString("IsAdmin") == "true";
 }
 
 <h1>Lageroversigt</h1>
-
+@if (isAdmin)
+{
+    <a class="btn btn-primary" asp-page="/Inventory/Create">Opret ny vare</a>
+}
 @foreach (var group in Model.Items.GroupBy(i => i.CategoryId))
 {
     <h4 class="mt-4">@GetCategoryName(group.Key)</h4>

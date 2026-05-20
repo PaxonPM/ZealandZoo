@@ -25,7 +25,7 @@ namespace ZealandZoo.Pages.Inventory
         {
             // Adgangsbeskyttelse
             if (HttpContext.Session.GetString("IsAdmin") != "true")
-                return RedirectToPage("Admin/AdminLogin");
+                return RedirectToPage("/Admin/AdminLogin");
 
             LoadCategories();
             return Page();
@@ -51,7 +51,7 @@ namespace ZealandZoo.Pages.Inventory
                 return Page();
             }
 
-            return RedirectToPage("/Create");
+            return RedirectToPage("/inventory/inventory");
         }
 
         private void LoadCategories()
