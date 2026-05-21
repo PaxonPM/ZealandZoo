@@ -5,6 +5,8 @@ using ZooApp.Data.interfaces;
 using ZooApp.Data.Repositories;
 using ZooApp.Services;
 using ZooApp.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using ZooApp.Data.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,11 @@ builder.Services.AddSession(options =>
 {
     //options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+// INSERTED: Entity Framework DbContext til Event update
+builder.Services.AddDbContext<DbContextUpdateEvent>(options =>
+    options.UseSqlServer(
+        @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=dev_ZealandZoo_0_8;Integrated Security=True;Trust Server Certificate=True"
+    ));
 
 var app = builder.Build();
 app.UseSession();
