@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Domain.Models;
-using ZooApp.Services;
+using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Guest
 {
@@ -11,9 +11,9 @@ namespace ZooApp.Web.Pages.Guest
     /// </summary>
     public class CreateGuestModel : PageModel
     {
-        private readonly GuestService _guestService;
+        private readonly IGuestService _guestService;
 
-        public CreateGuestModel(GuestService guestService)
+        public CreateGuestModel(IGuestService guestService)
         {
             _guestService = guestService;
         }
@@ -22,7 +22,7 @@ namespace ZooApp.Web.Pages.Guest
         /// Person object bound to the form input.
         /// </summary>
         [BindProperty]
-        public Person Person { get; set; } = new Person();
+        public UserModel user { get; set; } = new UserModel();
 
         /// <summary>
         /// Confirmation message shown after successful creation.
@@ -44,27 +44,28 @@ namespace ZooApp.Web.Pages.Guest
                 if (!ModelState.IsValid)
                     throw new Exception("Ugyldigt input. Kontroller dine oplysninger.");
 
-                GuestModel guest = new GuestModel
+                UserModel guest = new UserModel
                 {
-                    UserName = Person.Name,
-                    Email = Person.Email,
-                    PhoneNumber = Person.PhoneNumber,
-                    Password = Person.PwHash,  // GuestService hashes this
-                    IsNewsletterMember = Person.IsNewsLetterMember
+                    Name = user.Name,
+                    Email = user.Email,
+                    Telefon = user.Telefon,
+                    PwHash = user.PwHash,
+                    IsNotificationActive = user.IsNotificationActive
                 };
 
                 _guestService.CreateGuest(guest);
 
                 SuccessMessage = "Bruger oprettet!";
                 ModelState.Clear();
-                Person = new Person();
+                user = new UserModel();
+
+                return RedirectToPage("/index");
             }
             catch (Exception ex)
             {
                 ErrorMessage = ex.Message;
+                return Page();
             }
-
-            return RedirectToPage("/index"); ;
         }
     }
 }

@@ -8,11 +8,11 @@ namespace ZooApp.Web.Pages.User
 {
     public class StaffLoginModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IStaffService _staffService;
 
-        public StaffLoginModel(IUserService userService)
+        public StaffLoginModel(IStaffService staffService)
         {
-            _userService = userService;
+            _staffService = staffService;
         }
 
         [BindProperty]
@@ -27,7 +27,7 @@ namespace ZooApp.Web.Pages.User
 
         public IActionResult OnPost()
         {
-            ZooApp.Domain.Models.User? User = _userService.ValidateLogin(Email, Password);
+            ZooApp.Domain.Models.UserModel? User = _staffService.ValidateLogin(Email, Password);
 
             if (User == null)
             {
