@@ -7,6 +7,9 @@ using ZooApp.Domain.Models;
 
 namespace ZooApp.Data.interfaces
 {
+    /// <summary>
+    /// Interface for the Event repository, which extends the IBaseRepository interface and provides additional methods specific to event management.
+    /// </summary>
     public interface IEventRepository : IBaseRepository<Event>
     {
         public Event Create(Event entity);

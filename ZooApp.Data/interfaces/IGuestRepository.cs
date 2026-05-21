@@ -1,10 +1,6 @@
-using ZooApp.Domain.Models;
+namespace ZooApp.Data.interfaces;
 
-namespace ZooApp.Data.interfaces
-{
-    public interface IGuestRepository
-    {
-        GuestModel? GetByEmail(string email);
-        GuestModel Create(GuestModel guest);
-    }
-}
+/// <summary>
+/// Interface for the Guest repository, which extends both the IUserRepository and ICreateUserRepository interfaces.
+/// </summary>
+public interface IGuestRepository : IUserRepository, ICreateUserRepository { }

@@ -10,13 +10,13 @@ namespace ZooApp.Data.Repositories
     /// </summary>
     public class EventRepository : IEventRepository
     {
-        private readonly DbConnectionHelper _connection;
+        private readonly IDbConnectionHelper _connection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventRepository"/> class.
         /// </summary>
         /// <param name="connection">The database connection helper.</param>
-        public EventRepository(DbConnectionHelper connection)
+        public EventRepository(IDbConnectionHelper connection)
         {
             _connection = connection;
         }
