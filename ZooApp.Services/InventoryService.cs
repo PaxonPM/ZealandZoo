@@ -7,10 +7,11 @@ using ZealandZoo.Models;
 using ZealandZoo.Repositories;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Services
 {
-    public class InventoryService
+    public class InventoryService : IInventoryService
     {
         private readonly IInventoryRepository _inventoryRepository;
 
