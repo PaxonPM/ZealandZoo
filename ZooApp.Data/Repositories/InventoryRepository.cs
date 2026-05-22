@@ -15,9 +15,9 @@ namespace ZealandZoo.Repositories
     public class InventoryRepository : IInventoryRepository
     {
         //private readonly string _connectionString;
-        private readonly DbConnectionHelper _connection;
+        private readonly IDbConnectionHelper _connection;
 
-        public InventoryRepository(DbConnectionHelper connection) //IConfiguration configuration)
+        public InventoryRepository(IDbConnectionHelper connection) //IConfiguration configuration)
         {
             _connection = connection; //_connectionString = configuration.GetConnectionString("ZealandZoo");
         }

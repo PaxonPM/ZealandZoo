@@ -29,7 +29,7 @@ namespace ZooApp.Services
 
         }
 
-        public async Task SendEventNotificationAsync(Event newEvent, List<Person> recipients)
+        public async Task SendEventNotificationAsync(Event newEvent, List<UserModel> recipients)
         {
 
             try
@@ -42,11 +42,10 @@ namespace ZooApp.Services
                     DeliveryMethod = SmtpDeliveryMethod.Network
                 };
 
-                foreach (Person recipient in recipients)
+                foreach (UserModel recipient in recipients)
                 {
                     try
                     {
-                        Console.WriteLine($"Sending to {recipient.Email}...");
 
                         using MailMessage mail = new MailMessage
                         {
@@ -81,27 +80,17 @@ namespace ZooApp.Services
 
                         await client.SendMailAsync(mail);
                     }
-                    //catch (SmtpException smtpEx)
-                    //{
-                    //    Console.WriteLine($"✗ SMTP Error to {recipient.Email}:");
-                    //    Console.WriteLine($"   Status Code: {smtpEx.StatusCode}");
-                    //    Console.WriteLine($"   Message: {smtpEx.Message}");
-                    //    Console.WriteLine($"   Inner Exception: {smtpEx.InnerException?.Message}");
-                    //    throw; // Re-throw to see in Visual Studio
-                    //}
-                    catch (Exception ex)
+                    
+                    catch (Exception)
                     {
-                        //Console.WriteLine($"✗ Error to {recipient.Email}: {ex.Message}");
                         throw;
                     }
                 }
 
-                //Console.WriteLine("Finished email send operation.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Console.WriteLine($"SMTP Client Error: {ex.Message}");
-                //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                
                 throw;
             }
         }

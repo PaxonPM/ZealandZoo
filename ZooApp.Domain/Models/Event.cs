@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZooApp.Domain.Models
 {
@@ -23,7 +17,7 @@ namespace ZooApp.Domain.Models
         /// Gets or sets the title of the event.
         /// Maximum length is 50 characters.
         /// </summary>
-        [Required(ErrorMessage = "Title is required")]
+        [Required(ErrorMessage = "Titel er påkrævet")]
         [StringLength(50)]
         public string Title { get; set; }
 
@@ -31,27 +25,27 @@ namespace ZooApp.Domain.Models
         /// Gets or sets the description of the event.
         /// Maximum length is 255 characters.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Beskrivelse er påkrævet")]
         [StringLength(255)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the start date and time of the event.
         /// </summary>
-        [Required(ErrorMessage = "Start time is required")]
+        [Required(ErrorMessage = "Starttidspunkt er påkrævet")]
         public DateTime StartDateTime { get; set; }
 
         /// <summary>
         /// Gets or sets the end date and time of the event.
         /// </summary>
-        [Required(ErrorMessage = "Endtime is required")]
+        [Required(ErrorMessage = "Sluttidspunkt er påkrævet")]
         public DateTime EndDateTime { get; set; }
 
         /// <summary>
         /// Gets or sets the physical location where the event will take place.
         /// Maximum length is 100 characters.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Lokation er påkrævet")]
         [StringLength(100)]
         public string Location { get; set; }
 
@@ -64,8 +58,9 @@ namespace ZooApp.Domain.Models
         /// Gets or sets the maximum number of participants allowed for the event.
         /// Must be greater than 0.
         /// </summary>
-        [Range(1, int.MaxValue, ErrorMessage = "Max participants must be greater than 0")]
-        public int MaxParticipants { get; set; }
+        [Required(ErrorMessage = "Max antal deltagere er påkrævet")]
+        [Range(1, int.MaxValue, ErrorMessage = "Maks antal deltagere skal være større end 0")]
+        public int? MaxParticipants { get; set; }
 
         /// <summary>
         /// Gets or sets the date and time when the event was created in the system.

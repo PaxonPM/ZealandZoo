@@ -58,6 +58,8 @@ namespace ZooApp.Web.Pages.Event
 
             try
             {
+                //entity update
+                //await UpdateEventAsyncEntity(Event.Id, Event);
                 UpdatedEvent = await _eventService.UpdateEventAsync(Event);
             }
             catch (Exception ex)

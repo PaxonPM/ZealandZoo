@@ -1,48 +1,19 @@
-using Microsoft.Data.SqlClient;
 using ZooApp.Data.Db;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
 
-namespace ZooApp.Data.Repositories
+namespace ZooApp.Data.Repositories;
+
+public sealed class AdminRepository : BaseUserRepository, IAdminRepository
 {
-    public class AdminRepository : IAdminRepository
-    {
-        private readonly DbConnectionHelper _connection;
+    protected override int RoleId => 1;
 
-        public AdminRepository(DbConnectionHelper connection)
-        {
-            _connection = connection;
-        }
+    /// <summary>
+    /// Constructor for AdminRepository, initializes the base repository with the provided database connection helper.
+    /// </summary>
+    /// <param name="connection">The database connection helper used to interact with the database.</param>
+    public AdminRepository(IDbConnectionHelper connection) : base(connection) { }
 
-        /// <summary>
-        /// Retrieves an admin user from the database by username.
-        /// Only users with role_id = 1 (Admin) are considered.
-        /// </summary>
-        public Admin? GetByUsername(string username)
-        {
-            string queryStr = @"SELECT id, name, pw_hash 
-                                FROM Users 
-                                WHERE name = @username AND role_id = 1";
-
-            using var connection = _connection.CreateConnection();
-            SqlCommand cmd = new SqlCommand(queryStr, connection);
-            cmd.Parameters.AddWithValue("@username", username);
-
-            connection.Open();
-
-            using var reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                return new Admin
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("id")),
-                    Username = reader.GetString(reader.GetOrdinal("name")),
-                    Password = reader.GetString(reader.GetOrdinal("pw_hash"))
-                };
-            }
-
-            return null;
-        }
-    }
+   
+    UserModel? IAdminRepository.GetByName(string name) => base.GetByName(name);
 }

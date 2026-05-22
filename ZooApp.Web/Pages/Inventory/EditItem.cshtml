@@ -1,24 +1,28 @@
 ﻿@page "{id:int}"
 @model ZooApp.Web.Pages.Inventory.EditItemModel
+@{
+    bool isAdmin = Model.HttpContext.Session.GetString("IsAdmin") == "true";
+}
 
 <h2>Rediger vare</h2>
 
 <form method="post">
     <input type="hidden" asp-for="Item.Id" />
+    
+        <div>
+            <label>Navn</label>
+            <input asp-for="Item.Name" />
+            <span asp-validation-for="Item.Name"></span>
+        </div>
 
-    <div>
-        <label>Navn</label>
-        <input asp-for="Item.Name" />
-        <span asp-validation-for="Item.Name"></span>
-    </div>
-
-    <div>
-        <label>Kategori</label>
-        <select asp-for="Item.CategoryId" asp-items="Model.Categories">
-            <option value="">-- Vælg kategori --</option>
-        </select>
-    </div>
-
+        <div>
+            <label>Kategori</label>
+            <select asp-for="Item.CategoryId" asp-items="Model.Categories">
+                <option value="">-- Vælg kategori --</option>
+            </select>
+        </div>
+    
+    
     <div>
         <label>Antal på lager</label>
         <input asp-for="Item.Quantity" type="number" />
