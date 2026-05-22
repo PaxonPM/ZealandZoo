@@ -3,18 +3,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ZealandZoo.Services;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Inventory
 {
     public class EditItemModel : PageModel
     {
-        private readonly InventoryService _inventoryService;
+        private readonly IInventoryService _inventoryService;
 
         [BindProperty]
         public InventoryItem Item { get; set; }
         public List<SelectListItem> Categories { get; set; }
 
-        public EditItemModel(InventoryService inventoryService)
+        public EditItemModel(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
         }

@@ -37,10 +37,12 @@ builder.Services.AddSession(options =>
 {
     //options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+
+
 // INSERTED: Entity Framework DbContext til Event update
 builder.Services.AddDbContext<DbContextUpdateEvent>(options =>
     options.UseSqlServer(
-        @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=dev_ZealandZoo_0_8;Integrated Security=True;Trust Server Certificate=True"
+        @"Data Source=SHARK1-PC\SQLEXPRESS;Initial Catalog=dev_ZealandZoo_0_8;Integrated Security=True;Trust Server Certificate=True"
     ));
 
 var app = builder.Build();

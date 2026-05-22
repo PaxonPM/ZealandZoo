@@ -22,7 +22,8 @@ namespace ZooApp.Domain.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Telefonnummer er påkrævet")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "Telefonnummer skal være præcis 8 tegn")]
+        [StringLength(8, MinimumLength = 8, ErrorMessage = "Telefonnummer skal være præcis 8 tal")]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "Telefonnummer må kun indeholde tal")]
         public string Telefon { get; set; }
 
         [Required(ErrorMessage = "kodeord er påkrævet")]

@@ -7,6 +7,7 @@ using ZooApp.Data.MockData;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
+using ZooApp.Domain.Exceptions;
 
 namespace ZooApp.Services
 {
@@ -26,13 +27,19 @@ namespace ZooApp.Services
 
         public async Task<Event> CreateEventAsync(Event newEvent)
         {
-                Event created = _eventRepository.Create(newEvent);
-                List<UserModel> newsletterMembers = _guestService.GetNewsletterMembers();
-                
-                await _emailService.SendEventNotificationAsync(created, newsletterMembers);
+            Event created = _eventRepository.Create(newEvent);
+            List<UserModel> newsletterMembers = _guestService.GetNewsletterMembers();
 
-                return created;
-            
+            try
+            {
+                await _emailService.SendEventNotificationAsync(created, newsletterMembers);
+            }
+            catch (Exception ex)
+            {
+                throw new EmailNotificationException(ex.Message, created, ex);
+            }
+
+            return created;
         }
 
         

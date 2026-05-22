@@ -12,5 +12,7 @@ namespace ZooApp.Services.Interfaces
     {
         bool CreateItem(InventoryItem item);
         List<ItemCategory> GetAllCategories();
+        public List<InventoryItem> GetAllItems();
+        public void UpdateItem(InventoryItem item);
     }
 }

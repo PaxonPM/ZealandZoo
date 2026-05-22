@@ -59,7 +59,7 @@ namespace ZooApp.Web.Pages.Guest
                 ModelState.Clear();
                 user = new UserModel();
 
-                return RedirectToPage("/index");
+                return RedirectToPage("/register/afterregistration");
             }
             catch (Exception ex)
             {

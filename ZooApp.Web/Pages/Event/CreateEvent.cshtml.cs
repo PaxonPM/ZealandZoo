@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Services.Interfaces;
 using ZooApp.Domain;
 using ZooApp.Web.Pages.Shared;
+using ZooApp.Domain.Exceptions;
 
 namespace ZooApp.Web.Pages.Event
 {
@@ -76,7 +77,6 @@ namespace ZooApp.Web.Pages.Event
                 return RedirectToPage("/Admin/AdminLogin");
             }
 
-            // Return to the form with validation errors if model state is invalid
             if (!ModelState.IsValid)
             {
                 Modal = new ModalViewErrorModel();
@@ -85,14 +85,25 @@ namespace ZooApp.Web.Pages.Event
 
             try
             {
-                // Attempt to create the event through the service layer
                 CreatedEvent = await _eventService.CreateEventAsync(Event);
+            }
+            catch (EmailNotificationException ex)
+            {
+                // Event was created, but email notification failed
+                CreatedEvent = ex.CreatedEvent;
+                Modal = new ModalViewErrorModel
+                {
+                    Title = ex.Source ?? "Email notifikation fejlede",
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Code = "error"
+                };
             }
             catch (Exception ex)
             {
                 Modal = new ModalViewErrorModel
                 {
-                    Title = ex.Source != null ? ex.Source : "Error",
+                    Title = ex.Source ?? "Error",
                     Message = ex.Message,
                     StackTrace = ex.StackTrace,
                     Code = "error"

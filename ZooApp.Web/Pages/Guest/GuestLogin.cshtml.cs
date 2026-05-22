@@ -24,7 +24,7 @@ namespace ZooApp.Web.Pages.Guest
         public string Email { get; set; } = "";
 
         [BindProperty]
-        [Required(ErrorMessage = "Password er påkrævet")]
+        [Required(ErrorMessage = "Kodeord er påkrævet")]
         public string Password { get; set; } = "";
 
         public string ErrorMessage { get; set; } = "";
@@ -33,6 +33,10 @@ namespace ZooApp.Web.Pages.Guest
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             ZooApp.Domain.Models.UserModel? guest = _guestService.ValidateLogin(Email, Password);
 
             if (guest == null)

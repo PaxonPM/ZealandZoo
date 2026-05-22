@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using ZooApp.Services;
 using ZooApp.Services.Interfaces;
 
@@ -16,10 +17,12 @@ namespace ZooApp.Web.Pages.User
         }
 
         [BindProperty]
-        public string Email { get; set; } = "";
+        [Required(ErrorMessage = "Email er påkrævet")]
+        public string Email { get; set; }
 
         [BindProperty]
-        public string Password { get; set; } = "";
+        [Required(ErrorMessage = "Kodeord er påkrævet")]
+        public string Password { get; set; }
 
         public string ErrorMessage { get; set; } = "";
 
@@ -27,6 +30,10 @@ namespace ZooApp.Web.Pages.User
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             ZooApp.Domain.Models.UserModel? User = _staffService.ValidateLogin(Email, Password);
 
             if (User == null)

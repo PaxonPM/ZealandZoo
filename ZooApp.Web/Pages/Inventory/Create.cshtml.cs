@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ZealandZoo.Models;
 using ZealandZoo.Services;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Pages.Inventory
 {
     public class CreateModel : PageModel
     {
-        private readonly InventoryService _inventoryService;
+        private readonly IInventoryService _inventoryService;
         public string ErrorMessage { get; set; }
-        public CreateModel(InventoryService inventoryService)
+        public CreateModel(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
         }
