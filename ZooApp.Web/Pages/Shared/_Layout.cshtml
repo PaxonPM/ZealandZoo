@@ -1,5 +1,37 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+<style>
+    body {
+        background-image: url('Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+        color: #FF2AFF;
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+        color: #FF2AFF;
+    }
+
+    .navbar-brand, .navbar-link, .navbar-link, .navbar-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,32 +48,32 @@
         bool isStaff = Context.Session.GetString("IsStaff") == "true";
     }
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color:#0a0a0a">
+            <div class="container" style="background-color:#0a0a0a;">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">ZealandZoo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"  style= "background-color:#0a0a0a; color: #FF2AFF">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" style=" color: #FF2AFF" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" style=" color: #FF2AFF" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Event/Events">Events</a>
+                            <a class="nav-link" style=" color: #FF2AFF" asp-page="/Event/Events">Events</a>
                         </li>
 
                         @if (!isGuest && !isAdmin && !isStaff)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Register/CreateGuest">Register</a>
+                                <a class="nav-link" style=" color: #FF2AFF" asp-page="/Register/CreateGuest">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Guest/GuestLogin">Login</a>
+                                <a class="nav-link" style=" color: #FF2AFF" asp-page="/Guest/GuestLogin">Login</a>
                             </li>
                         }
 
@@ -66,7 +98,7 @@
                         {
                             <li class="nav-item">
                                 <form method="post" asp-page="/Logout">
-                                    <button type="submit" class="btn btn-link nav-link text-dark px-0">Log ud</button>
+                                    <button type="submit" class="btn btn-link nav-link px-0" style=" color: #FF2AFF">Log ud</button>
                                 </form>
                             </li>
                         }
@@ -82,7 +114,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container" style=" color: #FF2AFF">
             &copy; 2026 - ZealandZoo - <a asp-area="" asp-page="/admin/adminlogin">Privacy</a>
         </div>
     </footer>

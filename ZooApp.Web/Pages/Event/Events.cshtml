@@ -1,4 +1,39 @@
 ﻿@page
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        background-repeat: repeat;
+        color: #FF2AFF;
+        
+        
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+       
+    }
+
+    .navbar-brand, .nav-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
 @model ZooApp.Web.Pages.Event.EventsModel
 @{
     bool isGuest = Model.HttpContext.Session.GetString("IsGuest") == "true";
@@ -29,9 +64,9 @@ else
             bool isFull = ev.CurrentParticipants >= ev.MaxParticipants;
 
             <div class="col">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-header fw-semibold fs-5">@ev.Title</div>
-                    <div class="card-body">
+                <div class="card h-100 shadow-sm" style="background-color:#0a0a0a; color: #FF2AFF">
+                    <div class="card-header fw-semibold fs-5" style="background-color:#0a0a0a; color: #FF2AFF">@ev.Title</div>
+                    <div class="card-body" style= "background-color:#0a0a0a; color: #00FFFF">
                         <ul class="list-unstyled mb-0">
                             <li><i class="bi bi-calendar-event me-2"></i><strong>Start:</strong> @ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</li>
                             <li><i class="bi bi-calendar-x me-2"></i><strong>Slut:</strong> @ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</li>

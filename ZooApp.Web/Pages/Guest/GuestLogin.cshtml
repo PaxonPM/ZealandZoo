@@ -1,6 +1,38 @@
 ﻿@page
 @model ZooApp.Web.Pages.Guest.GuestLoginModel
 
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+        color: #FF2AFF;
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+        color: #FF2AFF;
+    }
+
+    .navbar-brand, .navbar-link, .navbar-link, .navbar-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
 <div class="container mt-4" style="max-width: 480px;">
     <h4>Gæst Login</h4>
     <form method="post">

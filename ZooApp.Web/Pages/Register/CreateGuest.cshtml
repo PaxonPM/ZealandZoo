@@ -1,5 +1,41 @@
 ﻿@page
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        background-repeat: repeat;
+        color: #F0F0FF;
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+    }
+
+    .navbar-brand, .nav-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
+    
+
 @model ZooApp.Web.Pages.Guest.CreateGuestModel
+
+
 
 <div class="container mt-4" style="max-width: 480px;">
     <h4>Opret Bruger</h4>
