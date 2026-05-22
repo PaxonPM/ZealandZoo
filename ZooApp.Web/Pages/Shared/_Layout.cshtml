@@ -80,18 +80,18 @@
                         @if (isAdmin || isStaff)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Inventory/Inventory">Lager</a>
+                                <a class="nav-link" style=" color: #FF2AFF" asp-page="/Inventory/Inventory">Lager</a>
                             </li>
                         }
 
                         @if (isAdmin)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Event/CreateEvent">Opret Event</a>
+                                <a class="nav-link" style=" color: #FF2AFF" asp-page="/Event/CreateEvent">Opret Event</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/staff/createstaff">Opret medarbejder</a>
+                                <a class="nav-link" style=" color: #FF2AFF" asp-page="/staff/createstaff">Opret medarbejder</a>
                             </li>
                         }
                         @if (isGuest || isAdmin || isStaff)
