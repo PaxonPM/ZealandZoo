@@ -2,7 +2,7 @@
 using ZooApp.Data.Db;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
-
+using Microsoft.EntityFrameworkCore;
 namespace ZooApp.Data.Repositories
 {
     /// <summary>
@@ -12,13 +12,13 @@ namespace ZooApp.Data.Repositories
     {
         private readonly IDbConnectionHelper _connection;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EventRepository"/> class.
-        /// </summary>
-        /// <param name="connection">The database connection helper.</param>
-        public EventRepository(IDbConnectionHelper connection)
+        // INSERTED: Entity Framework context
+        private readonly DbContextUpdateEvent _dbContextUpdateEvent;
+
+        public EventRepository(IDbConnectionHelper connection, DbContextUpdateEvent dbContextUpdateEvent)
         {
             _connection = connection;
+            _dbContextUpdateEvent = dbContextUpdateEvent;
         }
 
         /// <summary>
@@ -125,9 +125,15 @@ namespace ZooApp.Data.Repositories
         /// </summary>
         /// <param name="entity">The event entity with updated information.</param>
         /// <returns>The updated event.</returns>
+        /// <summary>
+        /// Updates an existing event in the database.
+        /// Uses both SQL and Entity Framework.
+        /// </summary>
+        /// <param name="entity">The event entity with updated information.</param>
+        /// <returns>The updated event.</returns>
         public Event Update(Event entity)
         {
-            // Validate input
+            // SQL + EF: Validate input
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity), "Event cannot be null.");
@@ -138,14 +144,15 @@ namespace ZooApp.Data.Repositories
                 throw new ArgumentException("Event ID must be greater than 0.");
             }
 
+            // OLD SQL UPDATE - beholdt
             string queryStr = @"UPDATE Event
-                       SET title = @title,
-                           description = @description,
-                           start_time = @start_time,
-                           end_time = @end_time,
-                           location = @location,
-                           max_participants = @max_participants
-                       WHERE event_id = @id";
+               SET title = @title,
+                   description = @description,
+                   start_time = @start_time,
+                   end_time = @end_time,
+                   location = @location,
+                   max_participants = @max_participants
+               WHERE event_id = @id";
 
             using var connection = _connection.CreateConnection();
             SqlCommand cmd = new SqlCommand(queryStr, connection);
@@ -162,13 +169,30 @@ namespace ZooApp.Data.Repositories
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
-            // If no rows were updated, event does not exist
             if (rowsAffected == 0)
             {
                 return null;
             }
 
-            return entity;
+            // INSERTED: ENTITY FRAMEWORK UPDATE
+            Event? eventFromEf = _dbContextUpdateEvent.Events
+                .FirstOrDefault(e => e.Id == entity.Id);
+
+            if (eventFromEf == null)
+            {
+                return null;
+            }
+
+            eventFromEf.Title = entity.Title;
+            eventFromEf.Description = entity.Description;
+            eventFromEf.StartDateTime = entity.StartDateTime;
+            eventFromEf.EndDateTime = entity.EndDateTime;
+            eventFromEf.Location = entity.Location;
+            eventFromEf.MaxParticipants = entity.MaxParticipants;
+
+            _dbContextUpdateEvent.SaveChanges();
+
+            return eventFromEf;
         }
 
 
