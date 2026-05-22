@@ -14,23 +14,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 // Database connection helper
-builder.Services.AddScoped<DbConnectionHelper>();
+builder.Services.AddScoped<IDbConnectionHelper, DbConnectionHelper>();
 
 // Repositories
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 // Services
-builder.Services.AddScoped<GuestService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton<IUserAuthenticator, UserAuthenticator>();
 builder.Services.AddScoped<IEventService, EventService>();
-builder.Services.AddScoped<InventoryService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IStaffService, StaffService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

@@ -31,14 +31,16 @@ namespace ZooApp.Web.Pages.Admin
 
         public IActionResult OnPost()
         {
-            if (!_adminService.ValidateLogin(Username, Password))
+            ZooApp.Domain.Models.UserModel? admin = _adminService.ValidateLogin(Username, Password);
+
+            if (admin == null)
             {
                 ErrorMessage = "Forkerte loginoplysninger";
                 return Page();
             }
 
             HttpContext.Session.SetString("IsAdmin", "true");
-            HttpContext.Session.SetString("AdminUsername", Username);
+            HttpContext.Session.SetString("AdminUsername", admin.Name);
 
             return RedirectToPage("/index");
         }

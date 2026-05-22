@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ZooApp.Data.interfaces
 {
+    /// <summary>
+    /// Interface for the base repository, which defines common CRUD operations for non-user specific entities in the application.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IBaseRepository<T>
     {
 

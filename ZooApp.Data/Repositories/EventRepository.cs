@@ -10,12 +10,12 @@ namespace ZooApp.Data.Repositories
     /// </summary>
     public class EventRepository : IEventRepository
     {
-        private readonly DbConnectionHelper _connection;
+        private readonly IDbConnectionHelper _connection;
 
         // INSERTED: Entity Framework context
         private readonly DbContextUpdateEvent _dbContextUpdateEvent;
 
-        public EventRepository(DbConnectionHelper connection, DbContextUpdateEvent dbContextUpdateEvent)
+        public EventRepository(IDbConnectionHelper connection, DbContextUpdateEvent dbContextUpdateEvent)
         {
             _connection = connection;
             _dbContextUpdateEvent = dbContextUpdateEvent;

@@ -15,30 +15,24 @@ namespace ZooApp.Services
         //private List<Event> _events;
         private readonly IEventRepository _eventRepository;
         private readonly IEmailService _emailService;
-        private readonly IPersonService _personService;
+        private readonly IGuestService _guestService;
 
-        public EventService(IEventRepository eventRepository, IEmailService emailService, IPersonService personService)
+        public EventService(IEventRepository eventRepository, IEmailService emailService, IGuestService guestService)
         {
             _eventRepository = eventRepository;
             _emailService = emailService;
-            _personService = personService;
+            _guestService = guestService;
         }
 
         public async Task<Event> CreateEventAsync(Event newEvent)
         {
-            Event created = _eventRepository.Create(newEvent);
-
-            try
-            {
-                List<Person> newsletterMembers = _personService.GetNewsletterMembers();
+                Event created = _eventRepository.Create(newEvent);
+                List<UserModel> newsletterMembers = _guestService.GetNewsletterMembers();
+                
                 await _emailService.SendEventNotificationAsync(created, newsletterMembers);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (for demonstration, we just write to console)
-                Console.WriteLine($"Failed to send event notification emails: {ex.Message}");
-            }
-            return created;
+
+                return created;
+            
         }
 
         
