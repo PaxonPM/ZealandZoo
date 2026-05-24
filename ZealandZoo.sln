@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooApp.Domain", "ZooApp.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooApp.Services", "ZooApp.Services\ZooApp.Services.csproj", "{79ED9695-787F-494F-BB72-8542E5CDB986}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooApp.test", "ZooApp.test\ZooApp.test.csproj", "{EA426899-A82D-4D58-A84D-4444EEDD3AE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{79ED9695-787F-494F-BB72-8542E5CDB986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79ED9695-787F-494F-BB72-8542E5CDB986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79ED9695-787F-494F-BB72-8542E5CDB986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA426899-A82D-4D58-A84D-4444EEDD3AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA426899-A82D-4D58-A84D-4444EEDD3AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA426899-A82D-4D58-A84D-4444EEDD3AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA426899-A82D-4D58-A84D-4444EEDD3AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
