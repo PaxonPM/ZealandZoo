@@ -87,16 +87,21 @@ namespace ZooApp.Services
             _eventRepository.AddParticipant(eventId, userId);
         }
 
+        /// Cancels a user's signup for an event.
         public void CancelSignUp(int eventId, int userId)
         {
+            /// Finds the event by id.
             Event? selectedEvent = GetEventById(eventId);
 
+            /// If the event does not exist, show an error.
             if (selectedEvent == null)
                 throw new Exception("Eventet blev ikke fundet.");
 
+            /// Checks if the user is signed up for the event.
             if (!_eventRepository.IsParticipant(eventId, userId))
                 throw new Exception("Du er ikke tilmeldt dette event.");
 
+            /// Removes the user from the event participants table.
             _eventRepository.RemoveParticipant(eventId, userId);
         }
 
