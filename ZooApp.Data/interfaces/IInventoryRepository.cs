@@ -15,5 +15,6 @@ namespace ZooApp.Data.interfaces
         List<ItemCategory> GetAllCategories();
         List<InventoryItem> GetAllItems();
         void UpdateItem(InventoryItem item);
+        void DeleteItem(int id);
     }
 }
