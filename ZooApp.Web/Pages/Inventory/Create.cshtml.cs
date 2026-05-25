@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ZealandZoo.Models;
 using ZealandZoo.Services;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Pages.Inventory
 {
     public class CreateModel : PageModel
     {
-        private readonly InventoryService _inventoryService;
+        private readonly IInventoryService _inventoryService;
         public string ErrorMessage { get; set; }
-        public CreateModel(InventoryService inventoryService)
+        public CreateModel(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
         }
@@ -25,7 +26,7 @@ namespace ZealandZoo.Pages.Inventory
         {
             // Adgangsbeskyttelse
             if (HttpContext.Session.GetString("IsAdmin") != "true")
-                return RedirectToPage("Admin/AdminLogin");
+                return RedirectToPage("/Admin/AdminLogin");
 
             LoadCategories();
             return Page();
@@ -51,7 +52,7 @@ namespace ZealandZoo.Pages.Inventory
                 return Page();
             }
 
-            return RedirectToPage("/Create");
+            return RedirectToPage("/inventory/inventory");
         }
 
         private void LoadCategories()

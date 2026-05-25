@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Admin
@@ -14,25 +15,40 @@ namespace ZooApp.Web.Pages.Admin
         }
 
         [BindProperty]
-        public string Username { get; set; } = "";
+        [Required(ErrorMessage = "Brugernavn er påkrævet")]
+        public string Username { get; set; }
 
         [BindProperty]
-        public string Password { get; set; } = "";
+        [Required(ErrorMessage = "Kodeord er påkrævet")]
+        public string Password { get; set; }
 
-        public string ErrorMessage { get; set; } = "";
+        public string ErrorMessage { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+            if (TempData["ErrorMessage"] is string message)
+            {
+                ErrorMessage = message;
+            }
+        }
 
         public IActionResult OnPost()
         {
-            if (!_adminService.ValidateLogin(Username, Password))
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            ZooApp.Domain.Models.UserModel? admin = _adminService.ValidateLogin(Username, Password);
+
+            if (admin == null)
             {
                 ErrorMessage = "Forkerte loginoplysninger";
                 return Page();
             }
 
             HttpContext.Session.SetString("IsAdmin", "true");
-            HttpContext.Session.SetString("AdminUsername", Username);
+            HttpContext.Session.SetString("AdminUsername", admin.Name);
 
             return RedirectToPage("/index");
         }

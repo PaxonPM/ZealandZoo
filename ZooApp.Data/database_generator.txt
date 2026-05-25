@@ -67,7 +67,8 @@ CREATE TABLE EventParticipants (
 
     CONSTRAINT FK_EventParticipants_Event
         FOREIGN KEY (event_id)
-        REFERENCES Event(event_id),
+        REFERENCES Event(event_id)
+        ON DELETE CASCADE,
 
     CONSTRAINT FK_EventParticipants_User
         FOREIGN KEY (user_id)

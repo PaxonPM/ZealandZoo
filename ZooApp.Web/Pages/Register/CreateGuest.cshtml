@@ -1,5 +1,41 @@
 ﻿@page
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        background-repeat: repeat;
+        color: #F0F0FF;
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+    }
+
+    .navbar-brand, .nav-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
+    
+
 @model ZooApp.Web.Pages.Guest.CreateGuestModel
+
+
 
 <div class="container mt-4" style="max-width: 480px;">
     <h4>Opret Bruger</h4>
@@ -16,34 +52,41 @@
 
     <form method="post">
         <div class="mb-3">
-            <label class="form-label" asp-for="Person.Name"></label>
-            <input class="form-control" asp-for="Person.Name" />
-            <span class="text-danger" asp-validation-for="Person.Name"></span>
+            <label class="form-label" asp-for="user.Name"></label>
+            <input class="form-control" asp-for="user.Name" />
+            <span class="text-danger" asp-validation-for="user.Name"></span>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" asp-for="Person.Email"></label>
-            <input class="form-control" asp-for="Person.Email" type="email" />
-            <span class="text-danger" asp-validation-for="Person.Email"></span>
+            <label class="form-label" asp-for="user.Email"></label>
+            <input class="form-control" asp-for="user.Email" type="email" />
+            <span class="text-danger" asp-validation-for="user.Email"></span>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" asp-for="Person.PhoneNumber"></label>
-            <input class="form-control" asp-for="Person.PhoneNumber" />
-            <span class="text-danger" asp-validation-for="Person.PhoneNumber"></span>
+            <label class="form-label" asp-for="user.Telefon"></label>
+            <input class="form-control" asp-for="user.Telefon" />
+            <span class="text-danger" asp-validation-for="user.Telefon"></span>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" asp-for="Person.PwHash">Adgangskode</label>
-            <input class="form-control" asp-for="Person.PwHash" type="password" />
-            <span class="text-danger" asp-validation-for="Person.PwHash"></span>
+            <label class="form-label" asp-for="user.PwHash">Adgangskode</label>
+            <input class="form-control" asp-for="user.PwHash" type="password" />
+            <span class="text-danger" asp-validation-for="user.PwHash"></span>
         </div>
 
         <div class="mb-3 form-check">
-            <input class="form-check-input" asp-for="Person.IsNewsletterMember" type="checkbox" />
-            <label class="form-check-label" asp-for="Person.IsNewsletterMember">Tilmeld nyhedsbrev</label>
+            <input class="form-check-input" asp-for="user.IsNotificationActive" type="checkbox" />
+            <label class="form-check-label" asp-for="user.IsNotificationActive">Tilmeld nyhedsbrev</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Opret Bruger</button>
     </form>
 </div>
+
+
+@* Include client-side validation scripts for immediate feedback *@
+@* JQuery validation, watches form inputs, applies rules, show errors, prevents submission *@
+@* @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@

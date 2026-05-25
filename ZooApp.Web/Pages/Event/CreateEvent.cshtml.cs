@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZooApp.Services.Interfaces;
 using ZooApp.Domain;
 using ZooApp.Web.Pages.Shared;
+using ZooApp.Domain.Exceptions;
 
 namespace ZooApp.Web.Pages.Event
 {
@@ -44,11 +45,17 @@ namespace ZooApp.Web.Pages.Event
 
         /// <summary>
         /// Handles GET requests to display the create event form.
-        /// Initializes the Modal property to prevent null reference errors.
+        /// Redirects to admin login if the user is not logged in as admin.
         /// </summary>
-        /// <returns>A page result displaying the event creation form.</returns>
+        /// <returns>A page result displaying the event creation form, or a redirect to admin login.</returns>
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            {
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at oprette events.";
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
             // Initialize Modal to prevent null reference when no errors occur
             Modal = new ModalViewErrorModel();
             return Page();
@@ -64,7 +71,12 @@ namespace ZooApp.Web.Pages.Event
         /// </returns>
         public async Task<IActionResult> OnPostAsync()
         {
-            // Return to the form with validation errors if model state is invalid
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+            {
+                TempData["ErrorMessage"] = "Du skal være logget ind som admin for at oprette events.";
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
             if (!ModelState.IsValid)
             {
                 Modal = new ModalViewErrorModel();
@@ -73,21 +85,31 @@ namespace ZooApp.Web.Pages.Event
 
             try
             {
-                // Attempt to create the event through the service layer
                 CreatedEvent = await _eventService.CreateEventAsync(Event);
             }
-            catch (Exception ex)
+            catch (EmailNotificationException ex)
             {
-                // Populate the error modal with exception details for user feedback
+                // Event was created, but email notification failed
+                CreatedEvent = ex.CreatedEvent;
                 Modal = new ModalViewErrorModel
                 {
-                    Title = ex.Source != null ? ex.Source : "Error",
+                    Title = ex.Source ?? "Email notifikation fejlede",
                     Message = ex.Message,
                     StackTrace = ex.StackTrace,
                     Code = "error"
                 };
             }
-            
+            catch (Exception ex)
+            {
+                Modal = new ModalViewErrorModel
+                {
+                    Title = ex.Source ?? "Error",
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace,
+                    Code = "error"
+                };
+            }
+
             return Page();
         }
     }

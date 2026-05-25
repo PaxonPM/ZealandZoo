@@ -1,16 +1,50 @@
 ﻿@page
 @model ZooApp.Web.Pages.Guest.GuestLoginModel
 
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+        color: #FF2AFF;
+    }
+
+    .navbar {
+        background-color: #0a0a0a;
+        color: #FF2AFF;
+    }
+
+    .navbar-brand, .navbar-link, .navbar-link, .navbar-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
 <div class="container mt-4" style="max-width: 480px;">
     <h4>Gæst Login</h4>
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input class="form-control" asp-for="Email" type="email" />
+            <span class="text-danger" asp-validation-for="Email"></span>
         </div>
         <div class="mb-3">
             <label class="form-label">Adgangskode</label>
             <input class="form-control" asp-for="Password" type="password" />
+            <span class="text-danger" asp-validation-for="Password"></span>
         </div>
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
@@ -19,6 +53,12 @@
         <button type="submit" class="btn btn-primary">Log ind</button>
     </form>
     <div class="mt-2">
-        <small><a asp-page="/User/StaffLogin">Medarbejder login</a></small>
+        <small><a asp-page="/staff/StaffLogin">Medarbejder login</a></small>
     </div>
 </div>
+
+@* Include client-side validation scripts for immediate feedback *@
+@* JQuery validation, watches form inputs, applies rules, show errors, prevents submission *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

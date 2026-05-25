@@ -13,23 +13,53 @@
     bool isStaff = Model.HttpContext.Session.GetString("IsStaff") == "true";
 
 }
+<style> body{
+        background-image: url('Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+
+        color: #FF2AFF;
+}
+
+.navbar{
+    background-color: #0a0a0a;
+    color: #FF2AFF;
+}
+.navbar-brand,.navbar-link, .navbar-link, .navbar-link{
+    color: #FF2AFF;
+}
+
+.navbar-brand:hover, .navbar-link:hover{
+    color: #FF2AFF;
+}
+.card{
+    color: #00FFFF;
+}
+
+.card-header{
+    color: #FF2AFF;
+}
+
+</style>
 
 <h2>Åbningstider</h2>
-<table class="table">
+<table class="table" >
     <thead>
         <tr>
-            <th>Dag</th>
-            <th>Åbningstid</th>
-            <th>Lukketid</th>
+            <th style= "background-color:#0a0a0a; color: #FF2AFF">Dag</th>
+            <th style= "background-color:#0a0a0a; color: #FF2AFF">Åbningstid</th>
+            <th style="background-color:#0a0a0a; color: #FF2AFF">Lukketid</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var å in Model.ÅbningsTider)
         {
-            <tr>
-                <td>@å.DayOfWeek</td>
-                <td>@å.OpenTime</td>
-                <td>@å.CloseTime</td>
+            <tr >
+                <td style= "background-color:#0a0a0a; color: #00FFFF">@å.DayOfWeek</td>
+                <td style= "background-color:#0a0a0a; color: #00FFFF">@å.OpenTime</td>
+                <td style="background-color:#0a0a0a; color: #00FFFF">@å.CloseTime</td>
             </tr>
         }
     </tbody>
@@ -77,8 +107,8 @@
                 bool isFull = ev.CurrentParticipants >= ev.MaxParticipants;
 
                 <div class="col">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header fw-semibold fs-5">@ev.Title</div>
+                    <div class="card h-100 shadow-sm" style= background-color:#0a0a0a;>
+                        <div class="card-header fw-semibold fs-5" style= background-color:#0a0a0a; color: #FF2AFF;>@ev.Title</div>
                         <div class="card-body">
                             <ul class="list-unstyled mb-0">
                                 <li><i class="bi bi-calendar-event me-2"></i><strong>Start:</strong> @ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</li>
@@ -120,7 +150,8 @@
                             }
                             else if (!isAdmin && !isStaff)
                             {
-                                <button class="btn btn-outline-secondary w-100" disabled>Log ind for at tilmelde</button>
+                                <button class="btn btn-outline-secondary w-100" style= background-color: #53BACF disabled>Log ind for at tilmelde</button>
+                                
                             }
                             @if (isAdmin)
                             {
