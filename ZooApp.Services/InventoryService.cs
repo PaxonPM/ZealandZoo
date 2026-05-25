@@ -43,5 +43,10 @@ namespace ZealandZoo.Services
         {
             _inventoryRepository.UpdateItem(item);
         }
+
+        public void DeleteItem(int id)
+        {
+            _inventoryRepository.DeleteItem(id);
+        }
     }
 }

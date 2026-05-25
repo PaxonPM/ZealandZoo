@@ -1,7 +1,6 @@
 ﻿@page
 @using ZooApp.Domain.Models
 @model ZooApp.Web.Pages.Inventory.InventoryModel
-
 @{
     string GetCategoryName(int id) => id switch
     {
@@ -12,7 +11,6 @@
     };
     bool isAdmin = Model.HttpContext.Session.GetString("IsAdmin") == "true";
 }
-
 <h1>Lageroversigt</h1>
 @if (isAdmin)
 {
@@ -37,7 +35,12 @@
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
-                    <td><a asp-page="/Inventory/EditItem" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Rediger</a></td>
+                    <td>
+                        <a asp-page="/Inventory/EditItem" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Rediger</a>
+                        <form method="post" asp-page="/Inventory/DeleteItem" asp-route-id="@item.Id" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Er du sikker på du vil slette @item.Name?')">Slet</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>

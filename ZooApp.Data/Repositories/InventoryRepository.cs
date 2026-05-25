@@ -114,5 +114,17 @@ namespace ZealandZoo.Repositories
 
             command.ExecuteNonQuery();
         }
+
+        public void DeleteItem(int id)
+        {
+            using var connection = _connection.CreateConnection();
+            connection.Open();
+
+            string sql = "DELETE FROM InventoryItems WHERE id = @Id";
+            using SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", id);
+
+            command.ExecuteNonQuery();
+        }
     }
 }
