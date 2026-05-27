@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZooApp.Domain.Models;
 
-namespace ZooApp.Data.interfaces
+namespace ZooApp.Data.interfaces;
+
+/// <summary>
+/// Interface for the User repository, which defines methods for retrieving user information from the data source.
+/// </summary>
+public interface IUserRepository
 {
-    public interface IUserRepository : IBaseRepository<User>
-    {
-
-        public User CreateUser(User entity);
-        public User GetById(int id);
-        public IEnumerable<User> GetAll();
-        public User Update(User entity);
-        public User Delete(int id);
-    }
+    UserModel? GetById(int id);
+    IEnumerable<UserModel> GetAll();
+    UserModel? GetByEmail(string email);
 }
-

@@ -8,24 +8,58 @@
     int month = today.Month;
     int daysInMonth = DateTime.DaysInMonth(year, month);
     int firstDayOfWeek = ((int)new DateTime(year, month, 1).DayOfWeek + 6) % 7; // Monday = 0
+    bool isGuest = Model.HttpContext.Session.GetString("IsGuest") == "true";
+    bool isAdmin = Model.HttpContext.Session.GetString("IsAdmin") == "true";
+    bool isStaff = Model.HttpContext.Session.GetString("IsStaff") == "true";
+
+}
+<style> body{
+        background-image: url('Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+
+        color: #FF2AFF;
 }
 
+.navbar{
+    background-color: #0a0a0a;
+    color: #FF2AFF;
+}
+.navbar-brand,.navbar-link, .navbar-link, .navbar-link{
+    color: #FF2AFF;
+}
+
+.navbar-brand:hover, .navbar-link:hover{
+    color: #FF2AFF;
+}
+.card{
+    color: #00FFFF;
+}
+
+.card-header{
+    color: #FF2AFF;
+}
+
+</style>
+
 <h2>Åbningstider</h2>
-<table class="table">
+<table class="table" >
     <thead>
         <tr>
-            <th>Dag</th>
-            <th>Åbningstid</th>
-            <th>Lukketid</th>
+            <th style= "background-color:#0a0a0a; color: #FF2AFF">Dag</th>
+            <th style= "background-color:#0a0a0a; color: #FF2AFF">Åbningstid</th>
+            <th style="background-color:#0a0a0a; color: #FF2AFF">Lukketid</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var å in Model.ÅbningsTider)
         {
-            <tr>
-                <td>@å.DayOfWeek</td>
-                <td>@å.OpenTime</td>
-                <td>@å.CloseTime</td>
+            <tr >
+                <td style= "background-color:#0a0a0a; color: #00FFFF">@å.DayOfWeek</td>
+                <td style= "background-color:#0a0a0a; color: #00FFFF">@å.OpenTime</td>
+                <td style="background-color:#0a0a0a; color: #00FFFF">@å.CloseTime</td>
             </tr>
         }
     </tbody>
@@ -33,71 +67,126 @@
 
 <h2>Events</h2>
 <div class="mb-3 d-flex justify-content-between align-items-center">
-    <!--TODO Lav button om til kun at være synlig for admin-->
-    <a class="btn btn-primary" asp-page="/Event/CreateEvent">Opret nyt Event</a>
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-6">
+            <input asp-for="SearchTitle" class="form-control" placeholder="Søg efter event..." />
+        </div>
+        <div class="col-md-4">
+            <select asp-for="SortOrder" class="form-select">
+                <option value="date_asc">Dato (stigende)</option>
+                <option value="date_desc">Dato (faldende)</option>
+                <option value="title_asc">Titel (A-Z)</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Søg</button>
+        </div>
+    </form>
+    @if (isAdmin)
+    {
+        <a class="btn btn-primary" asp-page="/Event/CreateEvent">Opret nyt Event</a>
+    }
+    else
+    {
+        <span></span>
+    }
     <div>
         <a class="btn btn-outline-secondary @(!isCalendar ? "active" : "")" asp-page="/Index" asp-route-view="list">Liste</a>
         <a class="btn btn-outline-secondary @(isCalendar ? "active" : "")" asp-page="/Index" asp-route-view="calendar">Kalender</a>
     </div>
 </div>
 
+
 @if (!isCalendar)
 {
     @if (Model.SuccessMessage != null)
     {
-        <div class="alert alert-success">
-            @Model.SuccessMessage
-        </div>
+        <div class="alert alert-success">@Model.SuccessMessage</div>
     }
 
     @if (Model.ErrorMessage != null)
     {
-        <div class="alert alert-danger">
-            @Model.ErrorMessage
-        </div>
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
     }
 
     @if (Model.Events.Count == 0)
     {
         <p>Der findes ingen events.</p>
     }
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Starttid</th>
-                <th>Sluttid</th>
-                <th>Lokation</th>
-                <th>Deltagere</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach (var ev in Model.Events)
             {
-                <tr>
-                    <td>@ev.Title</td>
-                    <td>@ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</td>
-                    <td>@ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</td>
-                    <td>@ev.Location</td>
-                    <td>@ev.CurrentParticipants / @ev.MaxParticipants</td>
-                    <td>
-                        <form method="post" asp-page-handler="SignUp">
-                            <input type="hidden" name="eventId" value="@ev.Id" />
-                            @if (ev.CurrentParticipants >= ev.MaxParticipants)
+                bool isSignedUp = Model.UserSignUps.ContainsKey(ev.Id) && Model.UserSignUps[ev.Id];
+                bool isFull = ev.CurrentParticipants >= ev.MaxParticipants;
+
+                <div class="col">
+                    <div class="card h-100 shadow-sm" style= background-color:#0a0a0a;>
+                        <div class="card-header fw-semibold fs-5" style= background-color:#0a0a0a; color: #FF2AFF;>@ev.Title</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li><i class="bi bi-calendar-event me-2"></i><strong>Start:</strong> @ev.StartDateTime.ToString("dd-MM-yyyy HH:mm")</li>
+                                <li><i class="bi bi-calendar-x me-2"></i><strong>Slut:</strong> @ev.EndDateTime.ToString("dd-MM-yyyy HH:mm")</li>
+                                <li><i class="bi bi-geo-alt me-2"></i><strong>Lokation:</strong> @ev.Location</li>
+                                <li>
+                                    <i class="bi bi-people me-2"></i><strong>Deltagere:</strong>
+                                    <span class="badge @(isFull ? "bg-danger" : "bg-success")">
+                                        @ev.CurrentParticipants / @ev.MaxParticipants
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            @if (isGuest)
                             {
-                                <button class="btn btn-secondary btn-sm" disabled>Fuldt booket</button>
+                                @if (isSignedUp)
+                                {
+                                    <form method="post" asp-page-handler="CancelSignUp">
+                                        <input type="hidden" name="eventId" value="@ev.Id" />
+                                        <button class="btn btn-danger w-100">Afmeld</button>
+                                    </form>
+                                }
+                                else if (isFull)
+                                {
+                                    <button class="btn btn-secondary w-100" disabled>Fuldt booket</button>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-page-handler="SignUp">
+                                        <input type="hidden" name="eventId" value="@ev.Id" />
+                                        <button class="btn btn-primary w-100">Tilmeld</button>
+                                    </form>
+                                }
                             }
-                            else
+                            else if (isFull)
                             {
-                                <button type="submit" class="btn btn-primary btn-sm">Tilmeld</button>
+                                <button class="btn btn-secondary w-100" disabled>Fuldt booket</button>
                             }
-                        </form>
-                    </td>
-                </tr>
+                            else if (!isAdmin && !isStaff)
+                            {
+                                <button class="btn btn-outline-secondary w-100" style= background-color: #53BACF disabled>Log ind for at tilmelde</button>
+                                
+                            }
+                            @if (isAdmin)
+                            {
+                                <a class="btn btn-warning btn-sm mt-2"
+                                   asp-page="/Event/UpdateEvent"
+                                   asp-route-id="@ev.Id">
+                                    Update
+                                </a>
+                                <a class="btn btn-danger btn-sm mt-2"
+                                   asp-page="/Event/DeleteEvent"
+                                   asp-route-id="@ev.Id">
+                                    Delete
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 }
 else
 {

@@ -5,54 +5,59 @@ using ZooApp.Data.interfaces;
 using ZooApp.Data.Repositories;
 using ZooApp.Services;
 using ZooApp.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using ZooApp.Data.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<GuestService>();
 
 // Database connection helper
-builder.Services.AddScoped<DbConnectionHelper>();
+builder.Services.AddScoped<IDbConnectionHelper, DbConnectionHelper>();
 
 // Repositories
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
-
-// Service
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IEventService, EventService>();
+// Services
 builder.Services.AddScoped<InventoryService>();
+builder.Services.AddSingleton<IUserAuthenticator, UserAuthenticator>();
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
-
+builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IStaffService, StaffService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    //options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+
+
+// INSERTED: Entity Framework DbContext til Event update
+builder.Services.AddDbContext<DbContextUpdateEvent>(options =>
+    options.UseSqlServer(
+        @"Data Source=SHARK1-PC\SQLEXPRESS;Initial Catalog=dev_ZealandZoo_0_8;Integrated Security=True;Trust Server Certificate=True"
+    ));
 
 var app = builder.Build();
 app.UseSession();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapStaticAssets();

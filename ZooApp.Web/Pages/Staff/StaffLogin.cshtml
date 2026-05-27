@@ -1,0 +1,28 @@
+﻿@page
+@model ZooApp.Web.Pages.User.StaffLoginModel
+@{
+}
+
+<div class="container mt-4" style="max-width: 480px;">
+    <h4>Medarbejder Login</h4>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control"/>
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Adgangskode</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p style="color:red">@Model.ErrorMessage</p>
+        }
+
+        <button class ="btn btn-primary" type="submit">Log ind</button>
+    </form>
+</div>

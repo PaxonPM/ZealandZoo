@@ -1,23 +1,64 @@
 ﻿@page
 @model ZooApp.Web.Pages.Guest.GuestLoginModel
 
-<h2>Guest Login</h2>
-
-<form method="post">
-    <div>
-        <label>Brugernavn</label>
-        <input asp-for="Username" />
-    </div>
-
-    <div>
-        <label>Adgangskode</label>
-        <input asp-for="Password" type="password" />
-    </div>
-
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <p style="color:red">@Model.ErrorMessage</p>
+<style>
+    body {
+        background-image: url('/Images/FlamingoBG.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: repeat;
+        color: #FF2AFF;
     }
 
-    <button type="submit">Log ind</button>
-</form>
+    .navbar {
+        background-color: #0a0a0a;
+        color: #FF2AFF;
+    }
+
+    .navbar-brand, .navbar-link, .navbar-link, .navbar-link {
+        color: #FF2AFF;
+    }
+
+        .navbar-brand:hover, .navbar-link:hover {
+            color: #FF2AFF;
+        }
+
+    .card {
+        color: #00FFFF;
+    }
+
+    .card-header {
+        color: #FF2AFF;
+    }
+
+</style>
+<div class="container mt-4" style="max-width: 480px;">
+    <h4>Gæst Login</h4>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" asp-for="Email" type="email" />
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Adgangskode</label>
+            <input class="form-control" asp-for="Password" type="password" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="text-danger">@Model.ErrorMessage</p>
+        }
+        <button type="submit" class="btn btn-primary">Log ind</button>
+    </form>
+    <div class="mt-2">
+        <small><a asp-page="/staff/StaffLogin">Medarbejder login</a></small>
+    </div>
+</div>
+
+@* Include client-side validation scripts for immediate feedback *@
+@* JQuery validation, watches form inputs, applies rules, show errors, prevents submission *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

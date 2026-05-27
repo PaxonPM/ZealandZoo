@@ -7,44 +7,38 @@ using ZooApp.Data.MockData;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
+using ZooApp.Domain.Exceptions;
 
 namespace ZooApp.Services
 {
     public class EventService : IEventService
     {
-        /// <summary>
-        /// Dictionary that stores which users are signed up for which events.
-        /// Key = eventId, Value = list of userIds.
-        /// Used as a temporary solution instead of a database.
-        /// </summary>
-        private static Dictionary<int, List<int>> eventSignUps = new();
-        
         //private List<Event> _events;
         private readonly IEventRepository _eventRepository;
         private readonly IEmailService _emailService;
-        private readonly IPersonService _personService;
+        private readonly IGuestService _guestService;
 
-        public EventService(IEventRepository eventRepository, IEmailService emailService, IPersonService personService)
+        public EventService(IEventRepository eventRepository, IEmailService emailService, IGuestService guestService)
         {
             _eventRepository = eventRepository;
             _emailService = emailService;
-            _personService = personService;
+            _guestService = guestService;
         }
 
         public async Task<Event> CreateEventAsync(Event newEvent)
         {
             Event created = _eventRepository.Create(newEvent);
+            List<UserModel> newsletterMembers = _guestService.GetNewsletterMembers();
 
             try
             {
-                List<Person> newsletterMembers = _personService.GetNewsletterMembers();
                 await _emailService.SendEventNotificationAsync(created, newsletterMembers);
             }
             catch (Exception ex)
             {
-                // Log the exception (for demonstration, we just write to console)
-                Console.WriteLine($"Failed to send event notification emails: {ex.Message}");
+                throw new EmailNotificationException(ex.Message, created, ex);
             }
+
             return created;
         }
 
@@ -84,37 +78,31 @@ namespace ZooApp.Services
             if (selectedEvent == null)
                 throw new Exception("Eventet blev ikke fundet.");
 
-            // Ensure the event has a list of signed-up users
-            if (!eventSignUps.ContainsKey(eventId))
-                eventSignUps[eventId] = new List<int>();
-
-            // Prevent duplicate sign-up
-            if (eventSignUps[eventId].Contains(userId))
+            if (_eventRepository.IsParticipant(eventId, userId))
                 throw new Exception("Du er allerede tilmeldt dette event.");
 
-            // Check if event is full
             if (selectedEvent.CurrentParticipants >= selectedEvent.MaxParticipants)
                 throw new Exception("Eventet er fuldt booket.");
 
-            // Add user to event
-            eventSignUps[eventId].Add(userId);
-            selectedEvent.CurrentParticipants++;
+            _eventRepository.AddParticipant(eventId, userId);
         }
 
+        /// Cancels a user's signup for an event.
         public void CancelSignUp(int eventId, int userId)
         {
+            /// Finds the event by id.
             Event? selectedEvent = GetEventById(eventId);
 
+            /// If the event does not exist, show an error.
             if (selectedEvent == null)
                 throw new Exception("Eventet blev ikke fundet.");
 
-            if (!eventSignUps.ContainsKey(eventId) || !eventSignUps[eventId].Contains(userId))
+            /// Checks if the user is signed up for the event.
+            if (!_eventRepository.IsParticipant(eventId, userId))
                 throw new Exception("Du er ikke tilmeldt dette event.");
 
-            eventSignUps[eventId].Remove(userId);
-
-            if (selectedEvent.CurrentParticipants > 0)
-                selectedEvent.CurrentParticipants--;
+            /// Removes the user from the event participants table.
+            _eventRepository.RemoveParticipant(eventId, userId);
         }
 
         /// <summary>
@@ -125,8 +113,29 @@ namespace ZooApp.Services
         /// <returns>True if the user is signed up, otherwise false</returns>
         public bool IsUserSignedUp(int eventId, int userId)
         {
-            return eventSignUps.ContainsKey(eventId)
-                   && eventSignUps[eventId].Contains(userId);
+            return _eventRepository.IsParticipant(eventId, userId);
+        }
+        /// <summary>
+        /// Updates an existing event.
+        /// </summary>
+        /// <param name="updatedEvent">The updated event object.</param>
+        /// <returns>The updated event.</returns>
+        public async Task<Event> UpdateEventAsync(Event updatedEvent)
+        {
+            return await Task.Run(() => _eventRepository.Update(updatedEvent));
+        }
+        /// <summary>
+        /// Gets an event asynchronously by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event.</param>
+        /// <returns>The event if found; otherwise null.</returns>
+        public async Task<Event?> GetEventByIdAsync(int id)
+        {
+            return await Task.Run(() => _eventRepository.GetById(id));
+        }
+        public Event? DeleteEvent(int id)
+        {
+            return _eventRepository.Delete(id);
         }
     }
 }

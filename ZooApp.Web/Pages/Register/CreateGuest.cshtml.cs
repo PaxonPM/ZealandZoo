@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Cryptography;
-using System.Text;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZooApp.Web.Pages.Guest
 {
@@ -12,11 +11,18 @@ namespace ZooApp.Web.Pages.Guest
     /// </summary>
     public class CreateGuestModel : PageModel
     {
+        private readonly IGuestService _guestService;
+
+        public CreateGuestModel(IGuestService guestService)
+        {
+            _guestService = guestService;
+        }
+
         /// <summary>
         /// Person object bound to the form input.
         /// </summary>
         [BindProperty]
-        public Person Person { get; set; } = new Person();
+        public UserModel user { get; set; } = new UserModel();
 
         /// <summary>
         /// Confirmation message shown after successful creation.
@@ -36,41 +42,29 @@ namespace ZooApp.Web.Pages.Guest
             try
             {
                 if (!ModelState.IsValid)
-                {
-                    throw new Exception("Invalid input. Please check your data.");
-                }
+                    throw new Exception("Ugyldigt input. Kontroller dine oplysninger.");
 
-                // Hash password before saving
-                Person.PwHash = HashPassword(Person.PwHash);
-                
-                // TODO Person RoleId 3 = guest (Check DEFAULT OR NOT IN DATABASE else set to guest)
-                // HIGH_TODO save user to database, use database error handling.
-               
-                SuccessMessage = "User created successfully!";
+                UserModel guest = new UserModel
+                {
+                    Name = user.Name,
+                    Email = user.Email,
+                    Telefon = user.Telefon,
+                    PwHash = user.PwHash,
+                    IsNotificationActive = user.IsNotificationActive
+                };
+
+                _guestService.CreateGuest(guest);
+
+                SuccessMessage = "Bruger oprettet!";
                 ModelState.Clear();
-                
+                user = new UserModel();
+
+                return RedirectToPage("/register/afterregistration");
             }
             catch (Exception ex)
             {
                 ErrorMessage = ex.Message;
-            }
-
-            return Page();
-        }
-
-        /// <summary>
-        /// Hashes a password using SHA256.
-        /// </summary>
-        /// <param name="password">Plain text password</param>
-        /// <returns>Hashed password</returns>
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-
-                return Convert.ToBase64String(hash);
+                return Page();
             }
         }
     }

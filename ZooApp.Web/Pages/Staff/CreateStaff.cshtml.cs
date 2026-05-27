@@ -12,7 +12,7 @@ namespace ZooApp.Web.Pages.CreateUser
             /// <summary>
             /// Service for handling event-related business logic and data operations.
             /// </summary>
-            private readonly IUserService _userService;
+            private readonly IStaffService _staffService;
 
             /// <summary>
             /// Gets or sets the modal error model for displaying error messages to the user.
@@ -23,20 +23,20 @@ namespace ZooApp.Web.Pages.CreateUser
             /// Gets or sets the event being created. This property is bound to the form inputs.
             /// </summary>
             [BindProperty]
-            public Domain.Models.User User{ get; set; }
+            public Domain.Models.UserModel NewUser{ get; set; }
 
             /// <summary>
             /// Gets or sets the successfully created event to display in the success modal.
             /// </summary>
-            public Domain.Models.User CreatedUser { get; set; }
+            public Domain.Models.UserModel CreatedUser { get; set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="CreateUserModel"/> class.
             /// </summary>
-            /// <param name="userService">The event service for managing event operations.</param>
-            public CreateUserModel(IUserService userService)
+            /// <param name="staffService">The staff service for managing staff operations.</param>
+            public CreateUserModel(IStaffService staffService)
             {
-                _userService = userService;
+                _staffService = staffService;
             }
 
             /// <summary>
@@ -46,9 +46,14 @@ namespace ZooApp.Web.Pages.CreateUser
             /// <returns>A page result displaying the event creation form.</returns>
             public IActionResult OnGet()
             {
+                if (HttpContext.Session.GetString("IsAdmin") != "true")
+                {
+                    TempData["ErrorMessage"] = "Du skal være logget ind som admin for at kunne oprette medarbejdere.";
+                    return RedirectToPage("/Admin/AdminLogin");
+                }
                 // Initialize Modal to prevent null reference when no errors occur
                 Modal = new ModalViewErrorModel();
-                return Page();
+                    return Page();
             }
 
             /// <summary>
@@ -62,15 +67,16 @@ namespace ZooApp.Web.Pages.CreateUser
             public IActionResult OnPost()
             {
                 // Return to the form with validation errors if model state is invalid
-                if (!ModelState.IsValid)
-                {
-                    return Page();
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    Modal = new ModalViewErrorModel();
+                //    return Page();
+                //}
 
                 try
                 {
-                    // Attempt to create the event through the service layer
-                    CreatedUser = _userService.CreateUser(User);
+                    // Attempt to create the user through the service layer
+                    CreatedUser = _staffService.CreateStaff(NewUser);
                 }
                 catch (Exception ex)
                 {

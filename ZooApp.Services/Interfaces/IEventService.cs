@@ -22,8 +22,12 @@ namespace ZooApp.Services.Interfaces
         /// <exception cref="ArgumentNullException">Thrown when newEvent is null.</exception>
         /// <exception cref="ValidationException">Thrown when the event data is invalid.</exception>
         Task<Event> CreateEventAsync(Event newEvent);
+        Task<Event> UpdateEventAsync(Event updatedEvent);
+        Task<Event?> GetEventByIdAsync(int id);
         List<Event> GetAllEvents();
+
         Event? GetEventById(int id);
+        Event? DeleteEvent(int id);
 
         void SignUpForEvent(int eventId, int userId);
         void CancelSignUp(int eventId, int userId);

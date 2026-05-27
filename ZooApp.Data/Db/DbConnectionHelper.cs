@@ -10,16 +10,16 @@ namespace ZooApp.Data.Db
     /// <summary>
     /// Helper class for creating and managing database connections.
     /// </summary>
-    public class DbConnectionHelper
+    public class DbConnectionHelper : IDbConnectionHelper
     {
         private readonly string _connectionString;
 
         public DbConnectionHelper()
-        { 
+        {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"SHARK1-PC\SQLEXPRESS",//@"PAX-LAPTOP\SQLEXPRESS",
-                InitialCatalog = "dev_ZealandZoo_0_4",
+                DataSource = @"PAX-LAPTOP\SQLEXPRESS", 
+                InitialCatalog = "dev_ZealandZoo_0_8",
                 TrustServerCertificate = true,
                 IntegratedSecurity = true // For Windows Auth
             };

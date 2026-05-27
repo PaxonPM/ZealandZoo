@@ -7,10 +7,11 @@ using ZealandZoo.Models;
 using ZealandZoo.Repositories;
 using ZooApp.Data.interfaces;
 using ZooApp.Domain.Models;
+using ZooApp.Services.Interfaces;
 
 namespace ZealandZoo.Services
 {
-    public class InventoryService
+    public class InventoryService : IInventoryService
     {
         private readonly IInventoryRepository _inventoryRepository;
 
@@ -31,6 +32,21 @@ namespace ZealandZoo.Services
         public List<ItemCategory> GetAllCategories()
         {
             return _inventoryRepository.GetAllCategories();
+        }
+
+        public List<InventoryItem> GetAllItems()
+        {
+            return _inventoryRepository.GetAllItems();
+        }
+
+        public void UpdateItem(InventoryItem item)
+        {
+            _inventoryRepository.UpdateItem(item);
+        }
+
+        public void DeleteItem(int id)
+        {
+            _inventoryRepository.DeleteItem(id);
         }
     }
 }

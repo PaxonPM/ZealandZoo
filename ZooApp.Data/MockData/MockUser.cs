@@ -4,31 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZooApp.Domain.Models;
+using ZooApp.Data.MockData;
 
 namespace ZooApp.Data.MockData
 {
     public class MockUser
     {
-        private static List<User> users = new List<User>
+        private static List<UserModel> users = new List<UserModel>
         {
-
-            new User(1, "Lucas", "Lucas@email.com", "1813", "hashedpassword1", "Staff", true)
-            {
-                PwHash = "hashedpassword1"
-            },
-            new User(2, "Frederik", "Frederik@email.com", "911",  "hashedpassword2", "Student", false)
-            {
-                PwHash = "hashedpassword2"
-            },
-            new User(3, "Paw", "Paw@email.com", "112", "hashedpassword3", "Admin", true)
-            {
-                PwHash = "hashedpassword2"
-            },
-            new User(4, "Nikolai", "Nikolai@email.com", "114","hashedpassword4", "Staff", true)
-            {
-                PwHash = "hashedpassword4"
-            }
+            new UserModel("Lucas", "Lucas@email.com", "1813", "hashedpassword1", 3, true),
+            new UserModel("Frederik", "Frederik@email.com", "911",  "hashedpassword2", 3, false),
+            new UserModel("Paw", "Paw@email.com", "112", "hashedpassword3", 1, true),
+            new UserModel("Nikolai", "Nikolai@email.com", "114","hashedpassword4", 2, false)
 
         };
+        public static List<UserModel> GetMockUsers()
+        {
+            return users;
+        }
     }
 }
