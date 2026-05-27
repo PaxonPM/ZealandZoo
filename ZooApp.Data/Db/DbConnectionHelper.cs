@@ -15,13 +15,15 @@ namespace ZooApp.Data.Db
         private readonly string _connectionString;
 
         public DbConnectionHelper()
-        { 
+        {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"SHARK1-PC\SQLEXPRESS",//@"PAX-LAPTOP\SQLEXPRESS", 
+                DataSource = "localhost,1433",
                 InitialCatalog = "dev_ZealandZoo_0_8",
                 TrustServerCertificate = true,
-                IntegratedSecurity = true // For Windows Auth
+                IntegratedSecurity = false,  // Windows Auth virker ikke med Docker
+                UserID = "sa",
+                Password = "Frederik123!"
             };
             _connectionString = builder.ConnectionString;
         }

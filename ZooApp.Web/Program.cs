@@ -24,6 +24,7 @@ builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 // Services
+builder.Services.AddScoped<InventoryService>();
 builder.Services.AddSingleton<IUserAuthenticator, UserAuthenticator>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
