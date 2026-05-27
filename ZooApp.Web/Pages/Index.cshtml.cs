@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 using ZooApp.Domain.Models;
 using ZooApp.Services.Interfaces;
 
@@ -31,6 +33,12 @@ namespace ZealandZoo.Pages
         // Add this property to your IndexModel class
         public Dictionary<int, bool> UserSignUps { get; set; } = new Dictionary<int, bool>();
 
+        [BindProperty(SupportsGet = true)]
+        public string? SearchTitle { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SortOrder { get; set; } = "date_asc";
+
         public IndexModel(ILogger<IndexModel> logger, IEventService eventService)
         {
             _logger = logger;
@@ -41,7 +49,23 @@ namespace ZealandZoo.Pages
         {
             int? guestId = HttpContext.Session.GetInt32("GuestId");
 
-            Events = _eventService.GetAllEvents();
+            var events = _eventService.GetAllEvents();
+
+            // Filtrering
+            if (!string.IsNullOrEmpty(SearchTitle))
+            {
+                events = events.Where(e => e.Title.Contains(SearchTitle,
+                    StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            // Sortering
+            Events = SortOrder switch
+            {
+                "date_asc" => events.OrderBy(e => e.StartDateTime).ToList(),
+                "date_desc" => events.OrderByDescending(e => e.StartDateTime).ToList(),
+                "title_asc" => events.OrderBy(e => e.Title).ToList(),
+                _ => events
+            };
 
             UserSignUps = Events.ToDictionary(
                 ev => ev.Id,

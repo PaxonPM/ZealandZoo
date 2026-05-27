@@ -18,12 +18,10 @@ namespace ZooApp.Data.Db
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = "localhost,1433",
+                DataSource = @"PAX-LAPTOP\SQLEXPRESS", 
                 InitialCatalog = "dev_ZealandZoo_0_8",
                 TrustServerCertificate = true,
-                IntegratedSecurity = false,  // Windows Auth virker ikke med Docker
-                UserID = "sa",
-                Password = "Frederik123!"
+                IntegratedSecurity = true // For Windows Auth
             };
             _connectionString = builder.ConnectionString;
         }
