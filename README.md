@@ -8,12 +8,10 @@ The application is used to show and manage events, opening hours and related inf
 The project can be downloaded from GitHub.
 
 ### Option 1: Download as ZIP
-
-1. Go to the GitHub repository.
-2. Click the green **Code** button.
-3. Click **Download ZIP**.
-4. Extract the ZIP file.
-5. Open the project folder in your IDE.
+1. Click the green **Code** button.
+2. Click **Download ZIP**.
+3. Extract the ZIP file.
+4. Open the project folder in your IDE.
 
 ### Option 2: Clone with Git
 
