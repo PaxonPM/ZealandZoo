@@ -13,10 +13,10 @@
 
 -- Create database
 
-CREATE DATABASE dev_ZealandZoo_0_8;
+CREATE DATABASE dev_ZealandZoo_0_11;
 GO
 
-USE dev_ZealandZoo_0_8;
+USE dev_ZealandZoo_0_11;
 GO
 
 
@@ -92,26 +92,6 @@ CREATE TABLE InventoryItems (
     CONSTRAINT FK_InventoryItems_Category FOREIGN KEY (category_id) 
         REFERENCES ItemCategories(id)
 );
-
--- Create table for Roles and Users
-CREATE TABLE Role(
-    role_id INT NOT NULL PRIMARY KEY,
-    role_name NVARCHAR(20) NOT NULL
-);
-CREATE TABLE Users(
-    id INT IDENTITY(1,1) NOT NULL,
-    name NVARCHAR(50) NULL,
-    telefon NVARCHAR(8) NULL,
-    email NVARCHAR(50) NULL,
-    role_id INT NOT NULL,
-    is_newsletter_member BIT NULL,
-    pw_hash NVARCHAR(25) NULL,
-
-    CONSTRAINT FK_Users_Role
-        FOREIGN KEY (role_id)
-        REFERENCES Role(role_id)
-    );
-
 
 INSERT INTO Event (
     title,
