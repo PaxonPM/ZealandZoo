@@ -39,18 +39,7 @@ namespace ZooApp.Data.MockData
                 CreatedAt = DateTime.Now
             },
 
-            new Event
-            {
-                Id = 3,
-                Title = "Wests frække aften",
-                Description = "Evening event with activities and social interaction.",
-                StartDateTime = new DateTime(2026, 5, 24, 19, 00, 00),
-                EndDateTime = new DateTime(2026, 5, 24, 23, 00, 00),
-                Location = "Zealand Zoo Café",
-                MaxParticipants = 25,
-                CurrentParticipants = 0,
-                CreatedAt = DateTime.Now
-            }
+          
         };
 
         /// <summary>
