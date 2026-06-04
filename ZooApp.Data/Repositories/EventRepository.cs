@@ -173,26 +173,26 @@ namespace ZooApp.Data.Repositories
             {
                 return null;
             }
-
+            return entity;
             // INSERTED: ENTITY FRAMEWORK UPDATE
-            Event? eventFromEf = _dbContextUpdateEvent.Events
-                .FirstOrDefault(e => e.Id == entity.Id);
+            //Event? eventFromEf = _dbContextUpdateEvent.Events
+            //    .FirstOrDefault(e => e.Id == entity.Id);
 
-            if (eventFromEf == null)
-            {
-                return null;
-            }
+            //if (eventFromEf == null)
+            //{
+            //    return null;
+            //}
 
-            eventFromEf.Title = entity.Title;
-            eventFromEf.Description = entity.Description;
-            eventFromEf.StartDateTime = entity.StartDateTime;
-            eventFromEf.EndDateTime = entity.EndDateTime;
-            eventFromEf.Location = entity.Location;
-            eventFromEf.MaxParticipants = entity.MaxParticipants;
+            //eventFromEf.Title = entity.Title;
+            //eventFromEf.Description = entity.Description;
+            //eventFromEf.StartDateTime = entity.StartDateTime;
+            //eventFromEf.EndDateTime = entity.EndDateTime;
+            //eventFromEf.Location = entity.Location;
+            //eventFromEf.MaxParticipants = entity.MaxParticipants;
 
-            _dbContextUpdateEvent.SaveChanges();
+            //_dbContextUpdateEvent.SaveChanges();
 
-            return eventFromEf;
+            //return eventFromEf;
         }
 
 
